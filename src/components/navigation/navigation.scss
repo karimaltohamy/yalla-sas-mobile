@@ -1,0 +1,81 @@
+@import "../../sass/variables.scss";
+
+.navigation {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  background-color: var(--bg-main);
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgb(0 0 0 / 35%);
+
+  .links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .link {
+      padding: 15px;
+      text-align: center;
+      display: block;
+      position: relative;
+
+      &.active {
+        color: $primary-color;
+
+        .icon {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          border: 3px solid var(--bg-main);
+          background-color: #238a5e;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          position: absolute;
+          top: -30px;
+          left: 50%;
+          transform: translate(-50%);
+          animation: move-up 0.3s linear;
+        }
+
+        span {
+          display: block;
+          font-weight: 600;
+          font-size: 14px;
+          animation: scale 0.3s linear;
+        }
+      }
+
+      svg {
+        margin: auto;
+      }
+
+      span {
+        display: none;
+      }
+    }
+  }
+}
+
+// animation
+
+@keyframes move-up {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -30px;
+  }
+}
+
+@keyframes scale {
+  0% {
+    scale: 0;
+  }
+  100% {
+    scale: 1;
+  }
+}

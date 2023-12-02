@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-main: #05131b;
+  --text-color: white;
+  --bg-section: #02533e;
+  --box-shadow: 0 10px 6px 0 rgb(0 0 0 / 35%);
+  --bg-box: #16392b;
+  --bg-box2: #16392b;
+  --bg-hero: radial-gradient(at bottom center, #1c7d49 0%, #061712 50%);
+  --bg-section-gradient: radial-gradient(
+    at bottom center,
+    #1c7d49 0%,
+    #09241c 50%
+  );
+  --bg-section2: linear-gradient(120deg, #09241c 40%, #238a5e 30%, #238a5e);
+  --bg-section3: linear-gradient(180deg, #15301f 18%, rgba(0, 0, 0, 0) 59%);
+  --border-color: #55615c;
+}
+
+html {
+  overflow-x: hidden !important;
+}
+
+body {
+  scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif !important;
+  overflow-x: hidden !important;
+  background-color: var(--bg-main) !important;
+  color: var(--text-color) !important;
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+
+.btn_fill {
+  padding: 5px 12px;
+  color: white !important;
+  background-color: #238a5e;
+  color: white;
+  border-radius: 5px;
+  border: none;
+}
+
+.btn_outline {
+  padding: 4px 12px;
+  color: #238a5e !important;
+  background-color: transparent;
+  border: 1px solid #238a5e !important;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.4s;
+
+  &:hover {
+    background-color: #238a5e;
+    color: white !important;
+  }
+}

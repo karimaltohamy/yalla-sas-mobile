@@ -1,0 +1,12 @@
+.box_info_user {
+  background-color: var(--bg-section);
+  border-radius: 7px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+
+  .bottom_info {
+    background-color: var(--bg-main);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+}
