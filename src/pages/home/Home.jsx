@@ -10,7 +10,7 @@ import PopupChangePackage from "../../components/popups/popupChangePackage/Popup
 import PopupExtendingPackage from "../../components/popups/popupExtendingPackage/PopupExtendingPackage";
 import PopupActivatePackage from "../../components/popups/popupActivatePackage/PopupActivatePackage";
 import PopupSettings from "../../components/popups/popupSettings/PopupSettings";
-import PopupNotification from "../../components/popups/PopupNotification/PopupNotification";
+import PopupNotification from "../../components/popups/popupNotification/PopupNotification";
 
 const Home = () => {
   const [openPopupCharge, setOpenPopupCharge] = useState(false);
