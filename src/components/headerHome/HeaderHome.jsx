@@ -3,20 +3,26 @@ import logo from "../../images/logo.png";
 import styles from "../../styles/style";
 import { Link } from "react-router-dom";
 
-const HeaderHome = () => {
+const HeaderHome = ({ setOpenPopupSettings, setOpenPopupNotification }) => {
   return (
     <header className="py-[12px]">
       <div className={styles.custom_container}>
         <div className="line flex items-center justify-between">
-          <Link to={"/"} className="notification">
+          <button
+            className="notification"
+            onClick={() => setOpenPopupNotification(true)}
+          >
             <IoMdNotificationsOutline size={25} />
-          </Link>
+          </button>
           <div className="logo">
             <img src={logo} alt="logo" loading="lazy" className="w-[80px]" />
           </div>
-          <Link to={"/"} className="settings">
+          <button
+            className="settings"
+            onClick={() => setOpenPopupSettings(true)}
+          >
             <IoMdSettings size={25} />
-          </Link>
+          </button>
         </div>
       </div>
     </header>

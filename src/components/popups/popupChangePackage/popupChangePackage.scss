@@ -1,0 +1,18 @@
+@import "../../../sass/mixins.scss";
+
+.popup_change_package {
+  @include popupStyle;
+
+  .top {
+    padding: 15px;
+    background-color: rgb(2 13 20);
+  }
+
+  .content {
+    .current_package {
+      padding: 8px;
+      border-radius: 7px;
+      background-color: var(--bg-section);
+    }
+  }
+}

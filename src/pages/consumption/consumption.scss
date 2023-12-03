@@ -1,0 +1,35 @@
+.consumption {
+  .consumption_chart {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: var(--bg-section);
+  }
+
+  .ruselt_consumption_chart {
+    .items {
+      .item {
+        background-color: var(--bg-main);
+        box-shadow: -1px 0px 10px 0 rgb(5 5 5 / 68%);
+        border-radius: 7px;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .package {
+          border: 1px solid white;
+          border-radius: 7px;
+          padding: 7px;
+        }
+
+        &:not(:last-child) {
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+
+  .popup_calender {
+    background-color: rgba(0, 0, 0, 0.458);
+  }
+}

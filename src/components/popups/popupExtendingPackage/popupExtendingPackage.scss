@@ -1,0 +1,35 @@
+@import "../../../sass/variables.scss";
+@import "../../../sass/mixins.scss";
+
+.popup_extending_package {
+  @include popupStyle;
+
+  .top {
+    padding: 15px;
+    background-color: rgb(2 13 20);
+  }
+
+  .content {
+    form {
+      .input_item {
+        select {
+          width: 100%;
+          outline: none;
+          border: 1px solid var(--border-color);
+          border-radius: 5px;
+          padding: 8px;
+          background-color: transparent;
+
+          &:focus {
+            border: 1px solid $primary-color;
+          }
+
+          option {
+            font-size: 14px;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@
   background-color: var(--bg-main);
   border-radius: 8px;
   box-shadow: 0 0 12px rgb(0 0 0 / 35%);
+  z-index: 99;
 
   .links {
     display: flex;

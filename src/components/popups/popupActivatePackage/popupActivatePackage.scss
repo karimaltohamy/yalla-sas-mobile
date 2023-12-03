@@ -1,0 +1,29 @@
+@import "../../../sass/mixins.scss";
+
+.popup_activate_package {
+  @include popupStyle;
+
+  .top {
+    padding: 15px;
+    background-color: rgb(2 13 20);
+  }
+
+  .content {
+    .items_info {
+      .item {
+        // display: flex;
+        // align-items: center;
+        // justify-content: space-between;
+        h5 {
+          font-size: 15px;
+        }
+
+        &:not(:last-child) {
+          margin-bottom: 10px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid var(--border-color);
+        }
+      }
+    }
+  }
+}

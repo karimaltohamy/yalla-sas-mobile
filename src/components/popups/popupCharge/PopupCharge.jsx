@@ -6,7 +6,7 @@ import "./popupCharge.scss";
 
 const PopupCharge = ({ setOpen, open }) => {
   return (
-    <div className={`PopupCharge ${open && "active"}`}>
+    <div className={`PopupCharge ${open ? "active" : ""}`}>
       <div className="top">
         <div className="back" onClick={() => setOpen(false)}>
           <IoMdArrowBack size={25} />

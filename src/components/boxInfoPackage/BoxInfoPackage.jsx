@@ -2,7 +2,7 @@ import { IoIosWifi } from "react-icons/io";
 import { IoSettings } from "react-icons/io5";
 import "./boxInfoPackage.scss";
 import { useState } from "react";
-const BoxInfoPackage = () => {
+const BoxInfoPackage = ({ setOpen }) => {
   const [percent, setPercent] = useState(60);
   return (
     <div className="box_info_package p-3">
@@ -44,7 +44,10 @@ const BoxInfoPackage = () => {
       </div>
       <div className="bottom_info flex items-center justify-between">
         <p className=" font-semibold text-[14px]">You have 0 MB out of 0 MB</p>
-        <button className="flex items-center gap-1 btn_fill">
+        <button
+          className="flex items-center gap-1 btn_fill"
+          onClick={() => setOpen(true)}
+        >
           <IoSettings />
           <span>Charge</span>
         </button>

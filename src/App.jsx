@@ -24,7 +24,7 @@ function App() {
         setMobile(false);
       }
     });
-  }, [document, mobile]);
+  }, [document]);
 
   return mobile ? (
     <Fragment>
@@ -37,7 +37,9 @@ function App() {
       </Routes>
     </Fragment>
   ) : (
-    <p className="text-center absolute top-1/2 left-1/2">only in mobile</p>
+    <p className="text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      only in mobile
+    </p>
   );
 }
 

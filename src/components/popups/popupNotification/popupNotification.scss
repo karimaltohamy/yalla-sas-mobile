@@ -1,0 +1,37 @@
+@import "../../../sass/variables.scss";
+@import "../../../sass//mixins.scss";
+
+.popup_notification {
+  @include popupStyle;
+
+  .top {
+    padding: 15px;
+    background-color: rgb(2 13 20);
+  }
+
+  .content {
+    .notifications_items {
+      .notification {
+        display: flex;
+        gap: 10px;
+        background-color: var(--bg-section);
+        padding: 8px;
+        border-radius: 8px;
+
+        &:not(:last-child) {
+          margin-bottom: 12px;
+        }
+
+        .icon {
+          width: 45px;
+          height: 45px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50px;
+          background-color: var(--bg-main);
+        }
+      }
+    }
+  }
+}
