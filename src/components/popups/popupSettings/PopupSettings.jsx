@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const PopupSettings = ({ open, setOpen }) => {
   const [mode, setMode] = useState("dark");
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const lang = localStorage.getItem("lang");
 
   // change theme
@@ -50,7 +50,7 @@ const PopupSettings = ({ open, setOpen }) => {
           <IoMdArrowBack size={25} />
         </div>
 
-        <h4 className=" font-semibold">Settings</h4>
+        <h4 className=" font-semibold">{t("Settings")}</h4>
       </div>
       <div className="content mt-10 px-3">
         <div className="select_lang ">
