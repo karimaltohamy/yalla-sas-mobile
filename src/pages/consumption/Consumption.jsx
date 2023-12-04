@@ -145,7 +145,7 @@ const Consumption = () => {
       {openCalenderDaily && (
         <div
           className="popup_calender absolute w-full h-full flex items-center justify-center top-0 left-0 text-black z-[1000]"
-          onClick={handleCloseCalender("daily")}
+          onClick={(e) => handleCloseCalender(e, "daily")}
         >
           <Calendar
             onChange={handleDateDaily}
@@ -159,7 +159,7 @@ const Consumption = () => {
       {openCalenderMonthlty && (
         <div
           className="popup_calender absolute w-full h-full flex items-center justify-center top-0 left-0 text-black z-[1000]"
-          onClick={handleCloseCalender("monthly")}
+          onClick={(e) => handleCloseCalender(e, "monthly")}
         >
           <Calendar
             onChange={handleDateMonthly}

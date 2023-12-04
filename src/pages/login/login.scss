@@ -1,0 +1,57 @@
+.login {
+  background: linear-gradient(
+    100deg,
+    rgba(3, 39, 59, 1) 0%,
+    rgba(15, 118, 136, 1) 27%,
+    rgba(17, 219, 133, 1) 73%,
+    rgba(8, 198, 117, 1) 100%
+  );
+  height: 100vh;
+
+  .line {
+    display: flex;
+    flex-direction: column;
+
+    .info {
+      height: 55%;
+    }
+
+    .login_form {
+      height: 45%;
+      background-color: var(--bg-main);
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+      padding: 40px 20px;
+
+      .input_item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid var(--border-color);
+        // border-radius: 7px;
+        padding: 12px;
+
+        &:not(:last-child) {
+          margin-bottom: 25px;
+        }
+
+        input {
+          flex: 1;
+          background-color: transparent;
+          border: none;
+          outline: none;
+        }
+      }
+
+      button {
+        background: linear-gradient(
+          303deg,
+          rgb(3, 39, 59) 0%,
+          rgb(15, 118, 136) 27%,
+          rgb(17, 219, 133) 73%,
+          rgb(8, 198, 117) 100%
+        );
+      }
+    }
+  }
+}

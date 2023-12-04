@@ -6,6 +6,10 @@ import Profile from "./pages/profile/Profile";
 import Consumption from "./pages/consumption/Consumption";
 import Navigation from "./components/navigation/Navigation";
 import { Fragment, useEffect, useState } from "react";
+import Menu from "./pages/menu/Menu";
+import Sessions from "./pages/sessions/Sessions";
+import MailBox from "./pages/mailBox/MailBox";
+import ConsumptionCalculation from "./pages/consumptionCalculation/ConsumptionCalculation";
 
 function App() {
   const [mobile, setMobile] = useState(false);
@@ -34,6 +38,13 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/my-profile" element={<Profile />} />
         <Route path="/consumption" element={<Consumption />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/sessions" element={<Sessions />} />
+        <Route path="/mail-box" element={<MailBox />} />
+        <Route
+          path="/consumption-calculation"
+          element={<ConsumptionCalculation />}
+        />
       </Routes>
     </Fragment>
   ) : (

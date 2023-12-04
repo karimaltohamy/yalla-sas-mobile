@@ -1,7 +1,6 @@
 import { IoMdNotificationsOutline, IoMdSettings } from "react-icons/io";
 import logo from "../../images/logo.png";
 import styles from "../../styles/style";
-import { Link } from "react-router-dom";
 
 const HeaderHome = ({ setOpenPopupSettings, setOpenPopupNotification }) => {
   return (
