@@ -29,10 +29,10 @@ const Home = () => {
           setOpenPopupNotification={setOpenPopupNotification}
         />
         <div className={styles.custom_container}>
-          <div className="pt-[80px]">
+          <div className="pt-[30px]">
             <BoxInfoUser setOpen={setOpenPopupCharge} />
           </div>
-          <div className="pt-[40px]">
+          <div className="pt-[30px]">
             <BoxInfoPackage setOpen={setOpenPackageManagement} />
           </div>
         </div>
