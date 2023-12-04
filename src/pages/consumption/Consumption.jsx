@@ -99,13 +99,13 @@ const Consumption = () => {
             className="flex items-center gap-1 btn_outline flex-1 justify-center py-2"
             onClick={() => setOpenCalenderMonthly(true)}
           >
-            <span className="text-[14px]">Monthly consumption</span>
+            <span className="text-[13px]">Monthly consumption</span>
           </button>
           <button
             className="flex items-center gap-1 btn_outline flex-1 justify-center py-2"
             onClick={() => setOpenCalenderDaily(true)}
           >
-            <span className="text-[14px]">Daily consumption</span>
+            <span className="text-[13px]">Daily consumption</span>
           </button>
         </div>
         <div className="consumption_chart mt-7">
