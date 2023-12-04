@@ -6,10 +6,13 @@ import styles from "../../styles/style";
 import { MdOutlineDownloading } from "react-icons/md";
 import { GrUploadOption } from "react-icons/gr";
 import { TbArrowsTransferDown } from "react-icons/tb";
+import { useTranslation } from "react-i18next";
 
 const ConsumptionCalculation = () => {
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
+  const { t } = useTranslation();
+  const lang = localStorage.getItem("lang");
 
   const handleConsumotionCalculation = (e) => {
     e.preventDefault();
@@ -19,18 +22,22 @@ const ConsumptionCalculation = () => {
   const navigate = useNavigate();
   return (
     <div className="consumption_calculation">
-      <div className="top flex items-center justify-between">
+      <div
+        className={`top flex items-center justify-between ${
+          lang == "en" ? "en" : "ar"
+        }`}
+      >
         <span className="back" onClick={() => navigate(-1)}>
           <IoMdArrowBack size={25} />
         </span>
 
-        <h4 className=" font-semibold">Sessions</h4>
+        <h4 className=" font-semibold">{t("Sessions")}</h4>
       </div>
       <div className={`${styles.custom_container} h-full`}>
         <div className="content mt-5">
           <form className="date" onSubmit={handleConsumotionCalculation}>
             <div className="input_item">
-              <label htmlFor="from">From:</label>
+              <label htmlFor="from">{t("From")}:</label>
               <input
                 type="date"
                 id="from"
@@ -39,7 +46,7 @@ const ConsumptionCalculation = () => {
               />
             </div>
             <div className="input_item">
-              <label htmlFor="to">To:</label>
+              <label htmlFor="to">{t("To")}:</label>
               <input
                 type="date"
                 id="to"
@@ -52,23 +59,23 @@ const ConsumptionCalculation = () => {
           <div className="result_calculation mt-10">
             <div className="items">
               <div className="item">
-                <h4>
+                <h4 className={lang == "en" ? "en" : "ar"}>
                   <MdOutlineDownloading size={25} />
-                  Total download
+                  {t("Total download")}
                 </h4>
                 <span>0 MB</span>
               </div>
               <div className="item">
-                <h4>
+                <h4 className={lang == "en" ? "en" : "ar"}>
                   <GrUploadOption size={25} />
-                  Total Upload
+                  {t("Total Upload")}
                 </h4>
                 <span>0 MB</span>
               </div>
               <div className="item">
-                <h4>
+                <h4 className={lang == "en" ? "en" : "ar"}>
                   <TbArrowsTransferDown size={25} />
-                  Consumption
+                  {t("Consumption")}
                 </h4>
                 <span>0 MB</span>
               </div>

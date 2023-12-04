@@ -1,7 +1,8 @@
+@import "../../sass/mixins.scss";
+
 .mail_box {
   .top {
-    padding: 15px;
-    background-color: rgb(2 13 20);
+    @include topPopup;
   }
 
   .content {

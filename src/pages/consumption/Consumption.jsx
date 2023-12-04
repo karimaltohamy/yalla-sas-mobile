@@ -14,6 +14,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
+import { useTranslation } from "react-i18next";
 
 ChartJS.register(
   CategoryScale,
@@ -72,6 +73,7 @@ const Consumption = () => {
   const [openCalenderDaily, setOpenCalenderDaily] = useState(false);
   const [openCalenderMonthlty, setOpenCalenderMonthly] = useState(false);
   const [typeComsumption, setTypeComsumption] = useState("Monthly");
+  const { t } = useTranslation();
 
   const handleCloseCalender = (e, type) => {
     if (e.target === e.currentTarget && type == "daily") {
@@ -99,19 +101,19 @@ const Consumption = () => {
             className="flex items-center gap-1 btn_outline flex-1 justify-center py-2"
             onClick={() => setOpenCalenderMonthly(true)}
           >
-            <span className="text-[13px]">Monthly consumption</span>
+            <span className="text-[13px]">{t("Monthly consumption")}</span>
           </button>
           <button
             className="flex items-center gap-1 btn_outline flex-1 justify-center py-2"
             onClick={() => setOpenCalenderDaily(true)}
           >
-            <span className="text-[13px]">Daily consumption</span>
+            <span className="text-[13px]">{t("Daily consumption")}</span>
           </button>
         </div>
         <div className="consumption_chart mt-7">
-          <h5 className="font-medium">consumption</h5>
+          <h5 className="font-medium">{t("consumption")}</h5>
           <h5 className="font-semibold text-[22px]">
-            {typeComsumption} consumption
+            {t(typeComsumption)} {t("consumption")}
           </h5>
           <div className="chart">
             <Line options={options} data={data} />

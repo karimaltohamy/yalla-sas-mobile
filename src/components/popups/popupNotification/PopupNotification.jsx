@@ -3,16 +3,24 @@ import { IoMdArrowBack } from "react-icons/io";
 import "./popupNotification.scss";
 
 import { MdOutlineNotificationsActive } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
 const PopupNotification = ({ open, setOpen }) => {
+  const lang = localStorage.getItem("lang");
+  const { t } = useTranslation();
+
   return (
     <div className={`popup_notification ${open ? "active" : ""}`}>
-      <div className="top flex items-center justify-between">
+      <div
+        className={`top flex items-center justify-between ${
+          lang == "en" ? "en" : "ar"
+        }`}
+      >
         <div className="back" onClick={() => setOpen(false)}>
           <IoMdArrowBack size={25} />
         </div>
 
-        <h4 className="font-semibold">Notifications</h4>
+        <h4 className="font-semibold">{t("Notifications")}</h4>
       </div>
       <div className="content mt-10 px-3">
         <div className="notifications_items">

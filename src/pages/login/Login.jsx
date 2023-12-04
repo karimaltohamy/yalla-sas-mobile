@@ -4,10 +4,12 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import logo from "../../images/logo.png";
 import imageLogin from "../../images/black-hero1.png";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { t } = useTranslation();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,10 +20,13 @@ const Login = () => {
     <div className="login">
       <div className="line h-full">
         <div className="info p-5 pb-0 h-full flex justify-end flex-col text-center">
-          <h4 className="text-[22px] font-semibold mb-1">Pay with one Click</h4>
+          <h4 className="text-[22px] font-semibold mb-1">
+            {t("Pay with one Click")}
+          </h4>
           <p className="text-[15px] mb-4">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo sunt
-            itaque pariatur.
+            {t(
+              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo sunt itaque pariatur."
+            )}
           </p>
           <div className="image text-center mb-2">
             <img
@@ -47,7 +52,7 @@ const Login = () => {
               <FaRegUser size={20} />
               <input
                 type="text"
-                placeholder="username"
+                placeholder={t("username")}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -56,13 +61,13 @@ const Login = () => {
               <RiLockPasswordLine size={20} />
               <input
                 type="password"
-                placeholder="password"
+                placeholder={t("password")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <button className="btn_fill w-full py-2 text-[18px] rounded-full">
-              Login
+              {t("Login")}
             </button>
           </form>
         </div>

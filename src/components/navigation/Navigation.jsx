@@ -4,8 +4,10 @@ import { FaHome } from "react-icons/fa";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { RiMenu2Fill } from "react-icons/ri";
 import "./navigation.scss";
+import { useTranslation } from "react-i18next";
 
 const Sidebar = () => {
+  const { t } = useTranslation();
   return (
     <div className="navigation">
       <div className="links">
@@ -16,7 +18,7 @@ const Sidebar = () => {
           <div className="icon">
             <IoPerson size={25} />
           </div>
-          <span>Account</span>
+          <span>{t("Account")}</span>
         </NavLink>
         <NavLink
           to={"/"}
@@ -25,7 +27,7 @@ const Sidebar = () => {
           <div className="icon">
             <FaHome size={25} />
           </div>
-          <span>Home</span>
+          <span>{t("Home")}</span>
         </NavLink>
         <NavLink
           to={"/consumption"}
@@ -34,7 +36,7 @@ const Sidebar = () => {
           <div className="icon">
             <TbBrandGoogleAnalytics size={25} />
           </div>
-          <span>Consumption</span>
+          <span>{t("Consumption")}</span>
         </NavLink>
         <NavLink
           to={"/menu"}
@@ -43,7 +45,7 @@ const Sidebar = () => {
           <div className="icon">
             <RiMenu2Fill size={25} />
           </div>
-          <span>Menu</span>
+          <span>{t("Menu")}</span>
         </NavLink>
       </div>
     </div>

@@ -6,8 +6,10 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { PiMathOperationsFill } from "react-icons/pi";
 import { MdOutlinePayment } from "react-icons/md";
 import "./menu.scss";
+import { useTranslation } from "react-i18next";
 
 const Menu = () => {
+  const { t } = useTranslation();
   return (
     <div className="menu pt-[90px] h-full">
       <div className={`${styles.custom_container} h-full`}>
@@ -15,19 +17,19 @@ const Menu = () => {
           <div className="links grid grid-cols-2 gap-5">
             <Link className="link" to={"/sessions"}>
               <BiSolidFoodMenu size={45} />
-              Sessions
+              {t("Sessions")}
             </Link>
             <Link className="link" to={"/mail-box"}>
               <MdOutlineMailOutline size={45} />
-              mail box
+              {t("mail box")}
             </Link>
             <Link className="link" to={"/consumption-calculation"}>
               <PiMathOperationsFill size={45} />
-              Consumption calculation
+              {t("Consumption calculation")}
             </Link>
             <Link className="link" to={"/payment"}>
               <MdOutlinePayment size={45} />
-              Payment fawry or Visa
+              {t("Payment fawry or Visa")}
             </Link>
           </div>
         </div>

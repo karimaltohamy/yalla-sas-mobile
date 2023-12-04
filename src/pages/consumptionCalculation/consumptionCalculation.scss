@@ -1,4 +1,5 @@
 @import "../../sass/variables.scss";
+@import "../../sass/mixins.scss";
 
 .consumption_calculation {
   .top {
@@ -64,7 +65,14 @@
             font-weight: 600;
             flex: 1;
             padding: 12px;
-            border-right: 1px solid var(--border-color);
+
+            &.en {
+              border-right: 1px solid var(--border-color);
+            }
+
+            &.ar {
+              border-left: 1px solid var(--border-color);
+            }
 
             svg {
               color: $primary-color;

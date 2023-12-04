@@ -4,17 +4,25 @@ import { MdMarkEmailRead } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "./mainBox.scss";
 import styles from "../../styles/style";
+import { useTranslation } from "react-i18next";
 
 const MailBox = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const lang = localStorage.getItem("lang");
+
   return (
     <div className="mail_box">
-      <div className="top flex items-center justify-between">
+      <div
+        className={`top flex items-center justify-between ${
+          lang == "en" ? "en" : "ar"
+        }`}
+      >
         <span className="back" onClick={() => navigate(-1)}>
           <IoMdArrowBack size={25} />
         </span>
 
-        <h4 className="font-semibold">Mail Box</h4>
+        <h4 className="font-semibold">{t("Mail Box")}</h4>
       </div>
 
       <div className={`${styles.custom_container} h-full`}>

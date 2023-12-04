@@ -15,8 +15,6 @@ function App() {
   const [mobile, setMobile] = useState(false);
   const location = useLocation();
 
-  console.log(location.pathname);
-
   useEffect(() => {
     if (window.innerWidth <= 500) {
       setMobile(true);
@@ -28,6 +26,14 @@ function App() {
       document.body.classList.add("light");
     } else {
       document.body.classList.remove("light");
+    }
+
+    if (localStorage.getItem("lang") == "ar") {
+      document.body.classList.add("ar");
+      document.body.classList.remove("en");
+    } else {
+      document.body.classList.add("en");
+      document.body.classList.remove("ar");
     }
   }, []);
 

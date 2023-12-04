@@ -2,8 +2,11 @@ import { IoIosWifi } from "react-icons/io";
 import { IoSettings } from "react-icons/io5";
 import "./boxInfoPackage.scss";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 const BoxInfoPackage = ({ setOpen }) => {
   const [percent, setPercent] = useState(60);
+  const { t } = useTranslation();
+
   return (
     <div className="box_info_package p-3">
       <div className="top_box flex items-center justify-between">
@@ -14,13 +17,13 @@ const BoxInfoPackage = ({ setOpen }) => {
           <div className="text">
             <h4 className="text-[20px] font-semibold">Le Test 5</h4>
             <p className="text-[13px] flex items-center gap-1">
-              Ending in:
+              {t("Ending in")}:
               <span className="time text-gray-400">30-12-2023</span>
             </p>
           </div>
         </div>
 
-        <span className="status text-green-500 font-bold">Active</span>
+        <span className="status text-green-500 font-bold">{t("Active")}</span>
       </div>
 
       <div className="card_progress">
@@ -43,13 +46,15 @@ const BoxInfoPackage = ({ setOpen }) => {
         </div>
       </div>
       <div className="bottom_info flex items-center justify-between">
-        <p className=" font-semibold text-[14px]">You have 0 MB out of 0 MB</p>
+        <p className=" font-semibold text-[14px]">
+          {t("You have")} 0 MB {t("out of")} 0 MB
+        </p>
         <button
           className="flex items-center gap-1 btn_fill"
           onClick={() => setOpen(true)}
         >
           <IoSettings />
-          <span>Charge</span>
+          <span>{t("Charge")}</span>
         </button>
       </div>
     </div>

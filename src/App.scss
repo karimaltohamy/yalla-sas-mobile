@@ -36,6 +36,16 @@ body {
     --box-shadow: 0 10px 6px 0 rgba(226, 232, 240, 0.5);
     --box-shadow2: -1px 0px 10px 0 rgb(173 173 173 / 68%);
   }
+
+  &.ar {
+    direction: rtl;
+    font-family: "Cairo", sans-serif !important;
+  }
+
+  &.en {
+    direction: ltr;
+    font-family: "Poppins", sans-serif !important;
+  }
 }
 
 .btn_fill {

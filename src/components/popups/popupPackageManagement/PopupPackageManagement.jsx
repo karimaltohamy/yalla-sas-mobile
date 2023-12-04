@@ -2,6 +2,7 @@ import { LiaExchangeAltSolid } from "react-icons/lia";
 import { GiElectric } from "react-icons/gi";
 import { LuPackage } from "react-icons/lu";
 import "./popupPackageManagement.scss";
+import { useTranslation } from "react-i18next";
 
 const PopupPackageManagement = ({
   open,
@@ -10,6 +11,7 @@ const PopupPackageManagement = ({
   setOpenExtending,
   setOpenActivatePackage,
 }) => {
+  const { t } = useTranslation();
   const closePoppup = (e) => {
     if (e.target === e.currentTarget) {
       setOpen(false);
@@ -31,7 +33,7 @@ const PopupPackageManagement = ({
             }}
           >
             <LiaExchangeAltSolid size={25} />
-            Change Package
+            {t("Change Package")}
           </button>
           <button
             className="item"
@@ -41,7 +43,7 @@ const PopupPackageManagement = ({
             }}
           >
             <GiElectric size={25} />
-            Activate Package
+            {t("Activate Package")}
           </button>
           <button
             className="item"
@@ -51,7 +53,7 @@ const PopupPackageManagement = ({
             }}
           >
             <LuPackage size={25} />
-            Extending Package
+            {t("Extending Package")}
           </button>
         </div>
       </div>

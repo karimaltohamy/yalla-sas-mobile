@@ -29,4 +29,12 @@
   padding: 15px;
   background-color: rgb(2 13 20);
   color: white;
+
+  &.ar {
+    flex-direction: row-reverse;
+  }
+
+  &.en {
+    flex-direction: row;
+  }
 }

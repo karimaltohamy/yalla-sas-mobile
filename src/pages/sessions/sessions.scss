@@ -1,7 +1,8 @@
+@import "../../sass/mixins.scss";
+
 .sessions {
   .top {
-    padding: 15px;
-    background-color: rgb(2 13 20);
+    @include topPopup;
   }
 
   .container_table {
