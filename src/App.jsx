@@ -24,14 +24,12 @@ function App() {
       setMobile(false);
     }
 
-    document.addEventListener("resize", () => {
-      if (window.innerWidth <= 500) {
-        setMobile(true);
-      } else {
-        setMobile(false);
-      }
-    });
-  }, [document]);
+    if (localStorage.getItem("mode") == "light") {
+      document.body.classList.add("light");
+    } else {
+      document.body.classList.remove("light");
+    }
+  }, []);
 
   return mobile ? (
     <Fragment>

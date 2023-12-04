@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./popupSettings.scss";
 import { IoMdArrowBack } from "react-icons/io";
 import { LuLanguages } from "react-icons/lu";
 import { IoInvertMode } from "react-icons/io5";
 
 const PopupSettings = ({ open, setOpen }) => {
+  const [mode, setMode] = useState("dark");
+
+  const handleModeTheme = (e) => {
+    let value = e.target.value;
+    if (value == "light") {
+      setMode(value);
+      localStorage.setItem("mode", value);
+      document.body.classList.add("light");
+    } else {
+      setMode(value);
+      localStorage.setItem("mode", value);
+      document.body.classList.remove("light");
+    }
+  };
+
   return (
     <div className={`popup_settings ${open && "active"}`}>
       <div className="top flex items-center justify-between">
@@ -24,9 +39,9 @@ const PopupSettings = ({ open, setOpen }) => {
         </div>
         <div className="select_theme">
           <IoInvertMode size={25} />
-          <select>
-            <option value="">Dark</option>
-            <option value="">Light</option>
+          <select value={mode} onChange={handleModeTheme}>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
           </select>
         </div>
       </div>

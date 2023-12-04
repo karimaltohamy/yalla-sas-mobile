@@ -9,7 +9,7 @@
     .items {
       .item {
         background-color: var(--bg-main);
-        box-shadow: -1px 0px 10px 0 rgb(5 5 5 / 68%);
+        box-shadow: var(--box-shadow2);
         border-radius: 7px;
         padding: 8px;
         display: flex;

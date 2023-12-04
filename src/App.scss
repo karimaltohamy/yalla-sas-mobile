@@ -11,17 +11,8 @@
   --text-color: white;
   --bg-section: #02533e;
   --box-shadow: 0 10px 6px 0 rgb(0 0 0 / 35%);
-  --bg-box: #16392b;
-  --bg-box2: #16392b;
-  --bg-hero: radial-gradient(at bottom center, #1c7d49 0%, #061712 50%);
-  --bg-section-gradient: radial-gradient(
-    at bottom center,
-    #1c7d49 0%,
-    #09241c 50%
-  );
-  --bg-section2: linear-gradient(120deg, #09241c 40%, #238a5e 30%, #238a5e);
-  --bg-section3: linear-gradient(180deg, #15301f 18%, rgba(0, 0, 0, 0) 59%);
   --border-color: #8d8d8d;
+  --box-shadow2: -1px 0px 10px 0 rgb(5 5 5 / 68%);
 }
 
 html {
@@ -36,6 +27,15 @@ body {
   color: var(--text-color) !important;
   min-height: 100vh;
   padding-bottom: 100px;
+
+  &.light {
+    --border-color: rgb(228, 228, 228);
+    --bg-section: #d0ffe7;
+    --bg-main: white;
+    --text-color: black;
+    --box-shadow: 0 10px 6px 0 rgba(226, 232, 240, 0.5);
+    --box-shadow2: -1px 0px 10px 0 rgb(173 173 173 / 68%);
+  }
 }
 
 .btn_fill {

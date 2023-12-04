@@ -2,8 +2,7 @@
 
 .consumption_calculation {
   .top {
-    padding: 15px;
-    background-color: rgb(2 13 20);
+    @include topPopup;
   }
 
   .content {
