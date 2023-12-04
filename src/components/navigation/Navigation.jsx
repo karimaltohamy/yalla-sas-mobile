@@ -37,7 +37,7 @@ const Sidebar = () => {
           <span>Consumption</span>
         </NavLink>
         <NavLink
-          to={"/menu"}
+          to={"/login"}
           className={({ isActive }) => (isActive ? "active link" : "link")}
         >
           <div className="icon">

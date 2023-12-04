@@ -3,8 +3,17 @@ import { FaRegUser } from "react-icons/fa6";
 import { RiLockPasswordLine } from "react-icons/ri";
 import logo from "../../images/logo.png";
 import imageLogin from "../../images/black-hero1.png";
+import { useState } from "react";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log({ username, password });
+  };
+
   return (
     <div className="login">
       <div className="line h-full">
@@ -33,14 +42,24 @@ const Login = () => {
               className="w-[80px] mx-auto"
             />
           </div>
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="input_item">
               <FaRegUser size={20} />
-              <input type="text" placeholder="username" />
+              <input
+                type="text"
+                placeholder="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </div>
             <div className="input_item">
               <RiLockPasswordLine size={20} />
-              <input type="password" placeholder="password" />
+              <input
+                type="password"
+                placeholder="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             <button className="btn_fill w-full py-2 text-[18px] rounded-full">
               Login
