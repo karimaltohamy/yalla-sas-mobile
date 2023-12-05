@@ -14,8 +14,13 @@ const PopupCharge = ({ setOpen, open }) => {
           <IoMdArrowBack size={25} />
         </div>
       </div>
-      <div className="content mt-10 px-3">
-        <form>
+      <div className="content h-[100vh]">
+        <iframe
+          src="https://go.yalla-cash.com/"
+          frameborder="0"
+          className="h-full w-full"
+        ></iframe>
+        {/* } <form>
           <div className="input_item">
             <FaRegCreditCard size={25} />
             <input type="text" placeholder={t("Card number")} />
@@ -30,7 +35,7 @@ const PopupCharge = ({ setOpen, open }) => {
               {t("Scan")}
             </button>
           </div>
-        </form>
+  </form> */}
       </div>
     </div>
   );
