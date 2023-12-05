@@ -7,9 +7,14 @@ import { useTranslation } from "react-i18next";
 
 const PopupCharge = ({ setOpen, open }) => {
   const { t } = useTranslation();
+  const lang = localStorage.getItem("lang");
   return (
     <div className={`PopupCharge ${open ? "active" : ""}`}>
-      <div className="top">
+      <div
+        className={`top flex items-center justify-between ${
+          lang == "en" ? "en" : "ar"
+        }`}
+      >
         <div className="back" onClick={() => setOpen(false)}>
           <IoMdArrowBack size={25} />
         </div>
