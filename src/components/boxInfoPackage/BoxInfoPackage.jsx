@@ -29,11 +29,11 @@ const BoxInfoPackage = ({ setOpen }) => {
       <div className="card_progress">
         <div className="percent">
           <svg>
-            <circle cx="100" cy="100" r="90"></circle>
+            <circle cx="100" cy="100" r="77"></circle>
             <circle
               cx="100"
               cy="100"
-              r="90"
+              r="77"
               strokeDashoffset={`calc(625px - (625px * ${percent} / 100)`}
             ></circle>
           </svg>

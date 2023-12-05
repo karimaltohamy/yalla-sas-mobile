@@ -1,15 +1,20 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.scss";
-import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
-import Profile from "./pages/profile/Profile";
-import Consumption from "./pages/consumption/Consumption";
-import Navigation from "./components/navigation/Navigation";
-import { Fragment, useEffect, useState } from "react";
-import Menu from "./pages/menu/Menu";
-import Sessions from "./pages/sessions/Sessions";
-import MailBox from "./pages/mailBox/MailBox";
-import ConsumptionCalculation from "./pages/consumptionCalculation/ConsumptionCalculation";
+import React, { Fragment, Suspense, useEffect, useState } from "react";
+import Loader from "./components/loader/Loader";
+const Home = React.lazy(() => import("./pages/home/Home"));
+const Login = React.lazy(() => import("./pages/login/Login"));
+const Profile = React.lazy(() => import("./pages/profile/Profile"));
+const Consumption = React.lazy(() => import("./pages/consumption/Consumption"));
+const Navigation = React.lazy(() =>
+  import("./components/navigation/Navigation")
+);
+const Menu = React.lazy(() => import("./pages/menu/Menu"));
+const Sessions = React.lazy(() => import("./pages/sessions/Sessions"));
+const MailBox = React.lazy(() => import("./pages/mailBox/MailBox"));
+const ConsumptionCalculation = React.lazy(() =>
+  import("./pages/consumptionCalculation/ConsumptionCalculation")
+);
 
 function App() {
   const [mobile, setMobile] = useState(false);
@@ -41,16 +46,63 @@ function App() {
     <Fragment>
       {!location.pathname.includes("login") && <Navigation />}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/my-profile" element={<Profile />} />
-        <Route path="/consumption" element={<Consumption />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/sessions" element={<Sessions />} />
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Home />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Login />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/my-profile"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Profile />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/consumption"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Consumption />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/menu"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Menu />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/sessions"
+          element={
+            <Suspense fallback={<Loader />}>
+              {" "}
+              <Sessions />
+            </Suspense>
+          }
+        />
         <Route path="/mail-box" element={<MailBox />} />
         <Route
           path="/consumption-calculation"
-          element={<ConsumptionCalculation />}
+          element={
+            <Suspense fallback={<Loader />}>
+              <ConsumptionCalculation />
+            </Suspense>
+          }
         />
       </Routes>
     </Fragment>
