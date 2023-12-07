@@ -2,7 +2,7 @@ import "./login.scss";
 import { FaRegUser } from "react-icons/fa6";
 import { RiLockPasswordLine } from "react-icons/ri";
 import logo from "../../images/logo.png";
-import imageLogin from "../../images/black-hero1.png";
+import imageLogin from "../../images/internet-img.png";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
