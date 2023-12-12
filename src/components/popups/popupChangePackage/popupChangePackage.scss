@@ -13,5 +13,26 @@
       border-radius: 7px;
       background-color: var(--bg-section);
     }
+
+    .packages_boxs {
+      .box {
+        padding: 20px;
+        border-radius: 8px;
+        background-color: var(--bg-main);
+        box-shadow: var(--box-shadow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        &.active {
+          background-color: var(--bg-section);
+        }
+
+        .package_name {
+          font-size: 25px;
+        }
+      }
+    }
   }
 }

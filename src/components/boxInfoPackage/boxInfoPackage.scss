@@ -12,55 +12,48 @@
     }
   }
 
-  .card_progress {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 20px auto 5px;
-    border-radius: 5px;
-
-    .percent {
-      position: relative;
-
-      svg {
-        position: relative;
-        width: 210px;
-        height: 210px;
-        transform: rotate(-90deg);
-
-        circle {
-          width: 100%;
-          height: 100%;
-          fill: none;
-          stroke: #f0f0f0;
-          stroke-width: 10;
-          stroke-linecap: round;
-        }
-
-        circle:last-of-type {
-          stroke-dasharray: 625px;
-          transition: all 0.4s;
-          // stroke-dashoffset: calc(625px - (625px * var(--percent)) / 100);
-          stroke: $primary-color;
-        }
-      }
-
-      .number {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        h3 {
-          font-weight: 600;
-          font-size: 25px;
-
-          span {
-            font-size: 22px;
-          }
-        }
-      }
+  @keyframes growProgressBar {
+    0%,
+    33% {
+      --pgPercentage: 0;
     }
+    100% {
+      --pgPercentage: var(--value);
+    }
+  }
+
+  @property --pgPercentage {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
+  }
+
+  .progressbar {
+    --size: 10rem;
+    --fg: #238a5e;
+    --bg: rgb(221, 255, 237);
+    --pgPercentage: var(--value);
+    animation: growProgressBar 3s 1 linear forwards;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(
+        closest-side,
+        white 87%,
+        transparent 0 99.9%,
+        white 0
+      ),
+      conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: calc(var(--size) / 5);
+    color: var(--fg);
+    margin: 12px auto;
+  }
+
+  div[role="progressbar"]::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) "%";
   }
 }

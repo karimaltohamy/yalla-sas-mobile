@@ -4,11 +4,11 @@ import "./boxInfoPackage.scss";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 const BoxInfoPackage = ({ setOpen }) => {
-  const [percent, setPercent] = useState(60);
+  const [percent, setPercent] = useState(50);
   const { t } = useTranslation();
 
   const circleStyle = {
-    "--percent": percent + "%", // Assuming you want to add the percentage sign
+    "--value": percent, // Assuming you want to add the percentage sign
   };
 
   return (
@@ -35,26 +35,15 @@ const BoxInfoPackage = ({ setOpen }) => {
         <span className="status text-green-500 font-bold">{t("Active")}</span>
       </div>
 
-      <div className="card_progress">
-        <div className="percent">
-          <svg>
-            <circle cx="105" cy="105" r="100"></circle>
-            <circle
-              cx="105"
-              cy="105"
-              r="100"
-              strokeDashoffset={`calc(625px - (625px * ${percent} / 100)`}
-              style={circleStyle}
-            ></circle>
-          </svg>
-          <div className="number">
-            <h3>
-              {percent}
-              <span>%</span>
-            </h3>
-          </div>
-        </div>
-      </div>
+      <div
+        className="progressbar"
+        role="progressbar"
+        aria-valuenow={percent}
+        aria-valuemin="0"
+        aria-valuemax="100"
+        style={circleStyle}
+      ></div>
+
       <div className="bottom_info flex items-center justify-between">
         <p className=" font-semibold text-[14px]">
           {t("You have")} 0 MB {t("out of")} 0 MB

@@ -12,6 +12,7 @@ const PopupCharge = ({ setOpen, open }) => {
 
   const [amount, setAmount] = useState("");
   const [radioCharge, setRadioCharge] = useState("renewPackage");
+  const [openIframe, setOpenIframe] = useState(false);
 
   const handleRadioChange = (event) => {
     setRadioCharge(event.target.value);
@@ -28,82 +29,94 @@ const PopupCharge = ({ setOpen, open }) => {
           <IoMdArrowBack size={25} />
         </div>
       </div>
-      <div className="content mt-[60px] px-5 h-[100vh] flex items-center justify-center">
-        <form>
-          <div className="inputs_radio mb-10">
-            <div className="input_radio">
-              <input
-                type="radio"
-                id="renew"
-                name="redio-charge"
-                onChange={handleRadioChange}
-                value={"renewPackage"}
-                checked={radioCharge === "renewPackage"}
-              />
-              <label htmlFor="renew">{t("Renew package")}</label>
+      {!openIframe && (
+        <div className="content mt-[60px] px-5 h-[100vh] flex items-center justify-center">
+          <form>
+            <div className="inputs_radio mb-10">
+              <div className="input_radio">
+                <input
+                  type="radio"
+                  id="renew"
+                  name="redio-charge"
+                  onChange={handleRadioChange}
+                  value={"renewPackage"}
+                  checked={radioCharge === "renewPackage"}
+                />
+                <label htmlFor="renew">{t("Renew package")}</label>
+              </div>
+              <div className="input_radio">
+                <input
+                  type="radio"
+                  id="deposit"
+                  name="redio-charge"
+                  onChange={handleRadioChange}
+                  value={"depositBalance"}
+                  checked={radioCharge === "depositBalance"}
+                />
+                <label htmlFor="deposit">{t("Deposit balance")}</label>
+              </div>
+              <div className="input_radio">
+                <input
+                  type="radio"
+                  id="offer"
+                  name="redio-charge"
+                  onChange={handleRadioChange}
+                  value={"useOffer"}
+                  checked={radioCharge === "useOffer"}
+                />
+                <label htmlFor="offer">{t("Use offer")}</label>
+              </div>
+              <div className="input_radio">
+                <input
+                  type="radio"
+                  id="extending"
+                  name="redio-charge"
+                  onChange={handleRadioChange}
+                  value={"extendingPackage"}
+                  checked={radioCharge === "extendingPackage"}
+                />
+                <label htmlFor="extending">{t("Extending package")}</label>
+              </div>
+              <div className="input_radio">
+                <input
+                  type="radio"
+                  id="change"
+                  name="redio-charge"
+                  onChange={handleRadioChange}
+                  value={"changePackage"}
+                  checked={radioCharge === "changePackage"}
+                />
+                <label htmlFor="change">{t("Change package")}</label>
+              </div>
             </div>
-            <div className="input_radio">
+            <div className="input_item">
+              <FaRegCreditCard size={25} />
               <input
-                type="radio"
-                id="deposit"
-                name="redio-charge"
-                onChange={handleRadioChange}
-                value={"depositBalance"}
-                checked={radioCharge === "depositBalance"}
+                type="text"
+                placeholder={t("amount")}
+                value={setAmount}
+                onChange={(e) => setAmount(e.target.value)}
               />
-              <label htmlFor="deposit">{t("Deposit balance")}</label>
             </div>
-            <div className="input_radio">
-              <input
-                type="radio"
-                id="offer"
-                name="redio-charge"
-                onChange={handleRadioChange}
-                value={"useOffer"}
-                checked={radioCharge === "useOffer"}
-              />
-              <label htmlFor="offer">{t("Use offer")}</label>
+            <div className="btns flex items-center justify-center gap-5">
+              <button className="flex items-center justify-center gap-[6px] btn_fill w-full">
+                <GiElectric size={20} />
+                {t("Charge")}
+              </button>
             </div>
-            <div className="input_radio">
-              <input
-                type="radio"
-                id="extending"
-                name="redio-charge"
-                onChange={handleRadioChange}
-                value={"extendingPackage"}
-                checked={radioCharge === "extendingPackage"}
-              />
-              <label htmlFor="extending">{t("Extending package")}</label>
-            </div>
-            <div className="input_radio">
-              <input
-                type="radio"
-                id="change"
-                name="redio-charge"
-                onChange={handleRadioChange}
-                value={"changePackage"}
-                checked={radioCharge === "changePackage"}
-              />
-              <label htmlFor="change">{t("Change package")}</label>
-            </div>
-          </div>
-          <div className="input_item">
-            <FaRegCreditCard size={25} />
-            <input
-              type="text"
-              placeholder={t("amount")}
-              value={setAmount}
-              onChange={(e) => setAmount(e.target.value)}
-            />
-          </div>
-          <div className="btns flex items-center justify-center gap-5">
-            <button className="flex items-center justify-center gap-[6px] btn_fill w-full">
-              <GiElectric size={20} />
-              {t("Charge")}
-            </button>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
+      )}
+
+      {openIframe && (
+        <div className="content h-[100vh]">
+          <iframe
+            src="https://go.yalla-cash.com/pay"
+            frameborder="0"
+            className="w-full h-full"
+          ></iframe>
+        </div>
+      )}
     </div>
   );
 };

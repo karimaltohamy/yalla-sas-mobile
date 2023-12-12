@@ -14,7 +14,7 @@ import PopupNotification from "../../components/popups/popupNotification/PopupNo
 
 const Home = () => {
   const [openPopupCharge, setOpenPopupCharge] = useState(false);
-  const [openPackageManagement, setOpenPackageManagement] = useState(false);
+  // const [openPackageManagement, setOpenPackageManagement] = useState(false);
   const [openChangePackage, setOpenChangePackage] = useState(false);
   const [openExtending, setOpenExtending] = useState(false);
   const [openActivatePackage, setOpenActivatePackage] = useState(false);
@@ -33,7 +33,7 @@ const Home = () => {
             <BoxInfoUser setOpen={setOpenPopupCharge} />
           </div>
           <div className="pt-[25px]">
-            <BoxInfoPackage setOpen={setOpenPackageManagement} />
+            <BoxInfoPackage setOpen={setOpenChangePackage} />
           </div>
         </div>
         <div className="primary-shadow"></div>
@@ -42,13 +42,13 @@ const Home = () => {
 
       {/* popups */}
       <PopupCharge open={openPopupCharge} setOpen={setOpenPopupCharge} />
-      <PopupPackageManagement
+      {/*  <PopupPackageManagement
         setOpen={setOpenPackageManagement}
         open={openPackageManagement}
         setOpenChangePackage={setOpenChangePackage}
         setOpenExtending={setOpenExtending}
         setOpenActivatePackage={setOpenActivatePackage}
-      />
+        />*/}
       <PopupChangePackage
         setOpen={setOpenChangePackage}
         open={openChangePackage}
