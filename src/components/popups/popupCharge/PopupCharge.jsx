@@ -28,9 +28,9 @@ const PopupCharge = ({ setOpen, open }) => {
           <IoMdArrowBack size={25} />
         </div>
       </div>
-      <div className="content mt-5 px-2">
+      <div className="content mt-[60px] px-5 h-[100vh] flex items-center justify-center">
         <form>
-          <div className="inputs_radio grid grid-cols-2">
+          <div className="inputs_radio mb-10">
             <div className="input_radio">
               <input
                 type="radio"
@@ -97,7 +97,7 @@ const PopupCharge = ({ setOpen, open }) => {
             />
           </div>
           <div className="btns flex items-center justify-center gap-5">
-            <button className="flex items-center gap-[6px] btn_fill">
+            <button className="flex items-center justify-center gap-[6px] btn_fill w-full">
               <GiElectric size={20} />
               {t("Charge")}
             </button>

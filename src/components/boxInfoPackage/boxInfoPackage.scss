@@ -40,6 +40,7 @@
 
         circle:last-of-type {
           stroke-dasharray: 625px;
+          transition: all 0.4s;
           // stroke-dashoffset: calc(625px - (625px * var(--percent)) / 100);
           stroke: $primary-color;
         }
