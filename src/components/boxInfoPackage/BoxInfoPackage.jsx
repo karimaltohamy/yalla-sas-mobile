@@ -7,8 +7,17 @@ const BoxInfoPackage = ({ setOpen }) => {
   const [percent, setPercent] = useState(60);
   const { t } = useTranslation();
 
+  const circleStyle = {
+    "--percent": percent + "%", // Assuming you want to add the percentage sign
+  };
+
   return (
-    <div className="box_info_package p-3">
+    <div
+      className="box_info_package p-3"
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      data-aos-delay="500"
+    >
       <div className="top_box flex items-center justify-between">
         <div className="package flex items-center gap-2">
           <div className="icon w-[50px] h-[50px] rounded-full flex items-center justify-center">
@@ -29,12 +38,13 @@ const BoxInfoPackage = ({ setOpen }) => {
       <div className="card_progress">
         <div className="percent">
           <svg>
-            <circle cx="100" cy="100" r="77"></circle>
+            <circle cx="105" cy="105" r="100"></circle>
             <circle
-              cx="100"
-              cy="100"
-              r="77"
+              cx="105"
+              cy="105"
+              r="100"
               strokeDashoffset={`calc(625px - (625px * ${percent} / 100)`}
+              style={circleStyle}
             ></circle>
           </svg>
           <div className="number">

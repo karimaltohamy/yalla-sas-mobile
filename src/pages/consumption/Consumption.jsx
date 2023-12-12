@@ -99,18 +99,29 @@ const Consumption = () => {
         <div className="btns_consumption flex items-center gap-4 py-5">
           <button
             className="flex items-center gap-1 btn_outline flex-1 justify-center py-2"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            data-aos-delay="200"
             onClick={() => setOpenCalenderMonthly(true)}
           >
             <span className="text-[13px]">{t("Monthly consumption")}</span>
           </button>
           <button
             className="flex items-center gap-1 btn_outline flex-1 justify-center py-2"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            data-aos-delay="400"
             onClick={() => setOpenCalenderDaily(true)}
           >
             <span className="text-[13px]">{t("Daily consumption")}</span>
           </button>
         </div>
-        <div className="consumption_chart mt-7">
+        <div
+          className="consumption_chart mt-7"
+          data-aos="zoom-in"
+          data-aos-duration="1000"
+          data-aos-delay="500"
+        >
           <h5 className="font-medium">{t("consumption")}</h5>
           <h5 className="font-semibold text-[22px]">
             {t(typeComsumption)} {t("consumption")}
@@ -121,23 +132,48 @@ const Consumption = () => {
         </div>
         <div className="ruselt_consumption_chart mt-5">
           <div className="items">
-            <div className="item">
+            <div
+              className="item"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
               <div className="package">MB 0</div>
               <div className="date">1-1-2023</div>
             </div>
-            <div className="item">
+            <div
+              className="item"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="300"
+            >
               <div className="package">MB 0</div>
               <div className="date">1-1-2023</div>
             </div>
-            <div className="item">
+            <div
+              className="item"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="400"
+            >
               <div className="package">MB 0</div>
               <div className="date">1-1-2023</div>
             </div>
-            <div className="item">
+            <div
+              className="item"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="500"
+            >
               <div className="package">MB 0</div>
               <div className="date">1-1-2023</div>
             </div>
-            <div className="item">
+            <div
+              className="item"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="600"
+            >
               <div className="package">MB 0</div>
               <div className="date">1-1-2023</div>
             </div>

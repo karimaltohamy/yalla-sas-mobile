@@ -59,5 +59,12 @@
   "username": "username",
   "password": "password",
   "Login": "Login",
-  "Settings": "Settings"
+  "Settings": "Settings",
+  "License number": "License number",
+  "amount": "amount",
+  "Renew package": "Renew package",
+  "Deposit balance": "Deposit balance",
+  "Use offer": "Use offer",
+  "Extending package": "Extending package",
+  "Change package": "Change package"
 }

@@ -15,10 +15,16 @@ const MailBox = React.lazy(() => import("./pages/mailBox/MailBox"));
 const ConsumptionCalculation = React.lazy(() =>
   import("./pages/consumptionCalculation/ConsumptionCalculation")
 );
+import AOS from "aos";
 
 function App() {
   const [mobile, setMobile] = useState(false);
   const location = useLocation();
+
+  // aos animation
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   useEffect(() => {
     if (window.innerWidth <= 500) {

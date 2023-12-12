@@ -9,6 +9,16 @@
 
   .content {
     form {
+      .inputs_radio {
+        .input_radio {
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+      }
+
       .input_item {
         display: flex;
         align-items: center;

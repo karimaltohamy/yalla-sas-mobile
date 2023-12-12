@@ -1,6 +1,7 @@
 import "./login.scss";
 import { FaRegUser } from "react-icons/fa6";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { GrLicense } from "react-icons/gr";
 import logo from "../../images/logo.png";
 import imageLogin from "../../images/internet-img.png";
 import { useState } from "react";
@@ -9,6 +10,7 @@ import { useTranslation } from "react-i18next";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [licenseNumber, setLicenseNumber] = useState("");
   const { t } = useTranslation();
 
   const handleLogin = (e) => {
@@ -48,6 +50,15 @@ const Login = () => {
             />
           </div>
           <form onSubmit={handleLogin}>
+            <div className="input_item">
+              <GrLicense size={20} />
+              <input
+                type="text"
+                placeholder={t("License number")}
+                value={licenseNumber}
+                onChange={(e) => setLicenseNumber(e.target.value)}
+              />
+            </div>
             <div className="input_item">
               <FaRegUser size={20} />
               <input

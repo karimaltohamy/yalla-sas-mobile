@@ -6,7 +6,12 @@ import { useTranslation } from "react-i18next";
 const BoxInfoUser = ({ setOpen }) => {
   const { t } = useTranslation();
   return (
-    <div className="box_info_user">
+    <div
+      className="box_info_user"
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      data-aos-delay="300"
+    >
       <div className="top_info p-4 flex items-center gap-3">
         <div className="image">
           <img

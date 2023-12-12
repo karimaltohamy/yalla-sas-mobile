@@ -6,6 +6,8 @@ import { BrowserRouter } from "react-router-dom";
 import "react-calendar/dist/Calendar.css";
 import i18n from "./i18n";
 
+import "aos/dist/aos.css";
+
 import { I18nextProvider } from "react-i18next";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

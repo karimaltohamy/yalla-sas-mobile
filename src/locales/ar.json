@@ -59,5 +59,12 @@
   "username": "اسم المستخدم",
   "password": "كلمة المرور",
   "Login": "تسجيل الدخول",
-  "Settings": "الاعدادات"
+  "Settings": "الاعدادات",
+  "License number": "رقم الرخصه",
+  "amount": "المبلغ",
+  "Renew package": "تجديد الباقه",
+  "Deposit balance": "ايداع رصيد",
+  "Use offer": "استخدام العرض",
+  "Extending package": "نمديد الباقه",
+  "Change package": "تغير الباقه"
 }

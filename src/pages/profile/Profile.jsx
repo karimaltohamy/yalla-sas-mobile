@@ -9,7 +9,12 @@ const Profile = () => {
 
   return (
     <div className="profile">
-      <div className="user_info pt-8 pb-[70px] px-3 flex items-center gap-3">
+      <div
+        className="user_info pt-8 pb-[70px] px-3 flex items-center gap-3"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        data-aos-delay="200"
+      >
         <div className="image">
           <img
             src={imgUser}
@@ -24,7 +29,12 @@ const Profile = () => {
         </div>
       </div>
       <div className={styles.custom_container}>
-        <div className="more_info py-6 px-5 -mt-10">
+        <div
+          className="more_info py-6 px-5 -mt-10"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+          data-aos-delay="400"
+        >
           <div className="items flex items-center gap-3 justify-between">
             <div className="item text-center">
               <h3 className="text-[21px] font-semibold">26</h3>
@@ -48,27 +58,57 @@ const Profile = () => {
         </div>
 
         <div className="items_info my-5">
-          <div className="item">
+          <div
+            className="item"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="200"
+          >
             <h5 className="font-semibold">{t("Account code")}</h5>
             <span className="text-gray-400">12456</span>
           </div>
-          <div className="item">
+          <div
+            className="item"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="300"
+          >
             <h5 className="font-semibold">{t("User Name")}</h5>
             <span className="text-gray-400">011194898</span>
           </div>
-          <div className="item">
+          <div
+            className="item"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="400"
+          >
             <h5 className="font-semibold">{t("Account balance")}</h5>
             <span className="text-gray-400">0.0EGP</span>
           </div>
-          <div className="item">
+          <div
+            className="item"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="500"
+          >
             <h5 className="font-semibold">{t("Email")}</h5>
             <span className="text-gray-400">example@info.com</span>
           </div>
-          <div className="item">
+          <div
+            className="item"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="600"
+          >
             <h5 className="font-semibold">{t("Phone Number")}</h5>
             <span className="text-gray-400">010487587</span>
           </div>
-          <div className="item">
+          <div
+            className="item"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="700"
+          >
             <h5 className="font-semibold">{t("Address")}</h5>
             <span className="text-gray-400">
               101 Kasr El Ainy Street Cairo.
@@ -77,6 +117,9 @@ const Profile = () => {
         </div>
         <button
           className="flex items-center justify-center gap-1 btn_fill w-full mt-5 py-2 text-[17px] rounded-full "
+          data-aos="zoom-in"
+          data-aos-duration="1000"
+          data-aos-delay="800"
           onClick={() => setOpen(true)}
         >
           <FiLogIn size={20} />
