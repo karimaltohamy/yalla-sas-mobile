@@ -33,7 +33,7 @@
     --fg: #238a5e;
     --bg: rgb(221, 255, 237);
     --pgPercentage: var(--value);
-    animation: growProgressBar 3s 1 linear forwards;
+    animation: growProgressBar 3s 1 ease forwards;
     width: var(--size);
     height: var(--size);
     border-radius: 50%;
@@ -50,9 +50,10 @@
     font-size: calc(var(--size) / 5);
     color: var(--fg);
     margin: 12px auto;
+    transition: all 3s linear;
   }
 
-  div[role="progressbar"]::before {
+  .progressbar::before {
     counter-reset: percentage var(--value);
     content: counter(percentage) "%";
   }

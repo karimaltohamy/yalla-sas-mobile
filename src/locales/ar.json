@@ -65,6 +65,8 @@
   "Renew package": "تجديد الباقه",
   "Deposit balance": "ايداع رصيد",
   "Use offer": "استخدام العرض",
-  "Extending package": "نمديد الباقه",
-  "Change package": "تغير الباقه"
+  "Extending package": "تمديد الباقه",
+  "Change package": "تغير الباقه",
+  "Package Name": "اسم الباقه",
+  "license name": "اسم الرخصه"
 }

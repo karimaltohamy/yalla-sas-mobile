@@ -6,16 +6,46 @@ import logo from "../../images/logo.png";
 import imageLogin from "../../images/internet-img.png";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import {
+  setUserError,
+  setUserStart,
+  setUserSuccess,
+} from "../../redux/reducers/userReducer";
+import apiAxios from "../../utils/apiAxios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom/dist";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [licenseNumber, setLicenseNumber] = useState("");
+  const [sas_id, setSasId] = useState(null);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  // handle login
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log({ username, password });
+    dispatch(setUserStart());
+    try {
+      const { data } = await apiAxios.post("mob/login", {
+        username,
+        password,
+        sas_id,
+      });
+      dispatch(setUserSuccess(data.data));
+      sessionStorage.setItem("access_token", data.access_token);
+
+      apiAxios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${data.access_token}`;
+      toast.success(data.success && "Successful login");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      dispatch(setUserError());
+    }
   };
 
   return (
@@ -52,12 +82,7 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <div className="input_item">
               <GrLicense size={20} />
-              <input
-                type="text"
-                placeholder={t("License number")}
-                value={licenseNumber}
-                onChange={(e) => setLicenseNumber(e.target.value)}
-              />
+              <input type="text" placeholder={t("license name")} />
             </div>
             <div className="input_item">
               <FaRegUser size={20} />
@@ -66,6 +91,7 @@ const Login = () => {
                 placeholder={t("username")}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                autoComplete="username"
               />
             </div>
             <div className="input_item">
@@ -75,6 +101,7 @@ const Login = () => {
                 placeholder={t("password")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
               />
             </div>
             <button className="btn_fill w-full py-2 text-[18px] rounded-full">

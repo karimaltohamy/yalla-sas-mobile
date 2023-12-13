@@ -2,7 +2,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.scss";
 import React, { Fragment, Suspense, useEffect, useState } from "react";
 import Loader from "./components/loader/Loader";
-const Home = React.lazy(() => import("./pages/home/Home"));
+import Home from "./pages/home/Home";
 const Login = React.lazy(() => import("./pages/login/Login"));
 const Profile = React.lazy(() => import("./pages/profile/Profile"));
 const Consumption = React.lazy(() => import("./pages/consumption/Consumption"));
@@ -16,17 +16,27 @@ const ConsumptionCalculation = React.lazy(() =>
   import("./pages/consumptionCalculation/ConsumptionCalculation")
 );
 import AOS from "aos";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom/dist";
+
+const ProidectedRoute = ({ children }) => {
+  const { userInfo } = useSelector((state) => state.user);
+
+  if (userInfo === null) {
+    return <Navigate to={"/login"} />;
+  }
+
+  return children;
+};
 
 function App() {
   const [mobile, setMobile] = useState(false);
   const location = useLocation();
 
-  // aos animation
+  // handle language and mode theme
   useEffect(() => {
     AOS.init();
-  }, []);
 
-  useEffect(() => {
     if (window.innerWidth <= 500) {
       setMobile(true);
     } else {
@@ -55,9 +65,9 @@ function App() {
         <Route
           path="/"
           element={
-            <Suspense fallback={<Loader />}>
+            <ProidectedRoute>
               <Home />
-            </Suspense>
+            </ProidectedRoute>
           }
         />
         <Route
@@ -72,7 +82,9 @@ function App() {
           path="/my-profile"
           element={
             <Suspense fallback={<Loader />}>
-              <Profile />
+              <ProidectedRoute>
+                <Profile />
+              </ProidectedRoute>
             </Suspense>
           }
         />
@@ -80,7 +92,9 @@ function App() {
           path="/consumption"
           element={
             <Suspense fallback={<Loader />}>
-              <Consumption />
+              <ProidectedRoute>
+                <Consumption />
+              </ProidectedRoute>
             </Suspense>
           }
         />
@@ -88,7 +102,9 @@ function App() {
           path="/menu"
           element={
             <Suspense fallback={<Loader />}>
-              <Menu />
+              <ProidectedRoute>
+                <Menu />
+              </ProidectedRoute>
             </Suspense>
           }
         />
@@ -96,8 +112,9 @@ function App() {
           path="/sessions"
           element={
             <Suspense fallback={<Loader />}>
-              {" "}
-              <Sessions />
+              <ProidectedRoute>
+                <Sessions />
+              </ProidectedRoute>
             </Suspense>
           }
         />
@@ -106,7 +123,9 @@ function App() {
           path="/consumption-calculation"
           element={
             <Suspense fallback={<Loader />}>
-              <ConsumptionCalculation />
+              <ProidectedRoute>
+                <ConsumptionCalculation />
+              </ProidectedRoute>
             </Suspense>
           }
         />

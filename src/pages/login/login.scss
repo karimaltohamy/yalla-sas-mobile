@@ -35,11 +35,16 @@
           margin-bottom: 25px;
         }
 
-        input {
+        input,
+        select {
           flex: 1;
           background-color: transparent;
           border: none;
           outline: none;
+
+          option {
+            color: black;
+          }
         }
       }
 
