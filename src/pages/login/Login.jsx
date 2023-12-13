@@ -82,12 +82,10 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <div className="input_item">
               <GrLicense size={20} />
-              <input
-                type="text"
-                placeholder={t("license name")}
-                value={sas_id}
-                onChange={(e) => setSasId(e.target.value)}
-              />
+              <select name="" onChange={(e) => setSasId(e.target.value)}>
+                <option value="">اختار شركتك</option>
+                <option value="26">26</option>
+              </select>
             </div>
             <div className="input_item">
               <FaRegUser size={20} />
