@@ -82,7 +82,12 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <div className="input_item">
               <GrLicense size={20} />
-              <input type="text" placeholder={t("license name")} />
+              <input
+                type="text"
+                placeholder={t("license name")}
+                value={sas_id}
+                onChange={(e) => setSasId(e.target.value)}
+              />
             </div>
             <div className="input_item">
               <FaRegUser size={20} />

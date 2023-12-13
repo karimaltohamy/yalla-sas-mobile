@@ -23,17 +23,17 @@ const PopupCharge = ({ setOpen, open }) => {
   const [error, setError] = useState(false);
   const [offer, setOffer] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await apiAxios.get("mob/offers");
-        setOffer(data);
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const { data } = await apiAxios.get("mob/offers");
+  //       setOffer(data);
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   })();
+  // }, []);
 
   const handleRadioChange = (event) => {
     setPaymentType(event.target.value);
