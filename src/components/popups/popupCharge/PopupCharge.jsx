@@ -144,7 +144,7 @@ const PopupCharge = ({ setOpen, open }) => {
         <div className="content h-[100vh]">
           <iframe
             src={urlCharge}
-            frameborder="0"
+            frameBorder="0"
             className="w-full h-full"
           ></iframe>
         </div>
