@@ -1,7 +1,6 @@
 import { IoMdArrowBack } from "react-icons/io";
 import { FaRegCreditCard } from "react-icons/fa";
 import { GiElectric } from "react-icons/gi";
-import { MdOutlineQrCodeScanner } from "react-icons/md";
 import "./popupCharge.scss";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
@@ -9,31 +8,30 @@ import apiAxios from "../../../utils/apiAxios";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { FaGift } from "react-icons/fa";
 
 const PopupCharge = ({ setOpen, open }) => {
   const { t } = useTranslation();
   const lang = localStorage.getItem("lang");
   const { userInfo } = useSelector((state) => state.user);
-
   const [amount, setAmount] = useState(0);
   const [paymentType, setPaymentType] = useState("fullCharge");
   const [openIframe, setOpenIframe] = useState(false);
   const [urlCharge, setUrlCharge] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [offer, setOffer] = useState(null);
+  const [options, setOtipns] = useState(null);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const { data } = await apiAxios.get("mob/offers");
-  //       setOffer(data);
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("mob/charge/options");
+        setOtipns(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
   const handleRadioChange = (event) => {
     setPaymentType(event.target.value);
@@ -69,9 +67,27 @@ const PopupCharge = ({ setOpen, open }) => {
         <div className="back" onClick={() => setOpen(false)}>
           <IoMdArrowBack size={25} />
         </div>
+        <h4 className=" font-semibold">{t("Recharge Package")}</h4>
       </div>
       {!openIframe && (
-        <div className="content mt-[60px] px-5 h-[100vh] flex items-center justify-center">
+        <div className="content mt-[30px] px-5 h-[100vh] flex items-center justify-center">
+          {options?.offer_enable && (
+            <div className="optionss mb-5 text-center">
+              <h4 className="title">{t("Our options")}</h4>
+              <div className="items">
+                <div className="item">
+                  <div className="icon">
+                    <FaGift size={20} />
+                  </div>
+                  <h5>باقات WE Space السنوية عرض للعملاء الجدد</h5>
+                  <div className="icon">
+                    <FaGift size={20} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           <form onSubmit={handlePayment}>
             <div className="inputs_radio mb-10">
               <div className="input_radio">
@@ -85,55 +101,74 @@ const PopupCharge = ({ setOpen, open }) => {
                 />
                 <label htmlFor="fullCharge">{t("Renew package")}</label>
               </div>
-              <div className="input_radio">
-                <input
-                  type="radio"
-                  id="deposit"
-                  name="redio-charge"
-                  onChange={handleRadioChange}
-                  value={"deposit"}
-                  checked={paymentType === "deposit"}
-                />
-                <label htmlFor="deposit">{t("Deposit balance")}</label>
-              </div>
-              <div className="input_radio">
-                <input
-                  type="radio"
-                  id="offer"
-                  name="redio-charge"
-                  onChange={handleRadioChange}
-                  value={"offer"}
-                  checked={paymentType === "offer"}
-                />
-                <label htmlFor="offer">{t("Use offer")}</label>
-              </div>
-              <div className="input_radio">
-                <input
-                  type="radio"
-                  id="extend"
-                  name="redio-charge"
-                  onChange={handleRadioChange}
-                  value={"extend"}
-                  checked={paymentType === "extend"}
-                />
-                <label htmlFor="extend">{t("Extending package")}</label>
-              </div>
+              {options?.deposit_enable && (
+                <div className="input_radio">
+                  <input
+                    type="radio"
+                    id="deposit"
+                    name="redio-charge"
+                    onChange={handleRadioChange}
+                    value={"deposit"}
+                    checked={paymentType === "deposit"}
+                  />
+                  <label htmlFor="deposit">{t("Deposit balance")}</label>
+                </div>
+              )}
+              {options?.offer_enable && (
+                <div className="input_radio">
+                  <input
+                    type="radio"
+                    id="options"
+                    name="redio-charge"
+                    onChange={handleRadioChange}
+                    value={"options"}
+                    checked={paymentType === "options"}
+                  />
+                  <label htmlFor="options">{t("Use options")}</label>
+                </div>
+              )}
+              {options?.extend_enable && (
+                <div className="input_radio">
+                  <input
+                    type="radio"
+                    id="extend"
+                    name="redio-charge"
+                    onChange={handleRadioChange}
+                    value={"extend"}
+                    checked={paymentType === "extend"}
+                  />
+                  <label htmlFor="extend">{t("Extending package")}</label>
+                </div>
+              )}
             </div>
-            <div className="input_item">
-              <FaRegCreditCard size={25} />
-              <input
-                type="text"
-                placeholder={t("amount")}
-                value={
-                  paymentType == "fullCharge" ? userInfo.package_price : amount
-                }
-                onChange={(e) => setAmount(e.target.value)}
-              />
-            </div>
+            {paymentType !== "extend" && (
+              <div className="input_item">
+                <FaRegCreditCard size={25} />
+                <input
+                  type="text"
+                  placeholder={t("amount")}
+                  value={
+                    paymentType == "fullCharge"
+                      ? userInfo.package_price
+                      : amount
+                  }
+                  onChange={(e) => setAmount(e.target.value)}
+                />
+              </div>
+            )}
             <div className="btns flex items-center justify-center gap-5">
               <button className="flex items-center justify-center gap-[6px] btn_fill w-full">
                 <GiElectric size={20} />
-                {t("Charge")}
+                {paymentType === "fullCharge"
+                  ? t("Renew package")
+                  : paymentType === "deposit"
+                  ? t("Deposit balance")
+                  : paymentType === "options"
+                  ? t("Use options")
+                  : paymentType === "extend"
+                  ? t("Extending package")
+                  : null}{" "}
+                {t("now")}
               </button>
             </div>
           </form>

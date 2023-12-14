@@ -66,7 +66,7 @@ const BoxInfoPackage = ({ setOpen }) => {
               onClick={() => setOpen(true)}
             >
               <IoSettings />
-              <span>{t("Charge")}</span>
+              <span>{t("Change Package")}</span>
             </button>
           </div>
         </div>

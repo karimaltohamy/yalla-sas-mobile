@@ -4,7 +4,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { GrLicense } from "react-icons/gr";
 import logo from "../../images/logo.png";
 import imageLogin from "../../images/internet-img.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import {
@@ -23,6 +23,18 @@ const Login = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [companies, setCompanies] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("mob/companies");
+        setCompanies(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
   // handle login
   const handleLogin = async (e) => {
@@ -32,7 +44,7 @@ const Login = () => {
       const { data } = await apiAxios.post("mob/login", {
         username,
         password,
-        sas_id,
+        sas_id: 26,
       });
       dispatch(setUserSuccess(data.data));
       sessionStorage.setItem("access_token", data.access_token);
@@ -84,7 +96,12 @@ const Login = () => {
               <GrLicense size={20} />
               <select name="" onChange={(e) => setSasId(e.target.value)}>
                 <option value="">اختار شركتك</option>
-                <option value="26">26</option>
+                {companies.length > 0 &&
+                  companies.map((item, index) => (
+                    <option key={index} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
               </select>
             </div>
             <div className="input_item">

@@ -3,11 +3,30 @@ import imgUser from "../../images/img-user.jpg";
 import "./profile.scss";
 import { FiLogIn } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import apiAxios from "../../utils/apiAxios";
+import { setLogout } from "../../redux/reducers/userReducer";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const { userInfo } = useSelector((state) => state.user);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    try {
+      await apiAxios.get("mob/logout");
+      dispatch(setLogout());
+      sessionStorage.setItem("access_token", null);
+      apiAxios.defaults.headers.common["Authorization"] = null;
+      toast.success(data.success && "Successful logout");
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -145,7 +164,7 @@ const Profile = () => {
               data-aos="zoom-in"
               data-aos-duration="1000"
               data-aos-delay="800"
-              onClick={() => setOpen(true)}
+              onClick={handleLogout}
             >
               <FiLogIn size={20} />
               <span>Logout</span>

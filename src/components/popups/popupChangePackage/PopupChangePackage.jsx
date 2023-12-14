@@ -1,12 +1,33 @@
 import { IoMdArrowBack } from "react-icons/io";
 import "./popupChangePackage.scss";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import apiAxios from "../../../utils/apiAxios";
 
 const PopupChangePackage = ({ open, setOpen }) => {
-  const [selectPackage, setSelectPackage] = useState("Le test 1");
+  const [selectPackage, setSelectPackage] = useState(0);
   const lang = localStorage.getItem("lang");
   const { t } = useTranslation();
+  const [packages, setPackages] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(false);
+      try {
+        const { data } = await apiAxios.get("mob/packages");
+        setPackages(data.data);
+        setLoading(true);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
+  const handleChangePackage = () => {
+    console.log(selectPackage);
+  };
+
   return (
     <div className={`popup_change_package ${open ? "active" : ""}`}>
       <div
@@ -27,38 +48,31 @@ const PopupChangePackage = ({ open, setOpen }) => {
         </div>
 
         <div className="packages_boxs my-8 grid grid-cols-2 gap-4">
-          <div
-            className={`box ${selectPackage == "Le test 1" ? "active" : ""}`}
-            onClick={() => setSelectPackage("Le test 1")}
-          >
-            <h4 className="package_name">Le test 1</h4>
-            <span className="price">100EGP</span>
-          </div>
-          <div
-            className={`box ${selectPackage == "Le test 2" ? "active" : ""}`}
-            onClick={() => setSelectPackage("Le test 2")}
-          >
-            <h4 className="package_name">Le test 2</h4>
-            <span className="price">100EGP</span>
-          </div>
-          <div
-            className={`box ${selectPackage == "Le test 3" ? "active" : ""}`}
-            onClick={() => setSelectPackage("Le test 3")}
-          >
-            <h4 className="package_name">Le test 3</h4>
-            <span className="price">100EGP</span>
-          </div>
-          <div
-            className={`box ${selectPackage == "Le test 4" ? "active" : ""}`}
-            onClick={() => setSelectPackage("Le test 4")}
-          >
-            <h4 className="package_name">Le test 4</h4>
-            <span className="price">100EGP</span>
-          </div>
+          {packages.length > 0 ? (
+            loading ? (
+              packages.map((item, index) => (
+                <div
+                  className={`box ${selectPackage === item.id ? "active" : ""}`}
+                  key={index}
+                  onClick={() => setSelectPackage(item.id)}
+                >
+                  <h4 className="package_name text-center">{item.name}</h4>
+                  <span className="price">{item.price}EGP</span>
+                </div>
+              ))
+            ) : (
+              <div className="mb-5 text-center">Loading...</div>
+            )
+          ) : (
+            <div className="text-center">No packages available</div>
+          )}
         </div>
 
         <div>
-          <button className="btn_fill w-full rounded-full text-[17px] py-3">
+          <button
+            className="btn_fill w-full rounded-full text-[17px] py-3"
+            onClick={handleChangePackage}
+          >
             {t("Change Package")}
           </button>
         </div>

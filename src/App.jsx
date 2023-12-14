@@ -118,7 +118,16 @@ function App() {
             </Suspense>
           }
         />
-        <Route path="/mail-box" element={<MailBox />} />
+        <Route
+          path="/mail-box"
+          element={
+            <Suspense fallback={<Loader />}>
+              <ProidectedRoute>
+                <MailBox />
+              </ProidectedRoute>
+            </Suspense>
+          }
+        />
         <Route
           path="/consumption-calculation"
           element={

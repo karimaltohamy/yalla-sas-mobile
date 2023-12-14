@@ -1,4 +1,5 @@
 @import "../../../sass/mixins.scss";
+@import "../../../sass/variables.scss";
 
 .PopupCharge {
   @include popupStyle;
@@ -8,6 +9,51 @@
   }
 
   .content {
+    .offers {
+      .title {
+        font-weight: 600;
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+
+      .items {
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px dashed rgb(212, 212, 212);
+        margin-bottom: 12px;
+
+        .item {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+
+          &:not(:last-child) {
+            margin-bottom: 10px;
+          }
+
+          .icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e7ffed;
+
+            svg {
+              color: $primary-color;
+            }
+          }
+
+          h5 {
+            font-size: 16px;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
     form {
       .inputs_radio {
         .input_radio {
@@ -19,7 +65,7 @@
           padding: 8px;
           border-radius: 7px;
           width: 100%;
-          background-color: var(--bg-section);
+          background-color: #0a1a29;
         }
       }
 
