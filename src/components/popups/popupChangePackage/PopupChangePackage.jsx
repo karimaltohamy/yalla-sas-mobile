@@ -3,6 +3,9 @@ import "./popupChangePackage.scss";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import apiAxios from "../../../utils/apiAxios";
+import { toast } from "react-toastify";
+import { getUser } from "../../../redux/actions/user";
+import { useDispatch } from "react-redux";
 
 const PopupChangePackage = ({ open, setOpen }) => {
   const [selectPackage, setSelectPackage] = useState(0);
@@ -10,7 +13,9 @@ const PopupChangePackage = ({ open, setOpen }) => {
   const { t } = useTranslation();
   const [packages, setPackages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
+  // get all packages
   useEffect(() => {
     (async () => {
       setLoading(false);
@@ -24,8 +29,18 @@ const PopupChangePackage = ({ open, setOpen }) => {
     })();
   }, []);
 
-  const handleChangePackage = () => {
-    console.log(selectPackage);
+  // change package
+  const handleChangePackage = async () => {
+    try {
+      const { data } = await apiAxios.put("mob/profile", {
+        profile_id: selectPackage,
+      });
+      toast.success(data.success && data.message);
+      getUser(dispatch);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }
   };
 
   return (

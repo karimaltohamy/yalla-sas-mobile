@@ -26,7 +26,13 @@ const BoxInfoPackage = ({ setOpen }) => {
         >
           <div className="top_box flex items-center justify-between">
             <div className="package flex items-center gap-2">
-              <div className="icon w-[50px] h-[50px] rounded-full flex items-center justify-center">
+              <div
+                className={`icon w-[50px] h-[50px] rounded-full flex items-center justify-center ${
+                  userInfo.user_status == "active"
+                    ? "text-[#238a5e]"
+                    : "text-red-500"
+                }`}
+              >
                 <IoIosWifi size={30} />
               </div>
               <div className="text">
@@ -42,9 +48,15 @@ const BoxInfoPackage = ({ setOpen }) => {
               </div>
             </div>
 
-            <span className="status text-green-500 font-bold">
-              {t("Active")}
-            </span>
+            {userInfo.user_status == "active" ? (
+              <span className="status text-green-500 font-bold">
+                {t("Active")}
+              </span>
+            ) : (
+              <span className="status text-green-500 font-bold text-red-500">
+                {t("Not Active")}
+              </span>
+            )}
           </div>
 
           <div

@@ -1,7 +1,7 @@
 import "./consumption.scss";
 import styles from "../../styles/style.js";
 import Calendar from "react-calendar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,6 +15,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
 import { useTranslation } from "react-i18next";
+import apiAxios from "../../utils/apiAxios.js";
 
 ChartJS.register(
   CategoryScale,
@@ -68,11 +69,12 @@ const data = {
 };
 
 const Consumption = () => {
+  const [trafficData, setTrafficData] = useState([]);
   const [valueDailyComsumption, onChangeDaily] = useState(new Date());
   const [valueMonthlyComsumption, onChangeMonthly] = useState(new Date());
   const [openCalenderDaily, setOpenCalenderDaily] = useState(false);
   const [openCalenderMonthlty, setOpenCalenderMonthly] = useState(false);
-  const [typeComsumption, setTypeComsumption] = useState("Monthly");
+  const [typeComsumption, setTypeComsumption] = useState("monthly");
   const { t } = useTranslation();
 
   const handleCloseCalender = (e, type) => {
@@ -83,14 +85,50 @@ const Consumption = () => {
     }
   };
 
+  useEffect(() => {
+    const date = new Date();
+    let body = {
+      report_type: "daily",
+      year: date.getFullYear(),
+      month: date.getMonth(),
+    };
+
+    getTrafficReport(body);
+  }, []);
+
+  console.log(trafficData);
+
   const handleDateDaily = (date) => {
+    let body = {
+      report_type: "daily",
+      year: date.getFullYear(),
+      month: date.getMonth(),
+    };
     onChangeDaily(date);
     setTypeComsumption("Daily");
+    // get all traffic data
+    getTrafficReport(body);
   };
 
   const handleDateMonthly = (date) => {
+    let body = {
+      report_type: "monthly",
+      year: date.getFullYear(),
+    };
     onChangeMonthly(date);
     setTypeComsumption("monthly");
+    // get all traffic data
+    getTrafficReport(body);
+  };
+
+  // get all traffic data
+  const getTrafficReport = async (body) => {
+    try {
+      const { data } = await apiAxios.post("mob/traffic/report", body);
+      setTrafficData(data.data);
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
   };
 
   return (
@@ -132,51 +170,23 @@ const Consumption = () => {
         </div>
         <div className="ruselt_consumption_chart mt-5">
           <div className="items">
-            <div
-              className="item"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="200"
-            >
-              <div className="package">MB 0</div>
-              <div className="date">1-1-2023</div>
-            </div>
-            <div
-              className="item"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="300"
-            >
-              <div className="package">MB 0</div>
-              <div className="date">1-1-2023</div>
-            </div>
-            <div
-              className="item"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="400"
-            >
-              <div className="package">MB 0</div>
-              <div className="date">1-1-2023</div>
-            </div>
-            <div
-              className="item"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="500"
-            >
-              <div className="package">MB 0</div>
-              <div className="date">1-1-2023</div>
-            </div>
-            <div
-              className="item"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="600"
-            >
-              <div className="package">MB 0</div>
-              <div className="date">1-1-2023</div>
-            </div>
+            {trafficData.length > 0 ? (
+              trafficData.map((item) => {
+                return (
+                  <div
+                    className="item"
+                    data-aos="fade-up"
+                    data-aos-duration="1000"
+                    data-aos-delay="200"
+                  >
+                    <div className="package">{item.total}</div>
+                    <div className="date">{item.date}</div>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="text-center">you don't have data</div>
+            )}
           </div>
         </div>
       </div>

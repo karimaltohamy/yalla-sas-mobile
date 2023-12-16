@@ -31,7 +31,7 @@ apiAxios.interceptors.response.use(
     }
     return response;
   },
-  (error) => {
+  async (error) => {
     return Promise.reject(error);
   }
 );

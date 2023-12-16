@@ -1,27 +1,19 @@
 .login {
-  background: linear-gradient(
-    100deg,
-    rgba(3, 39, 59, 1) 0%,
-    rgba(15, 118, 136, 1) 27%,
-    rgba(17, 219, 133, 1) 73%,
-    rgba(8, 198, 117, 1) 100%
-  );
+  background-color: var(--bg-main);
   height: 100vh;
+  margin: 0 20px;
 
   .line {
     display: flex;
-    flex-direction: column;
-
-    .info {
-      height: 55%;
-    }
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 78px);
 
     .login_form {
-      height: 45%;
-      background-color: var(--bg-main);
-      border-top-left-radius: 30px;
-      border-top-right-radius: 30px;
+      width: 100%;
+      background-color: var(--bg-section);
       padding: 40px 20px;
+      border-radius: 10px;
 
       .input_item {
         display: flex;

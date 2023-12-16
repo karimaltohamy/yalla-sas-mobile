@@ -16,8 +16,9 @@ const ConsumptionCalculation = React.lazy(() =>
   import("./pages/consumptionCalculation/ConsumptionCalculation")
 );
 import AOS from "aos";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom/dist";
+import { getUser } from "./redux/actions/user";
 
 const ProidectedRoute = ({ children }) => {
   const { userInfo } = useSelector((state) => state.user);
@@ -32,6 +33,13 @@ const ProidectedRoute = ({ children }) => {
 function App() {
   const [mobile, setMobile] = useState(false);
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!location.pathname.includes("login")) {
+      getUser(dispatch);
+    }
+  }, []);
 
   // handle language and mode theme
   useEffect(() => {

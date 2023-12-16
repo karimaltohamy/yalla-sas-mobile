@@ -19,22 +19,10 @@ import { useNavigate } from "react-router-dom/dist";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [sas_id, setSasId] = useState(null);
+  const [LicenseName, setLicenseName] = useState("");
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [companies, setCompanies] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await apiAxios.get("mob/companies");
-        setCompanies(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
 
   // handle login
   const handleLogin = async (e) => {
@@ -44,7 +32,7 @@ const Login = () => {
       const { data } = await apiAxios.post("mob/login", {
         username,
         password,
-        sas_id: 26,
+        license_num: LicenseName,
       });
       dispatch(setUserSuccess(data.data));
       sessionStorage.setItem("access_token", data.access_token);
@@ -53,56 +41,37 @@ const Login = () => {
         "Authorization"
       ] = `Bearer ${data.access_token}`;
       toast.success(data.success && "Successful login");
+
       navigate("/");
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.message);
       dispatch(setUserError());
     }
   };
 
   return (
     <div className="login">
-      <div className="line h-full">
-        <div className="info p-5 pb-0 h-full flex justify-end flex-col text-center">
-          <h4 className="text-[22px] font-semibold mb-1">
-            {t("Pay with one Click")}
-          </h4>
-          <p className="text-[15px] mb-4">
-            {t(
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo sunt itaque pariatur."
-            )}
-          </p>
-          <div className="image text-center mb-2">
-            <img
-              src={imageLogin}
-              alt="img-login"
-              loading="lazy"
-              className="w-[80%] mx-auto"
-            />
-          </div>
-        </div>
-
+      <div className="logo py-3 text-center">
+        <img
+          src={logo}
+          alt="logo"
+          loading="lazy"
+          className="w-[80px] mx-auto"
+        />
+      </div>
+      <div className="line">
         <div className="login_form">
-          <div className="logo mb-5 text-center">
-            <img
-              src={logo}
-              alt="logo"
-              loading="lazy"
-              className="w-[80px] mx-auto"
-            />
-          </div>
           <form onSubmit={handleLogin}>
             <div className="input_item">
               <GrLicense size={20} />
-              <select name="" onChange={(e) => setSasId(e.target.value)}>
-                <option value="">اختار شركتك</option>
-                {companies.length > 0 &&
-                  companies.map((item, index) => (
-                    <option key={index} value={item.id}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
+              <input
+                type="number"
+                placeholder={t("License name")}
+                value={LicenseName}
+                onChange={(e) => setLicenseName(e.target.value)}
+                autoComplete="License name"
+              />
             </div>
             <div className="input_item">
               <FaRegUser size={20} />
@@ -135,3 +104,5 @@ const Login = () => {
 };
 
 export default Login;
+
+// "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTk5MCIsInNhc19pZCI6IjI2IiwidXNlcm5hbWUiOiIwMTAwMDA1NjEyMCIsInBob25lIjoiMDEwMDAwNTYxMjAiLCJwYXNzd29yZCI6IjAxMDAwMDU2MTIwIiwibGljZW5zZV9udW0iOiIxMjM0NTY3ODkwIiwiaWF0IjoxNzAyNzE4NDIwfQ.pUkR6XNyOvg2eHgTWGOvAJQo5OV7aDseF4c-zmWhiVU",

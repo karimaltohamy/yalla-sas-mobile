@@ -4,18 +4,13 @@ import "./boxInfoUser.scss";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { IoReloadOutline } from "react-icons/io5";
-import { useEffect } from "react";
 import { getUser } from "../../redux/actions/user";
+import Loader from "../loader/Loader";
 
 const BoxInfoUser = ({ setOpen }) => {
   const { t } = useTranslation();
-  const { userInfo } = useSelector((state) => state.user);
+  const { userInfo, loading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
-  // get new user Data
-  useEffect(() => {
-    getUser(dispatch);
-  }, []);
 
   const handleRefrechUserData = async () => {
     getUser(dispatch);
@@ -26,7 +21,7 @@ const BoxInfoUser = ({ setOpen }) => {
       {userInfo ? (
         <>
           <div
-            className="refrech flex items-center justify-end gap-2 mb-2"
+            className="refrech flex items-center justify-end gap-2 mb-2 "
             onClick={handleRefrechUserData}
           >
             <button>
@@ -80,6 +75,8 @@ const BoxInfoUser = ({ setOpen }) => {
       ) : (
         <div>Loading...</div>
       )}
+
+      {loading && <Loader fixed={true} />}
     </>
   );
 };

@@ -5,6 +5,8 @@ import styles from "../../styles/style";
 import "./sessions.scss";
 import { useTranslation } from "react-i18next";
 import apiAxios from "../../utils/apiAxios";
+import { formateDate } from "../../utils/formatDate";
+import LoaderBox from "../../components/loaderBox/LoaderBox";
 
 const Sessions = () => {
   const navigate = useNavigate();
@@ -20,9 +22,7 @@ const Sessions = () => {
     (async () => {
       setLoading(false);
       try {
-        const { data } = await apiAxios.get("mob/sessions", {
-          page: 1,
-        });
+        const { data } = await apiAxios.get(`mob/sessions?page=${currentPage}`);
         setSessions(data.data);
         setCurrentPage(data.current_page);
         setLastPage(data.last_page);
@@ -32,7 +32,7 @@ const Sessions = () => {
         console.log(error);
       }
     })();
-  }, []);
+  }, [currentPage]);
 
   return (
     <div className="sessions">
@@ -67,22 +67,39 @@ const Sessions = () => {
                   sessions.map((session, index) => {
                     return (
                       <tr key={index}>
-                        <td>{formatDate(session.start_time)}</td>
-                        <td>{formatDate(session.end_time)}</td>
-                        <td>34878782</td>
-                        <td>20MB</td>
-                        <td>30MB</td>
-                        <td>pc</td>
-                        <td>Te lest4</td>
+                        <td>{formateDate(session.start_time)}</td>
+                        <td>{formateDate(session.start_time)}</td>
+                        <td>{session.ip_address}</td>
+                        <td>{session.download}</td>
+                        <td>{session.upload}</td>
+                        <td>{session.mac_address}</td>
+                        <td>{session.profile_name}</td>
                       </tr>
                     );
                   })
                 ) : (
-                  <div className="text-center">Loading...</div>
+                  <div className="text-center">
+                    <LoaderBox />
+                  </div>
                 )}
               </tbody>
             )}
           </table>
+        </div>
+        <div className="pagination">
+          <div className="items">
+            {Array.from({ length: lastPage }).map((_, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`item ${currentPage == index + 1 && "active"}`}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

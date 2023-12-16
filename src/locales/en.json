@@ -68,9 +68,11 @@
   "Extending package": "Extending package",
   "Change package": "Change package",
   "Package Name": "Package Name",
-  "license name": "license name",
+  "License name": "License name",
   "Our Offer": "Our Offer",
   "Last updated": "Last updated",
   "now": "now",
-  "Recharge Package": "Recharge Package"
+  "Recharge Package": "Recharge Package",
+  "Not Active": "غير نشط",
+  "monthly": "monthly"
 }

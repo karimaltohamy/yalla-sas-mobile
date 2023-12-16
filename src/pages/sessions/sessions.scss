@@ -1,4 +1,5 @@
 @import "../../sass/mixins.scss";
+@import "../../sass/variables.scss";
 
 .sessions {
   .top {
@@ -59,6 +60,29 @@
           color: rgb(129 129 129);
           padding: 8px;
           text-align: center;
+        }
+      }
+    }
+  }
+
+  .pagination {
+    margin-top: 15px;
+    .items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      .item {
+        width: 32px;
+        height: 32px;
+        @include flex(center, center);
+        border-radius: 8px;
+        background-color: #0a1a29;
+        box-shadow: var(--box-shadow);
+
+        &.active {
+          background-color: $primary-color;
         }
       }
     }

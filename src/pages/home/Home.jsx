@@ -1,20 +1,35 @@
-import { Fragment, useState } from "react";
+import React, { Fragment, Suspense, useState } from "react";
 import HeaderHome from "../../components/headerHome/HeaderHome";
-import BoxInfoUser from "../../components/boxInfoUser/BoxInfoUser";
+const BoxInfoUser = React.lazy(() =>
+  import("../../components/boxInfoUser/BoxInfoUser")
+);
+const BoxInfoPackage = React.lazy(() =>
+  import("../../components/boxInfoPackage/BoxInfoPackage")
+);
+const PopupCharge = React.lazy(() =>
+  import("../../components/popups/popupCharge/PopupCharge")
+);
+const PopupChangePackage = React.lazy(() =>
+  import("../../components/popups/popupChangePackage/PopupChangePackage")
+);
+const PopupExtendingPackage = React.lazy(() =>
+  import("../../components/popups/popupExtendingPackage/PopupExtendingPackage")
+);
+const PopupActivatePackage = React.lazy(() =>
+  import("../../components/popups/popupActivatePackage/PopupActivatePackage")
+);
+const PopupSettings = React.lazy(() =>
+  import("../../components/popups/popupSettings/PopupSettings")
+);
+const PopupNotification = React.lazy(() =>
+  import("../../components/popups/popupNotification/PopupNotification")
+);
 import styles from "../../styles/style";
-import BoxInfoPackage from "../../components/boxInfoPackage/BoxInfoPackage";
 import "./home.scss";
-import PopupCharge from "../../components/popups/popupCharge/PopupCharge";
-import PopupPackageManagement from "../../components/popups/popupPackageManagement/PopupPackageManagement";
-import PopupChangePackage from "../../components/popups/popupChangePackage/PopupChangePackage";
-import PopupExtendingPackage from "../../components/popups/popupExtendingPackage/PopupExtendingPackage";
-import PopupActivatePackage from "../../components/popups/popupActivatePackage/PopupActivatePackage";
-import PopupSettings from "../../components/popups/popupSettings/PopupSettings";
-import PopupNotification from "../../components/popups/popupNotification/PopupNotification";
+import LoaderBox from "../../components/loaderBox/LoaderBox";
 
 const Home = () => {
   const [openPopupCharge, setOpenPopupCharge] = useState(false);
-  // const [openPackageManagement, setOpenPackageManagement] = useState(false);
   const [openChangePackage, setOpenChangePackage] = useState(false);
   const [openExtending, setOpenExtending] = useState(false);
   const [openActivatePackage, setOpenActivatePackage] = useState(false);
@@ -30,10 +45,26 @@ const Home = () => {
         />
         <div className={styles.custom_container}>
           <div className="pt-[10px]">
-            <BoxInfoUser setOpen={setOpenPopupCharge} />
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center my-4 p-4 rounded bg_loader">
+                  <LoaderBox />
+                </div>
+              }
+            >
+              <BoxInfoUser setOpen={setOpenPopupCharge} />
+            </Suspense>
           </div>
           <div className="pt-[25px]">
-            <BoxInfoPackage setOpen={setOpenChangePackage} />
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center my-4 p-4 rounded bg_loader">
+                  <LoaderBox />
+                </div>
+              }
+            >
+              <BoxInfoPackage setOpen={setOpenChangePackage} />
+            </Suspense>
           </div>
         </div>
         <div className="primary-shadow"></div>
@@ -41,28 +72,39 @@ const Home = () => {
       </div>
 
       {/* popups */}
-      <PopupCharge open={openPopupCharge} setOpen={setOpenPopupCharge} />
-      {/*  <PopupPackageManagement
-        setOpen={setOpenPackageManagement}
-        open={openPackageManagement}
-        setOpenChangePackage={setOpenChangePackage}
-        setOpenExtending={setOpenExtending}
-        setOpenActivatePackage={setOpenActivatePackage}
-        />*/}
-      <PopupChangePackage
-        setOpen={setOpenChangePackage}
-        open={openChangePackage}
-      />
-      <PopupActivatePackage
-        setOpen={setOpenActivatePackage}
-        open={openActivatePackage}
-      />
-      <PopupExtendingPackage setOpen={setOpenExtending} open={openExtending} />
-      <PopupSettings setOpen={setOpenPopupSettings} open={openPopupSettings} />
-      <PopupNotification
-        setOpen={setOpenPopupNotification}
-        open={openPopupNotification}
-      />
+      <Suspense>
+        <PopupCharge open={openPopupCharge} setOpen={setOpenPopupCharge} />
+      </Suspense>
+      <Suspense>
+        <PopupChangePackage
+          setOpen={setOpenChangePackage}
+          open={openChangePackage}
+        />
+      </Suspense>
+      <Suspense>
+        <PopupActivatePackage
+          setOpen={setOpenActivatePackage}
+          open={openActivatePackage}
+        />
+      </Suspense>
+      <Suspense>
+        <PopupExtendingPackage
+          setOpen={setOpenExtending}
+          open={openExtending}
+        />
+      </Suspense>
+      <Suspense>
+        <PopupSettings
+          setOpen={setOpenPopupSettings}
+          open={openPopupSettings}
+        />
+      </Suspense>
+      <Suspense>
+        <PopupNotification
+          setOpen={setOpenPopupNotification}
+          open={openPopupNotification}
+        />
+      </Suspense>
     </Fragment>
   );
 };
