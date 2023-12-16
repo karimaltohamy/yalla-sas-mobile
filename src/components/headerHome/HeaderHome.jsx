@@ -33,8 +33,8 @@ const HeaderHome = ({ setOpenPopupSettings, setOpenPopupNotification }) => {
           <button className="notification btn_fill" onClick={handleLogout}>
             {t("Logout")}
           </button>
-          <div className="logo">
-            <img src={logo} alt="logo" loading="lazy" className="w-[80px]" />
+          <div className="logo mt-3">
+            <img src={logo} alt="logo" loading="lazy" className="w-[100px]" />
           </div>
           <button
             className="settings"
