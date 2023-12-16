@@ -96,8 +96,6 @@ const Consumption = () => {
     getTrafficReport(body);
   }, []);
 
-  console.log(trafficData);
-
   const handleDateDaily = (date) => {
     let body = {
       report_type: "daily",
