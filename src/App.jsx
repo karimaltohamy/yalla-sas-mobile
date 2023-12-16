@@ -45,6 +45,8 @@ function App() {
   useEffect(() => {
     AOS.init();
 
+    localStorage.setItem("lang", "ar");
+
     if (window.innerWidth <= 500) {
       setMobile(true);
     } else {

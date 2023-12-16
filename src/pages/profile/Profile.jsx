@@ -167,7 +167,7 @@ const Profile = () => {
               onClick={handleLogout}
             >
               <FiLogIn size={20} />
-              <span>Logout</span>
+              <span>{t("Logout")}</span>
             </button>
           </div>
         </div>

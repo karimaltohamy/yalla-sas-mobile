@@ -6,10 +6,12 @@ import { useDispatch } from "react-redux";
 import apiAxios from "../../utils/apiAxios";
 import { setLogout } from "../../redux/reducers/userReducer";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const HeaderHome = ({ setOpenPopupSettings, setOpenPopupNotification }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleLogout = async () => {
     try {
@@ -29,7 +31,7 @@ const HeaderHome = ({ setOpenPopupSettings, setOpenPopupNotification }) => {
       <div className={styles.custom_container}>
         <div className="line flex items-center justify-between">
           <button className="notification btn_fill" onClick={handleLogout}>
-            Logout
+            {t("Logout")}
           </button>
           <div className="logo">
             <img src={logo} alt="logo" loading="lazy" className="w-[80px]" />
