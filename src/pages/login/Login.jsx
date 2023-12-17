@@ -57,7 +57,7 @@ const Login = () => {
           src={logo}
           alt="logo"
           loading="lazy"
-          className="w-[80px] mx-auto"
+          className="w-[100px] mt-4 mx-auto"
         />
       </div>
       <div className="line">

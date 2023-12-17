@@ -27,7 +27,9 @@ const BoxInfoUser = ({ setOpen }) => {
             <button>
               <IoReloadOutline size={20} />
             </button>
-            <span className="time">{t("Last updated")} 10:00 ص</span>
+            <span className="time">
+              {t("Last updated")} {userInfo.last_refresh}
+            </span>
           </div>
           <div
             className="box_info_user"

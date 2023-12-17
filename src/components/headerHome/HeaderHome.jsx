@@ -7,6 +7,7 @@ import apiAxios from "../../utils/apiAxios";
 import { setLogout } from "../../redux/reducers/userReducer";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { FiLogIn } from "react-icons/fi";
 
 const HeaderHome = ({ setOpenPopupSettings, setOpenPopupNotification }) => {
   const navigate = useNavigate();
@@ -30,11 +31,11 @@ const HeaderHome = ({ setOpenPopupSettings, setOpenPopupNotification }) => {
     <header className="py-[12px]">
       <div className={styles.custom_container}>
         <div className="line flex items-center justify-between">
-          <button className="notification btn_fill" onClick={handleLogout}>
-            {t("Logout")}
+          <button className="notification" onClick={handleLogout}>
+            <FiLogIn size={20} />
           </button>
-          <div className="logo mt-3">
-            <img src={logo} alt="logo" loading="lazy" className="w-[100px]" />
+          <div className="logo">
+            <img src={logo} alt="logo" loading="lazy" className="w-[80px]" />
           </div>
           <button
             className="settings"
