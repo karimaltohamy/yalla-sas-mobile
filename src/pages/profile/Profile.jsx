@@ -73,7 +73,7 @@ const Profile = () => {
                 </div>
                 <div className="item text-center">
                   <h3 className="text-[21px] font-semibold">
-                    {userInfo.total_rxtx}
+                    {userInfo.package_usage_percent}
                   </h3>
                   <span className="text-[15px] -translate-y-1 block text-gray-400">
                     {t("Package")}

@@ -69,10 +69,17 @@ const BoxInfoPackage = ({ setOpen }) => {
           ></div>
 
           <div className="bottom_info flex items-center justify-between">
-            <p className=" font-semibold text-[14px]">
-              {t("You have")} {userInfo.total_rxtx} {t("out of")}{" "}
-              {userInfo.traffic_limit}
-            </p>
+            {userInfo.package_usage_percent == "unlimited" ? (
+              <p className=" font-semibold text-[14px]">
+                {t("You have")} {userInfo.package_usage_percent} {t("Package")}
+              </p>
+            ) : (
+              <p className=" font-semibold text-[14px]">
+                {t("You have")} {userInfo.package_usage_percent} {t("out of")}{" "}
+                {userInfo.traffic_limit}
+              </p>
+            )}
+
             <button
               className="flex items-center gap-1 btn_fill"
               onClick={() => setOpen(true)}

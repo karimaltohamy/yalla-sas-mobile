@@ -16,6 +16,7 @@ import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
 import { useTranslation } from "react-i18next";
 import apiAxios from "../../utils/apiAxios.js";
+import ReactDatePicker from "react-datepicker";
 
 ChartJS.register(
   CategoryScale,
@@ -68,6 +69,8 @@ const data = {
   ],
 };
 
+console.log(labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })));
+
 const Consumption = () => {
   const [trafficData, setTrafficData] = useState([]);
   const [valueDailyComsumption, onChangeDaily] = useState(new Date());
@@ -75,6 +78,7 @@ const Consumption = () => {
   const [openCalenderDaily, setOpenCalenderDaily] = useState(false);
   const [openCalenderMonthlty, setOpenCalenderMonthly] = useState(false);
   const [typeComsumption, setTypeComsumption] = useState("monthly");
+  const [years, setYears] = useState([]);
   const { t } = useTranslation();
 
   const handleCloseCalender = (e, type) => {
@@ -87,15 +91,24 @@ const Consumption = () => {
 
   useEffect(() => {
     const date = new Date();
+
+    // this for loop for set years in select options
+    const yearArray = [];
+    for (let i = date.getFullYear(); i >= 2017; i--) {
+      yearArray.push(i);
+    }
+    setYears(yearArray);
+
+    // this for get data when the page load
     let body = {
       report_type: "daily",
       year: date.getFullYear(),
       month: date.getMonth(),
     };
-
     getTrafficReport(body);
   }, []);
 
+  // handle get daily data
   const handleDateDaily = (date) => {
     let body = {
       report_type: "daily",
@@ -108,12 +121,12 @@ const Consumption = () => {
     getTrafficReport(body);
   };
 
-  const handleDateMonthly = (date) => {
+  // handle get daily monthly
+  const handleDateMonthly = (year) => {
     let body = {
       report_type: "monthly",
-      year: date.getFullYear(),
+      year: year,
     };
-    onChangeMonthly(date);
     setTypeComsumption("monthly");
     // get all traffic data
     getTrafficReport(body);
@@ -133,15 +146,21 @@ const Consumption = () => {
     <div className="consumption py-4">
       <div className={styles.custom_container}>
         <div className="btns_consumption flex items-center gap-4 py-5">
-          <button
-            className="flex items-center gap-1 btn_outline flex-1 justify-center py-2"
+          <select
+            className="flex items-center gap-1 btn_outline flex-1 justify-center py-[2px]"
             data-aos="fade-right"
             data-aos-duration="1000"
             data-aos-delay="200"
-            onClick={() => setOpenCalenderMonthly(true)}
+            onChange={(e) => handleDateMonthly(e.target.value)}
           >
-            <span className="text-[13px]">{t("Monthly consumption")}</span>
-          </button>
+            <option className="text-[13px]">{t("Monthly consumption")}</option>
+            {years &&
+              years.map((item, index) => (
+                <option value={item} key={index}>
+                  {item}
+                </option>
+              ))}
+          </select>
           <button
             className="flex items-center gap-1 btn_outline flex-1 justify-center py-2"
             data-aos="fade-right"
@@ -169,9 +188,10 @@ const Consumption = () => {
         <div className="ruselt_consumption_chart mt-5">
           <div className="items">
             {trafficData.length > 0 ? (
-              trafficData.map((item) => {
+              trafficData.map((item, index) => {
                 return (
                   <div
+                    key={index}
                     className="item"
                     data-aos="fade-up"
                     data-aos-duration="1000"
@@ -198,6 +218,8 @@ const Consumption = () => {
             value={valueDailyComsumption}
             onClickDay={() => setOpenCalenderDaily(false)}
             closeCalendar={true}
+            defaultView="year"
+            showNeighboringMonth={false}
           />
         </div>
       )}
@@ -212,8 +234,9 @@ const Consumption = () => {
             value={valueMonthlyComsumption}
             onClickDay={() => setOpenCalenderMonthly(false)}
             closeCalendar={true}
-            defaultView="year"
+            defaultView="year" // Set the default view to "year"
             showNeighboringMonth={false}
+            dateFormat={"yyyy"}
           />
         </div>
       )}

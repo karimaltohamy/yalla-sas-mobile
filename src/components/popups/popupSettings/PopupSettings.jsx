@@ -56,6 +56,7 @@ const PopupSettings = ({ open, setOpen }) => {
         <div className="select_lang ">
           <LuLanguages size={25} />
           <select onChange={changeLanguage}>
+            <option value="">{t("select language")}</option>
             <option value="en">English</option>
             <option value="ar">Arabic</option>
           </select>
@@ -63,6 +64,7 @@ const PopupSettings = ({ open, setOpen }) => {
         <div className="select_theme">
           <IoInvertMode size={25} />
           <select value={mode} onChange={handleModeTheme}>
+            <option value="">{t("select mode")}</option>
             <option value="dark">Dark</option>
             <option value="light">Light</option>
           </select>

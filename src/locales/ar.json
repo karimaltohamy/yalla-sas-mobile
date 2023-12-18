@@ -74,5 +74,8 @@
   "now": "الان",
   "Recharge Package": "اشحن الباقه",
   "monthly": "شهريا",
-  "Logout": "تسجيل الخروج"
+  "Logout": "تسجيل الخروج",
+  "Not Active": "غير نشط",
+  "select language": "اختر اللغه",
+  "select mode": "حدد الوضع"
 }

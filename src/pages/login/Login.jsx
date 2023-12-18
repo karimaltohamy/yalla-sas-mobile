@@ -3,10 +3,9 @@ import { FaRegUser } from "react-icons/fa6";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { GrLicense } from "react-icons/gr";
 import logo from "../../images/logo.png";
-import imageLogin from "../../images/internet-img.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setUserError,
   setUserStart,
@@ -15,11 +14,13 @@ import {
 import apiAxios from "../../utils/apiAxios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom/dist";
+import Loader from "../../components/loader/Loader";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [LicenseName, setLicenseName] = useState("");
+  const { loading } = useSelector((state) => state.user);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -99,6 +100,7 @@ const Login = () => {
           </form>
         </div>
       </div>
+      {loading && <Loader fixed={true} />}
     </div>
   );
 };

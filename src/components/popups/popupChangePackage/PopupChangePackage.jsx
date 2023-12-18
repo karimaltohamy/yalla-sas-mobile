@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 import apiAxios from "../../../utils/apiAxios";
 import { toast } from "react-toastify";
 import { getUser } from "../../../redux/actions/user";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const PopupChangePackage = ({ open, setOpen }) => {
   const [selectPackage, setSelectPackage] = useState(0);
   const lang = localStorage.getItem("lang");
   const { t } = useTranslation();
+  const { userInfo } = useSelector((state) => state.user);
   const [packages, setPackages] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ const PopupChangePackage = ({ open, setOpen }) => {
       <div className="content mt-10 px-3">
         <div className="current_package flex items-center gap-1 justify-between">
           <h5>{t("Current Package")}:</h5>
-          <span className="text-gray-500">Le test 5</span>
+          <span className="text-gray-500">{userInfo.package}</span>
         </div>
 
         <div className="packages_boxs my-8 grid grid-cols-2 gap-4">

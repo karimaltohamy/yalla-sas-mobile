@@ -73,7 +73,9 @@
   "Last updated": "Last updated",
   "now": "now",
   "Recharge Package": "Recharge Package",
-  "Not Active": "غير نشط",
+  "Not Active": "Not Active",
   "monthly": "monthly",
-  "Logout": "Logout"
+  "Logout": "Logout",
+  "select language": "select language",
+  "select mode": "select mode"
 }
