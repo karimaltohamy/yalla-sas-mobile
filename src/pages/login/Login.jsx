@@ -24,6 +24,7 @@ const Login = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const lang = localStorage.getItem("lang");
 
   // handle login
   const handleLogin = async (e) => {
@@ -46,7 +47,11 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message);
+      toast.error(
+        lang == "en"
+          ? error.response.data.message.en
+          : error.response.data.message.ar
+      );
       dispatch(setUserError());
     }
   };

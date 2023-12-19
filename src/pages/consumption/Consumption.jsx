@@ -69,15 +69,14 @@ const data = {
   ],
 };
 
-console.log(labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })));
-
 const Consumption = () => {
   const [trafficData, setTrafficData] = useState([]);
+  const [chartData, setChartData] = useState([]);
   const [valueDailyComsumption, onChangeDaily] = useState(new Date());
   const [valueMonthlyComsumption, onChangeMonthly] = useState(new Date());
   const [openCalenderDaily, setOpenCalenderDaily] = useState(false);
   const [openCalenderMonthlty, setOpenCalenderMonthly] = useState(false);
-  const [typeComsumption, setTypeComsumption] = useState("monthly");
+  const [typeComsumption, setTypeComsumption] = useState("Monthly consumption");
   const [years, setYears] = useState([]);
   const { t } = useTranslation();
 
@@ -109,14 +108,15 @@ const Consumption = () => {
   }, []);
 
   // handle get daily data
-  const handleDateDaily = (date) => {
+  const handleDateDaily = (month) => {
+    const date = new Date();
     let body = {
       report_type: "daily",
       year: date.getFullYear(),
-      month: date.getMonth(),
+      month: month,
     };
     onChangeDaily(date);
-    setTypeComsumption("Daily");
+    setTypeComsumption("Monthly consumption");
     // get all traffic data
     getTrafficReport(body);
   };
@@ -127,7 +127,7 @@ const Consumption = () => {
       report_type: "monthly",
       year: year,
     };
-    setTypeComsumption("monthly");
+    setTypeComsumption("Annual consumption");
     // get all traffic data
     getTrafficReport(body);
   };
@@ -137,9 +137,22 @@ const Consumption = () => {
     try {
       const { data } = await apiAxios.post("mob/traffic/report", body);
       setTrafficData(data.data);
+      setChartData(data.chart.total);
     } catch (error) {
       console.log(error.response.data.message);
     }
+  };
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: labels.map(() => chartData),
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
   };
 
   return (
@@ -153,7 +166,7 @@ const Consumption = () => {
             data-aos-delay="200"
             onChange={(e) => handleDateMonthly(e.target.value)}
           >
-            <option className="text-[13px]">{t("Monthly consumption")}</option>
+            <option className="text-[13px]">{t("Annual consumption")}</option>
             {years &&
               years.map((item, index) => (
                 <option value={item} key={index}>
@@ -161,15 +174,27 @@ const Consumption = () => {
                 </option>
               ))}
           </select>
-          <button
-            className="flex items-center gap-1 btn_outline flex-1 justify-center py-2"
+          <select
+            className="flex items-center gap-1 btn_outline flex-1 justify-center py-[2px]"
             data-aos="fade-right"
             data-aos-duration="1000"
             data-aos-delay="400"
-            onClick={() => setOpenCalenderDaily(true)}
+            onChange={(e) => handleDateDaily(e.target.value)}
           >
-            <span className="text-[13px]">{t("Daily consumption")}</span>
-          </button>
+            <option className="text-[13px]">{t("Monthly consumption")}</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
         </div>
         <div
           className="consumption_chart mt-7"
@@ -177,10 +202,7 @@ const Consumption = () => {
           data-aos-duration="1000"
           data-aos-delay="500"
         >
-          <h5 className="font-medium">{t("consumption")}</h5>
-          <h5 className="font-semibold text-[22px]">
-            {t(typeComsumption)} {t("consumption")}
-          </h5>
+          <h5 className="font-semibold text-[22px]">{t(typeComsumption)}</h5>
           <div className="chart">
             <Line options={options} data={data} />
           </div>
@@ -220,23 +242,6 @@ const Consumption = () => {
             closeCalendar={true}
             defaultView="year"
             showNeighboringMonth={false}
-          />
-        </div>
-      )}
-
-      {openCalenderMonthlty && (
-        <div
-          className="popup_calender absolute w-full h-full flex items-center justify-center top-0 left-0 text-black z-[1000]"
-          onClick={(e) => handleCloseCalender(e, "monthly")}
-        >
-          <Calendar
-            onChange={handleDateMonthly}
-            value={valueMonthlyComsumption}
-            onClickDay={() => setOpenCalenderMonthly(false)}
-            closeCalendar={true}
-            defaultView="year" // Set the default view to "year"
-            showNeighboringMonth={false}
-            dateFormat={"yyyy"}
           />
         </div>
       )}

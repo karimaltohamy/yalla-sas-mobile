@@ -35,11 +35,14 @@ function App() {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  {
+    /*useEffect(() => {
     if (!location.pathname.includes("login")) {
       getUser(dispatch);
     }
   }, []);
+*/
+  }
 
   // handle language and mode theme
   useEffect(() => {

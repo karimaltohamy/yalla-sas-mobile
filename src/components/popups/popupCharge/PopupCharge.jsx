@@ -9,12 +9,13 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FaGift } from "react-icons/fa";
+import Loader from "../../loader/Loader";
 
 const PopupCharge = ({ setOpen, open }) => {
   const { t } = useTranslation();
   const lang = localStorage.getItem("lang");
   const { userInfo } = useSelector((state) => state.user);
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   const [paymentType, setPaymentType] = useState("fullCharge");
   const [openIframe, setOpenIframe] = useState(false);
   const [urlCharge, setUrlCharge] = useState(null);
@@ -52,6 +53,7 @@ const PopupCharge = ({ setOpen, open }) => {
       setUrlCharge(data.data?.url && data.data.url);
       setOpenIframe(data.data?.url && true);
     } catch (error) {
+      toast.error(error.response.data.message);
       console.log(error);
       setError(true);
     }
@@ -184,6 +186,8 @@ const PopupCharge = ({ setOpen, open }) => {
           ></iframe>
         </div>
       )}
+
+      {loading && <Loader fixed={true} />}
     </div>
   );
 };

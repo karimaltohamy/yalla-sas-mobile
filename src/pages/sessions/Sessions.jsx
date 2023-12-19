@@ -67,8 +67,8 @@ const Sessions = () => {
                   sessions.map((session, index) => {
                     return (
                       <tr key={index}>
-                        <td>{formateDate(session.start_time)}</td>
-                        <td>{formateDate(session.start_time)}</td>
+                        <td>{session.start_time?.split(" ")[0]}</td>
+                        <td> {session.end_time?.split(" ")[0]}</td>
                         <td>{session.ip_address}</td>
                         <td>{session.download}</td>
                         <td>{session.upload}</td>
