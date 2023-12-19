@@ -42,7 +42,11 @@ const Login = () => {
       apiAxios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${data.access_token}`;
-      toast.success(data.success && "Successful login");
+      toast.success(
+        data.success && lang == "en"
+          ? "Successful login"
+          : "تم تسجيل الدخول بنجاح"
+      );
 
       navigate("/");
     } catch (error) {
