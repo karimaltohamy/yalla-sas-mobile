@@ -80,7 +80,7 @@ const PopupChangePackage = ({ open, setOpen }) => {
               <div className="mb-5 text-center">Loading...</div>
             )
           ) : (
-            <div className="text-center">No packages available</div>
+            <div className="text-center">{t("No packages available")}</div>
           )}
         </div>
 

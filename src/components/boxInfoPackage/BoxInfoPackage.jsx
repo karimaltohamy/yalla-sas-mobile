@@ -61,7 +61,7 @@ const BoxInfoPackage = ({ setOpen }) => {
           </div>
 
           <div
-            className="progressbar"
+            className={`progressbar ${percent == 0 && "percent-0"}`}
             role="progressbar"
             aria-valuenow={percent}
             aria-valuemin="0"

@@ -78,5 +78,20 @@
   "Logout": "Logout",
   "select language": "select language",
   "select mode": "select mode",
-  "Annual consumption": "Annual consumption"
+  "Annual consumption": "Annual consumption",
+  "January": "January",
+  "February": "February",
+  "March": "March",
+  "April": "April",
+  "May": "May",
+  "June": "June",
+  "July": "July",
+  "August": "August",
+  "September": "September",
+  "October": "October",
+  "November": "November",
+  "December": "December",
+  "No packages available": "No packages available",
+  "you don't have data": "you don't have data",
+  "Loading...": "Loading..."
 }

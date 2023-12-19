@@ -78,5 +78,20 @@
   "Not Active": "غير نشط",
   "select language": "اختر اللغه",
   "select mode": "حدد الوضع",
-  "Annual consumption": "الاستهلاك السنوي"
+  "Annual consumption": "الاستهلاك السنوي",
+  "January": "يناير",
+  "February": "فبراير",
+  "March": "مارس",
+  "April": "ابريل",
+  "May": "مايو",
+  "June": "يونيو",
+  "July": "يوليو",
+  "August": "اغسطس",
+  "September": "سبتمبر",
+  "October": "اكتوبر",
+  "November": "نوفمبر",
+  "December": "ديسمبر",
+  "No packages available": "ليس لديك باقات متاحه",
+  "you don't have data": "ليس لديك اي بيانات",
+  "Loading...": "تحميل..."
 }

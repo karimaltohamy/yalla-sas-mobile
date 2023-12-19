@@ -182,18 +182,18 @@ const Consumption = () => {
             onChange={(e) => handleDateDaily(e.target.value)}
           >
             <option className="text-[13px]">{t("Monthly consumption")}</option>
-            <option value="1">January</option>
-            <option value="2">February</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
+            <option value="1">{t("January")}</option>
+            <option value="2">{t("February")}</option>
+            <option value="3">{t("March")}</option>
+            <option value="4">{t("April")}</option>
+            <option value="5">{t("May")}</option>
+            <option value="6">{t("June")}</option>
+            <option value="7">{t("July")}</option>
+            <option value="8">{t("August")}</option>
+            <option value="9">{t("September")}</option>
+            <option value="10">{t("October")}</option>
+            <option value="11">{t("November")}</option>
+            <option value="12">{t("December")}</option>
           </select>
         </div>
         <div
@@ -225,7 +225,7 @@ const Consumption = () => {
                 );
               })
             ) : (
-              <div className="text-center">you don't have data</div>
+              <div className="text-center">{t("you don't have data")}</div>
             )}
           </div>
         </div>

@@ -51,6 +51,10 @@
     color: var(--fg);
     margin: 12px auto;
     transition: all 3s linear;
+
+    &.percent-0 {
+      --bg: rgb(255, 221, 225);
+    }
   }
 
   .progressbar::before {
