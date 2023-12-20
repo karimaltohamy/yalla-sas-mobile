@@ -74,14 +74,14 @@ const PopupCharge = ({ setOpen, open }) => {
       {!openIframe && (
         <div className="content mt-[30px] px-5 h-[100vh] flex items-center justify-center">
           {options?.offer_enable && (
-            <div className="optionss mb-5 text-center">
+            <div className="offers mb-5 text-center">
               <h4 className="title">{t("Our options")}</h4>
               <div className="items">
                 <div className="item">
                   <div className="icon">
                     <FaGift size={20} />
                   </div>
-                  <h5>باقات WE Space السنوية عرض للعملاء الجدد</h5>
+                  <h5>{lang == "en" ? options.text_en : options.text_ar}</h5>
                   <div className="icon">
                     <FaGift size={20} />
                   </div>
@@ -126,7 +126,7 @@ const PopupCharge = ({ setOpen, open }) => {
                     value={"options"}
                     checked={paymentType === "options"}
                   />
-                  <label htmlFor="options">{t("Use options")}</label>
+                  <label htmlFor="options">{t("Use option")}</label>
                 </div>
               )}
               {options?.extend_enable && (

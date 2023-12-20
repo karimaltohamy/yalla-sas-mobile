@@ -212,13 +212,7 @@ const Consumption = () => {
             {trafficData.length > 0 ? (
               trafficData.map((item, index) => {
                 return (
-                  <div
-                    key={index}
-                    className="item"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                  >
+                  <div key={index} className="item">
                     <div className="package">{item.total}</div>
                     <div className="date">{item.date}</div>
                   </div>

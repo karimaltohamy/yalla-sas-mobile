@@ -13,7 +13,11 @@ const BoxInfoPackage = ({ setOpen }) => {
 
   const circleStyle = {
     "--value":
-      userInfo.package_usage_percent == "unlimited" ? 100 : Math.floor(percent),
+      userInfo.package_usage_percent == "unlimited"
+        ? 100
+        : userInfo.package_usage_percent == "suspended"
+        ? 0
+        : Math.floor(percent),
   };
 
   return (
@@ -71,6 +75,10 @@ const BoxInfoPackage = ({ setOpen }) => {
 
           <div className="bottom_info flex items-center justify-between">
             {userInfo.package_usage_percent == "unlimited" ? (
+              <p className=" font-semibold text-[14px]">
+                {t("You have")} {userInfo.package_usage_percent} {t("Package")}
+              </p>
+            ) : userInfo.package_usage_percent == "suspended" ? (
               <p className=" font-semibold text-[14px]">
                 {t("You have")} {userInfo.package_usage_percent} {t("Package")}
               </p>
