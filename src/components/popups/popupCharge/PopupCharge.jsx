@@ -66,7 +66,12 @@ const PopupCharge = ({ setOpen, open }) => {
           lang == "en" ? "en" : "ar"
         }`}
       >
-        <div className="back" onClick={() => setOpen(false)}>
+        <div
+          className={`back ${openIframe && "text-red-500"}`}
+          onClick={() => {
+            openIframe ? setOpenIframe(false) : setOpen(false);
+          }}
+        >
           <IoMdArrowBack size={25} />
         </div>
         <h4 className=" font-semibold">{t("Recharge Package")}</h4>

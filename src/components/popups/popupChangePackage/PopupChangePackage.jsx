@@ -63,9 +63,9 @@ const PopupChangePackage = ({ open, setOpen }) => {
           <span className="text-gray-500">{userInfo.package}</span>
         </div>
 
-        <div className="packages_boxs my-8 grid grid-cols-2 gap-4">
-          {packages.length > 0 ? (
-            loading ? (
+        {packages.length > 0 ? (
+          <div className="packages_boxs my-8 grid grid-cols-2 gap-4">
+            {!loading ? (
               packages.map((item, index) => (
                 <div
                   className={`box ${selectPackage === item.id ? "active" : ""}`}
@@ -78,11 +78,15 @@ const PopupChangePackage = ({ open, setOpen }) => {
               ))
             ) : (
               <div className="mb-5 text-center">Loading...</div>
-            )
-          ) : (
-            <div className="text-center">{t("No packages available")}</div>
-          )}
-        </div>
+            )}
+          </div>
+        ) : (
+          <div className="text-center py-3">
+            {t(
+              "Your company does not have any available packages at the moment, contact us"
+            )}
+          </div>
+        )}
 
         <div>
           <button

@@ -19,6 +19,7 @@ import AOS from "aos";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom/dist";
 import { getUser } from "./redux/actions/user";
+import Message from "./pages/message/Message";
 
 const ProidectedRoute = ({ children }) => {
   const { userInfo } = useSelector((state) => state.user);
@@ -149,6 +150,14 @@ function App() {
                 <ConsumptionCalculation />
               </ProidectedRoute>
             </Suspense>
+          }
+        />
+        <Route
+          path="/message"
+          element={
+            <ProidectedRoute>
+              <Message />
+            </ProidectedRoute>
           }
         />
       </Routes>

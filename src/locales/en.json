@@ -91,9 +91,10 @@
   "October": "October",
   "November": "November",
   "December": "December",
-  "No packages available": "No packages available",
+  "Your company does not have any available packages at the moment, contact us": "Your company does not have any available packages at the moment, contact us",
   "you don't have data": "you don't have data",
   "Loading...": "Loading...",
   "Our options": "Our options",
-  "Use option": "Use options"
+  "Use option": "Use options",
+  "The transaction is being verified and the subscription will be activated if the transaction is completed": "The transaction is being verified and the subscription will be activated if the transaction is completed"
 }

@@ -55,19 +55,34 @@ export const options = {
   },
 };
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+const labels = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
-const data = {
-  labels,
-  datasets: [
-    {
-      label: "Dataset 1",
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-  ],
-};
+// const data = {
+//   labels,
+//   datasets: [
+//     {
+//       label: "Dataset 1",
+//       data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+//       borderColor: "rgb(255, 99, 132)",
+//       backgroundColor: "rgba(255, 99, 132, 0.5)",
+//     },
+//   ],
+// };
+
+console.log(labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })));
 
 const Consumption = () => {
   const [trafficData, setTrafficData] = useState([]);
@@ -148,7 +163,7 @@ const Consumption = () => {
     datasets: [
       {
         label: "Dataset 1",
-        data: labels.map(() => chartData),
+        data: chartData,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },

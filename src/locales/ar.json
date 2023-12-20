@@ -91,9 +91,10 @@
   "October": "اكتوبر",
   "November": "نوفمبر",
   "December": "ديسمبر",
-  "No packages available": "ليس لديك باقات متاحه",
+  "Your company does not have any available packages at the moment, contact us": "شركتك لا تتوفر باقات المتوفرة في الوقت الحالي ,التواصل معنا",
   "you don't have data": "ليس لديك اي بيانات",
   "Loading...": "تحميل...",
   "Our options": "عروضنا",
-  "Use option": "استخدم العرض"
+  "Use option": "استخدم العرض",
+  "The transaction is being verified and the subscription will be activated if the transaction is completed": "جارى التحقق من المعاملة و سيتم تفعيل الإشتراك فى حالة إتمام المعاملة"
 }
