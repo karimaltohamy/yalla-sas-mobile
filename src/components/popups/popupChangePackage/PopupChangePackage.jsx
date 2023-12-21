@@ -83,7 +83,7 @@ const PopupChangePackage = ({ open, setOpen }) => {
         ) : (
           <div className="text-center py-3">
             {t(
-              "Your company does not have any available packages at the moment, contact us"
+              "Sorry, there are no packages available now Please contact the company"
             )}
           </div>
         )}

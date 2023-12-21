@@ -2,9 +2,9 @@ import React from "react";
 import styles from "../../styles/style";
 import { Link } from "react-router-dom";
 import { BiSolidFoodMenu } from "react-icons/bi";
-import { MdOutlineMailOutline } from "react-icons/md";
 import { PiMathOperationsFill } from "react-icons/pi";
 import { MdOutlinePayment } from "react-icons/md";
+import { RiCustomerServiceLine } from "react-icons/ri";
 import "./menu.scss";
 import { useTranslation } from "react-i18next";
 
@@ -25,7 +25,7 @@ const Menu = () => {
               <BiSolidFoodMenu size={45} />
               {t("Sessions")}
             </Link>
-            <Link
+            {/* <Link
               className="link"
               to={"/mail-box"}
               data-aos="zoom-in"
@@ -34,7 +34,7 @@ const Menu = () => {
             >
               <MdOutlineMailOutline size={45} />
               {t("mail box")}
-            </Link>
+              </Link>*/}
             <Link
               className="link"
               to={"/consumption-calculation"}
@@ -45,17 +45,19 @@ const Menu = () => {
               <PiMathOperationsFill size={45} />
               {t("Consumption calculation")}
             </Link>
+          </div>
+          {
             <Link
-              className="link"
-              to={"/payment"}
+              className="link mt-4"
+              to={"https://www.youtube.com/watch?v=XmD9WsFnyKo"}
               data-aos="zoom-in"
               data-aos-duration="1000"
-              data-aos-delay="500"
+              data-aos-delay="200"
             >
-              <MdOutlinePayment size={45} />
-              {t("Payment fawry or Visa")}
+              <RiCustomerServiceLine size={45} />
+              {t("Contact customer service")}
             </Link>
-          </div>
+          }
         </div>
       </div>
       <div className="primary-shadow"></div>

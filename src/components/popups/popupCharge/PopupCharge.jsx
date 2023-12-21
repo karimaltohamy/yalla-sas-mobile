@@ -1,4 +1,4 @@
-import { IoMdArrowBack } from "react-icons/io";
+import { IoMdArrowBack, IoMdClose } from "react-icons/io";
 import { FaRegCreditCard } from "react-icons/fa";
 import { GiElectric } from "react-icons/gi";
 import "./popupCharge.scss";
@@ -66,14 +66,20 @@ const PopupCharge = ({ setOpen, open }) => {
           lang == "en" ? "en" : "ar"
         }`}
       >
-        <div
-          className={`back ${openIframe && "text-red-500"}`}
-          onClick={() => {
-            openIframe ? setOpenIframe(false) : setOpen(false);
-          }}
-        >
-          <IoMdArrowBack size={25} />
-        </div>
+        {!openIframe && (
+          <div className={`back `} onClick={() => setOpen(false)}>
+            <IoMdArrowBack size={25} />
+          </div>
+        )}
+        {openIframe && (
+          <div
+            className={`back text-red-500 flex items-center gap-2`}
+            onClick={() => setOpenIframe(false)}
+          >
+            <span>{t("close")}</span>
+            <IoMdClose size={25} />
+          </div>
+        )}
         <h4 className=" font-semibold">{t("Recharge Package")}</h4>
       </div>
       {!openIframe && (
@@ -125,13 +131,13 @@ const PopupCharge = ({ setOpen, open }) => {
                 <div className="input_radio">
                   <input
                     type="radio"
-                    id="options"
+                    id="offer"
                     name="redio-charge"
                     onChange={handleRadioChange}
-                    value={"options"}
-                    checked={paymentType === "options"}
+                    value={"offer"}
+                    checked={paymentType === "offer"}
                   />
-                  <label htmlFor="options">{t("Use option")}</label>
+                  <label htmlFor="offer">{t("Use option")}</label>
                 </div>
               )}
               {options?.extend_enable && (
@@ -157,6 +163,8 @@ const PopupCharge = ({ setOpen, open }) => {
                   value={
                     paymentType == "fullCharge"
                       ? userInfo.package_price
+                      : paymentType == "offer"
+                      ? userInfo.package_price * Number(options.no_of_months)
                       : amount
                   }
                   onChange={(e) => setAmount(e.target.value)}
@@ -174,6 +182,8 @@ const PopupCharge = ({ setOpen, open }) => {
                   ? t("Use options")
                   : paymentType === "extend"
                   ? t("Extending package")
+                  : paymentType === "offer"
+                  ? t("Use option")
                   : null}{" "}
                 {t("now")}
               </button>

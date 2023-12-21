@@ -60,7 +60,7 @@
   "password": "كلمة المرور",
   "Login": "تسجيل الدخول",
   "Settings": "الاعدادات",
-  "License number": "رقم الرخصه",
+  "License number": "ادخل رقم رخصه الشركه",
   "amount": "المبلغ",
   "Renew package": "تجديد الباقه",
   "Deposit balance": "ايداع رصيد",
@@ -91,10 +91,13 @@
   "October": "اكتوبر",
   "November": "نوفمبر",
   "December": "ديسمبر",
-  "Your company does not have any available packages at the moment, contact us": "شركتك لا تتوفر باقات المتوفرة في الوقت الحالي ,التواصل معنا",
+  "Sorry, there are no packages available now Please contact the company": "عذرا لا تتوفر باقات الان ارجاء الاتصال بالشركه",
   "you don't have data": "ليس لديك اي بيانات",
   "Loading...": "تحميل...",
   "Our options": "عروضنا",
   "Use option": "استخدم العرض",
-  "The transaction is being verified and the subscription will be activated if the transaction is completed": "جارى التحقق من المعاملة و سيتم تفعيل الإشتراك فى حالة إتمام المعاملة"
+  "The transaction is being verified and the subscription will be activated if the transaction is completed": "جارى التحقق من المعاملة و سيتم تفعيل الإشتراك فى حالة إتمام المعاملة",
+  "close": "اغلاق",
+  "Contact customer service": "تواصل مع خدمة العملاء",
+  "being processing now": "يتم المعالجه الان"
 }

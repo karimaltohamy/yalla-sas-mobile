@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom/dist";
 import { getUser } from "./redux/actions/user";
 import Message from "./pages/message/Message";
+import { useTranslation } from "react-i18next";
 
 const ProidectedRoute = ({ children }) => {
   const { userInfo } = useSelector((state) => state.user);
@@ -35,6 +36,7 @@ function App() {
   const [mobile, setMobile] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   {
     /*useEffect(() => {
@@ -164,7 +166,7 @@ function App() {
     </Fragment>
   ) : (
     <p className="text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      only in mobile
+      {t("being processing now")}
     </p>
   );
 }

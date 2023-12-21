@@ -60,7 +60,7 @@
   "password": "password",
   "Login": "Login",
   "Settings": "Settings",
-  "License number": "License number",
+  "License number": "Enter the company license number",
   "amount": "amount",
   "Renew package": "Renew package",
   "Deposit balance": "Deposit balance",
@@ -68,7 +68,6 @@
   "Extending package": "Extending package",
   "Change package": "Change package",
   "Package Name": "Package Name",
-  "License name": "Write License name",
   "Our Offer": "Our Offer",
   "Last updated": "Last updated",
   "now": "now",
@@ -91,10 +90,13 @@
   "October": "October",
   "November": "November",
   "December": "December",
-  "Your company does not have any available packages at the moment, contact us": "Your company does not have any available packages at the moment, contact us",
+  "Sorry, there are no packages available now Please contact the company": "Sorry, there are no packages available now Please contact the company",
   "you don't have data": "you don't have data",
   "Loading...": "Loading...",
   "Our options": "Our options",
   "Use option": "Use options",
-  "The transaction is being verified and the subscription will be activated if the transaction is completed": "The transaction is being verified and the subscription will be activated if the transaction is completed"
+  "The transaction is being verified and the subscription will be activated if the transaction is completed": "The transaction is being verified and the subscription will be activated if the transaction is completed",
+  "close": "close",
+  "Contact customer service": "Contact customer service",
+  "being processing now": "being processing now"
 }

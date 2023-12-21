@@ -13,7 +13,7 @@ export const getUser = async (dispatch) => {
       "Authorization"
     ] = `Bearer ${data.access_token}`;
     dispatch(setUserSuccess(data.data));
-    sessionStorage.setItem("access_token", data.access_token);
+    localStorage.setItem("access_token", data.access_token);
     return data;
   } catch (error) {
     dispatch(setUserError());

@@ -8,14 +8,18 @@ import apiAxios from "../../utils/apiAxios";
 import { setLogout } from "../../redux/reducers/userReducer";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loader from "../../components/loader/Loader";
+import { useState } from "react";
 
 const Profile = () => {
   const { userInfo } = useSelector((state) => state.user);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const handleLogout = async () => {
+    setLoading(true);
     try {
       await apiAxios.get("mob/logout");
       dispatch(setLogout());
@@ -23,8 +27,11 @@ const Profile = () => {
       apiAxios.defaults.headers.common["Authorization"] = null;
       toast.success(data.success && "Successful logout");
       navigate("/login");
+      setLoading(false);
     } catch (error) {
+      toast.error(error.response.data.message);
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -174,6 +181,7 @@ const Profile = () => {
       ) : (
         <div>Loading...</div>
       )}
+      {loading && <Loader fixed={true} />}
     </>
   );
 };

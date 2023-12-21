@@ -82,15 +82,11 @@ const labels = [
 //   ],
 // };
 
-console.log(labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })));
-
 const Consumption = () => {
   const [trafficData, setTrafficData] = useState([]);
   const [chartData, setChartData] = useState([]);
   const [valueDailyComsumption, onChangeDaily] = useState(new Date());
-  const [valueMonthlyComsumption, onChangeMonthly] = useState(new Date());
   const [openCalenderDaily, setOpenCalenderDaily] = useState(false);
-  const [openCalenderMonthlty, setOpenCalenderMonthly] = useState(false);
   const [typeComsumption, setTypeComsumption] = useState("Monthly consumption");
   const [years, setYears] = useState([]);
   const { t } = useTranslation();
@@ -98,8 +94,6 @@ const Consumption = () => {
   const handleCloseCalender = (e, type) => {
     if (e.target === e.currentTarget && type == "daily") {
       setOpenCalenderDaily(false);
-    } else if (e.target === e.currentTarget && type == "monthly") {
-      setOpenCalenderMonthly(false);
     }
   };
 

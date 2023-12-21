@@ -8,13 +8,17 @@ import { setLogout } from "../../redux/reducers/userReducer";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { FiLogIn } from "react-icons/fi";
+import Loader from "../loader/Loader";
+import { useState } from "react";
 
 const HeaderHome = ({ setOpenPopupSettings, setOpenPopupNotification }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
 
   const handleLogout = async () => {
+    setLoading(true);
     try {
       await apiAxios.get("mob/logout");
       dispatch(setLogout());
@@ -22,8 +26,11 @@ const HeaderHome = ({ setOpenPopupSettings, setOpenPopupNotification }) => {
       apiAxios.defaults.headers.common["Authorization"] = null;
       toast.success(data.success && "Successful logout");
       navigate("/login");
+      setLoading(false);
     } catch (error) {
+      toast.error(error.response.data.message);
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -45,6 +52,7 @@ const HeaderHome = ({ setOpenPopupSettings, setOpenPopupNotification }) => {
           </button>
         </div>
       </div>
+      {loading && <Loader fixed={true} />}
     </header>
   );
 };

@@ -4,16 +4,19 @@
     align-items: center;
     justify-content: center;
     .links {
-      .link {
-        padding: 30px 20px;
-        text-align: center;
-        border-radius: 6px;
-        background-color: var(--bg-section);
+    }
 
-        svg {
-          margin: auto;
-          margin-bottom: 10px;
-        }
+    .link {
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 6px;
+      background-color: var(--bg-section);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      svg {
       }
     }
   }

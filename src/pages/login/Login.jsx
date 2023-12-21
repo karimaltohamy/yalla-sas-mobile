@@ -37,7 +37,7 @@ const Login = () => {
         license_num: LicenseName,
       });
       dispatch(setUserSuccess(data.data));
-      sessionStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("access_token", data.access_token);
 
       apiAxios.defaults.headers.common[
         "Authorization"
@@ -77,7 +77,7 @@ const Login = () => {
               <GrLicense size={20} />
               <input
                 type="number"
-                placeholder={t("License name")}
+                placeholder={t("License number")}
                 value={LicenseName}
                 onChange={(e) => setLicenseName(e.target.value)}
                 autoComplete="License name"
@@ -86,7 +86,7 @@ const Login = () => {
             <div className="input_item">
               <FaRegUser size={20} />
               <input
-                type="text"
+                type="number"
                 placeholder={t("username")}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}

@@ -37,7 +37,7 @@ const ConsumptionCalculation = () => {
 
     let body = {
       year: DateFrom.getFullYear(),
-      month: DateFrom.getMonth(),
+      month: DateFrom.getMonth() + 1,
       day_from: DateFrom.getDate(),
       day_to: DateTo.getDate(),
     };
@@ -55,8 +55,9 @@ const ConsumptionCalculation = () => {
       toast.error(error.response.data.message.month[0]);
       toast.error(error.response.data.message.day_to[0]);
       toast.error(error.response.data.message.day_from[0]);
-      setLoading(false);
     }
+
+    setLoading(false);
   };
 
   const navigate = useNavigate();
