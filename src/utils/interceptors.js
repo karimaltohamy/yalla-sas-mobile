@@ -1,5 +1,5 @@
 import apiAxios from "./apiAxios";
-const accessToken = sessionStorage.getItem("access_token");
+const accessToken = localStorage.getItem("access_token");
 
 // apiAxios.interceptors.response.use(
 //   (response) => {

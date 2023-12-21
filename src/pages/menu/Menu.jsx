@@ -7,9 +7,11 @@ import { MdOutlinePayment } from "react-icons/md";
 import { RiCustomerServiceLine } from "react-icons/ri";
 import "./menu.scss";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const Menu = () => {
   const { t } = useTranslation();
+  const { userInfo } = useSelector((state) => state.user);
   return (
     <div className="menu pt-[90px] h-full">
       <div className={`${styles.custom_container} h-full`}>
@@ -46,7 +48,7 @@ const Menu = () => {
               {t("Consumption calculation")}
             </Link>
           </div>
-          {
+          {userInfo.whatsapp_support_number && (
             <Link
               className="link mt-4"
               to={"https://www.youtube.com/watch?v=XmD9WsFnyKo"}
@@ -57,7 +59,7 @@ const Menu = () => {
               <RiCustomerServiceLine size={45} />
               {t("Contact customer service")}
             </Link>
-          }
+          )}
         </div>
       </div>
       <div className="primary-shadow"></div>

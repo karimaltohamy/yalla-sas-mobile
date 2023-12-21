@@ -23,7 +23,7 @@ const Profile = () => {
     try {
       await apiAxios.get("mob/logout");
       dispatch(setLogout());
-      sessionStorage.setItem("access_token", null);
+      localStorage.setItem("access_token", null);
       apiAxios.defaults.headers.common["Authorization"] = null;
       toast.success(data.success && "Successful logout");
       navigate("/login");

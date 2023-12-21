@@ -58,6 +58,7 @@
   "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo sunt itaque pariatur.": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo sunt itaque pariatur.",
   "username": "username",
   "password": "password",
+  "phoneNumber": "phoneNumber",
   "Login": "Login",
   "Settings": "Settings",
   "License number": "Enter the company license number",
@@ -98,5 +99,6 @@
   "The transaction is being verified and the subscription will be activated if the transaction is completed": "The transaction is being verified and the subscription will be activated if the transaction is completed",
   "close": "close",
   "Contact customer service": "Contact customer service",
-  "being processing now": "being processing now"
+  "being processing now": "being processing now",
+  "Choose account": "Choose account"
 }

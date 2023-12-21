@@ -11,7 +11,7 @@ const apiAxios = axios.create({
 
 apiAxios.interceptors.request.use(
   (config) => {
-    const accessToken = sessionStorage.getItem("access_token");
+    const accessToken = localStorage.getItem("access_token");
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -25,7 +25,7 @@ apiAxios.interceptors.request.use(
 // Response interceptor
 apiAxios.interceptors.response.use(
   (response) => {
-    const accessToken = sessionStorage.getItem("access_token");
+    const accessToken = localStorage.getItem("access_token");
     if (accessToken) {
       response.headers.Authorization = `Bearer ${accessToken}`;
     }

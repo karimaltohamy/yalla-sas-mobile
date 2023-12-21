@@ -15,11 +15,13 @@ import apiAxios from "../../utils/apiAxios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom/dist";
 import Loader from "../../components/loader/Loader";
+import { MdOutlinePhoneEnabled } from "react-icons/md";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [LicenseName, setLicenseName] = useState("");
+  const [showSelect, setShowSelect] = useState(false);
+  const [users, setUsers] = useState([]);
   const { loading } = useSelector((state) => state.user);
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -32,9 +34,47 @@ const Login = () => {
     dispatch(setUserStart());
     try {
       const { data } = await apiAxios.post("mob/login", {
-        username,
-        password,
+        phone: phoneNumber,
         license_num: LicenseName,
+      });
+      if (data.success == "multiable") {
+        setShowSelect(true);
+        setUsers(data.data);
+        console.log(data);
+        dispatch(setUserSuccess(data.data));
+      } else {
+        dispatch(setUserSuccess(data.data));
+        localStorage.setItem("access_token", data.access_token);
+
+        apiAxios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${data.access_token}`;
+        toast.success(
+          data.success && lang == "en"
+            ? "Successful login"
+            : "تم تسجيل الدخول بنجاح"
+        );
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(
+        lang == "en"
+          ? error.response.data.message.en
+          : error.response.data.message.ar
+      );
+      dispatch(setUserError());
+    }
+  };
+
+  const handleMultipleUser = async (e) => {
+    let value = e.target.value;
+    dispatch(setUserStart());
+    try {
+      const { data } = await apiAxios.post("mob/login", {
+        phone: phoneNumber,
+        license_num: LicenseName,
+        user_id: value,
       });
       dispatch(setUserSuccess(data.data));
       localStorage.setItem("access_token", data.access_token);
@@ -47,16 +87,9 @@ const Login = () => {
           ? "Successful login"
           : "تم تسجيل الدخول بنجاح"
       );
-
       navigate("/");
     } catch (error) {
       console.log(error);
-      toast.error(
-        lang == "en"
-          ? error.response.data.message.en
-          : error.response.data.message.ar
-      );
-      dispatch(setUserError());
     }
   };
 
@@ -84,28 +117,36 @@ const Login = () => {
               />
             </div>
             <div className="input_item">
-              <FaRegUser size={20} />
+              <MdOutlinePhoneEnabled size={20} />
               <input
                 type="number"
-                placeholder={t("username")}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                autoComplete="username"
+                placeholder={t("phoneNumber")}
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                autoComplete="phoneNumber"
               />
             </div>
-            <div className="input_item">
-              <RiLockPasswordLine size={20} />
-              <input
-                type="password"
-                placeholder={t("password")}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password"
-              />
-            </div>
-            <button className="btn_fill w-full py-2 text-[18px] rounded-full">
-              {t("Login")}
-            </button>
+            {showSelect && (
+              <div className="input_item">
+                <FaRegUser size={20} />
+                <select onChange={handleMultipleUser}>
+                  <option value="">{t("Choose account")}</option>
+                  {users &&
+                    users.map((user) => {
+                      return (
+                        <option option value={user.id}>
+                          {user.name}
+                        </option>
+                      );
+                    })}
+                </select>
+              </div>
+            )}
+            {!showSelect && (
+              <button className="btn_fill w-full py-2 text-[18px] rounded-full">
+                {t("Login")}
+              </button>
+            )}
           </form>
         </div>
       </div>
@@ -115,5 +156,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTk5MCIsInNhc19pZCI6IjI2IiwidXNlcm5hbWUiOiIwMTAwMDA1NjEyMCIsInBob25lIjoiMDEwMDAwNTYxMjAiLCJwYXNzd29yZCI6IjAxMDAwMDU2MTIwIiwibGljZW5zZV9udW0iOiIxMjM0NTY3ODkwIiwiaWF0IjoxNzAyNzE4NDIwfQ.pUkR6XNyOvg2eHgTWGOvAJQo5OV7aDseF4c-zmWhiVU",
