@@ -28,9 +28,7 @@ const Sessions = () => {
         setLastPage(data.last_page);
         setTotalRecords(data.total_records);
         setLoading(true);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     })();
   }, [currentPage]);
 

@@ -24,12 +24,10 @@ const HeaderHome = ({ setOpenPopupSettings, setOpenPopupNotification }) => {
       dispatch(setLogout());
       localStorage.setItem("access_token", null);
       apiAxios.defaults.headers.common["Authorization"] = null;
+      setLoading(false);
       toast.success(data.success && "Successful logout");
       navigate("/login");
-      setLoading(false);
     } catch (error) {
-      toast.error(error.response.data.message);
-      console.log(error);
       setLoading(false);
     }
   };

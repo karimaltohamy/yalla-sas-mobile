@@ -19,13 +19,13 @@ const PopupChangePackage = ({ open, setOpen }) => {
   // get all packages
   useEffect(() => {
     (async () => {
-      setLoading(false);
+      setLoading(true);
       try {
         const { data } = await apiAxios.get("mob/packages");
         setPackages(data.data);
-        setLoading(true);
+        setLoading(false);
       } catch (error) {
-        console.log(error);
+        setLoading(false);
       }
     })();
   }, []);
@@ -39,7 +39,6 @@ const PopupChangePackage = ({ open, setOpen }) => {
       toast.success(data.success && data.message);
       getUser(dispatch);
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message);
     }
   };
@@ -89,12 +88,14 @@ const PopupChangePackage = ({ open, setOpen }) => {
         )}
 
         <div>
-          <button
-            className="btn_fill w-full rounded-full text-[17px] py-3"
-            onClick={handleChangePackage}
-          >
-            {t("Change Package")}
-          </button>
+          {packages.length > 0 && (
+            <button
+              className="btn_fill w-full rounded-full text-[17px] py-3"
+              onClick={handleChangePackage}
+            >
+              {t("Change Package")}
+            </button>
+          )}
         </div>
       </div>
     </div>

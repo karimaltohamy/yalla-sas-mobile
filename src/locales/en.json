@@ -100,5 +100,11 @@
   "close": "close",
   "Contact customer service": "Contact customer service",
   "being processing now": "being processing now",
-  "Choose account": "Choose account"
+  "Choose account": "Choose account",
+  "Mass consumption": "Mass consumption",
+  "You must write a number greater than 0 in the amount": "You must write a number greater than 0 in the amount",
+  "Month": "Month",
+  "select month": "select month",
+  "select day": "select day",
+  "Day to must be greater than Day from": "Day to must be greater than Day from"
 }

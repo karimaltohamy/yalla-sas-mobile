@@ -23,15 +23,15 @@ const PopupCharge = ({ setOpen, open }) => {
   const [error, setError] = useState(false);
   const [options, setOtipns] = useState(null);
 
+  const getOptions = async () => {
+    try {
+      const { data } = await apiAxios.get("mob/charge/options");
+      setOtipns(data.data);
+    } catch (error) {}
+  };
+
   useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await apiAxios.get("mob/charge/options");
-        setOtipns(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    getOptions();
   }, []);
 
   const handleRadioChange = (event) => {
@@ -41,6 +41,12 @@ const PopupCharge = ({ setOpen, open }) => {
   // handle payment
   const handlePayment = async (e) => {
     e.preventDefault();
+
+    if (amount < 1) {
+      return toast.error(
+        t("You must write a number greater than 0 in the amount")
+      );
+    }
 
     setLoading(true);
     try {
@@ -52,9 +58,10 @@ const PopupCharge = ({ setOpen, open }) => {
       setLoading(false);
       setUrlCharge(data.data?.url && data.data.url);
       setOpenIframe(data.data?.url && true);
+      paymentType == "extend" && setOpen(false);
+      getOptions();
     } catch (error) {
       toast.error(error.response.data.message);
-      console.log(error);
       setError(true);
     }
   };

@@ -24,13 +24,42 @@
           margin-bottom: 5px;
         }
 
-        input {
+        input,
+        select {
           background-color: transparent;
           padding: 7px 10px;
           border: 1px solid var(--border-color);
           border-radius: 5px;
           font-size: 14px;
           width: 100%;
+          // filter: invert(1);
+          color: var(--text-color);
+
+          option {
+            color: black;
+            height: 30px;
+          }
+        }
+
+        .css-13cymwt-control,
+        .css-13cymwt-control:focus {
+          border: 1px solid var(--border-color);
+          color: var(--text-color);
+          background-color: transparent;
+
+          .css-1nmfiq5-menu {
+            color: black;
+          }
+        }
+
+        /* Styles for the calendar icon in normal state (white color) */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+          filter: invert(1);
+        }
+
+        /* Styles for the calendar icon in a different state (black color) */
+        input[type="date"]:focus::-webkit-calendar-picker-indicator {
+          filter: invert(0);
         }
       }
 

@@ -13,6 +13,9 @@ const userReducer = createSlice({
     setUserStart: (state) => {
       state.loading = true;
     },
+    setEndLoading: (state) => {
+      state.loading = false;
+    },
     setUserSuccess: (state, action) => {
       state.loading = false;
       state.userInfo = action.payload;
@@ -29,7 +32,12 @@ const userReducer = createSlice({
   },
 });
 
-export const { setUserStart, setUserSuccess, setUserError, setLogout } =
-  userReducer.actions;
+export const {
+  setUserStart,
+  setEndLoading,
+  setUserSuccess,
+  setUserError,
+  setLogout,
+} = userReducer.actions;
 
 export default userReducer.reducer;

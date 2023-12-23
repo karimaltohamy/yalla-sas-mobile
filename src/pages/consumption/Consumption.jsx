@@ -17,6 +17,7 @@ import { faker } from "@faker-js/faker";
 import { useTranslation } from "react-i18next";
 import apiAxios from "../../utils/apiAxios.js";
 import ReactDatePicker from "react-datepicker";
+import Loader from "../../components/loader/Loader.jsx";
 
 ChartJS.register(
   CategoryScale,
@@ -85,6 +86,7 @@ const labels = [
 const Consumption = () => {
   const [trafficData, setTrafficData] = useState([]);
   const [chartData, setChartData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [valueDailyComsumption, onChangeDaily] = useState(new Date());
   const [openCalenderDaily, setOpenCalenderDaily] = useState(false);
   const [typeComsumption, setTypeComsumption] = useState("Monthly consumption");
@@ -111,7 +113,7 @@ const Consumption = () => {
     let body = {
       report_type: "daily",
       year: date.getFullYear(),
-      month: date.getMonth(),
+      month: date.getMonth() + 1,
     };
     getTrafficReport(body);
   }, []);
@@ -143,12 +145,14 @@ const Consumption = () => {
 
   // get all traffic data
   const getTrafficReport = async (body) => {
+    setLoading(true);
     try {
       const { data } = await apiAxios.post("mob/traffic/report", body);
       setTrafficData(data.data);
       setChartData(data.chart.total);
+      setLoading(false);
     } catch (error) {
-      console.log(error.response.data.message);
+      setLoading(false);
     }
   };
 
@@ -191,18 +195,18 @@ const Consumption = () => {
             onChange={(e) => handleDateDaily(e.target.value)}
           >
             <option className="text-[13px]">{t("Monthly consumption")}</option>
-            <option value="1">{t("January")}</option>
-            <option value="2">{t("February")}</option>
-            <option value="3">{t("March")}</option>
-            <option value="4">{t("April")}</option>
-            <option value="5">{t("May")}</option>
-            <option value="6">{t("June")}</option>
-            <option value="7">{t("July")}</option>
-            <option value="8">{t("August")}</option>
-            <option value="9">{t("September")}</option>
-            <option value="10">{t("October")}</option>
-            <option value="11">{t("November")}</option>
-            <option value="12">{t("December")}</option>
+            <option value="1">1{t("January")}</option>
+            <option value="2">2{t("February")}</option>
+            <option value="3">3{t("March")}</option>
+            <option value="4">4{t("April")}</option>
+            <option value="5">5{t("May")}</option>
+            <option value="6">6{t("June")}</option>
+            <option value="7">7{t("July")}</option>
+            <option value="8">8{t("August")}</option>
+            <option value="9">9{t("September")}</option>
+            <option value="10">10{t("October")}</option>
+            <option value="11">11{t("November")}</option>
+            <option value="12">12{t("December")}</option>
           </select>
         </div>
         <div
@@ -248,6 +252,8 @@ const Consumption = () => {
           />
         </div>
       )}
+
+      {loading && <Loader fixed={true} />}
     </div>
   );
 };

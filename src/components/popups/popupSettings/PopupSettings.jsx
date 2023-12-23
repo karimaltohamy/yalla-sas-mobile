@@ -6,7 +6,7 @@ import { IoInvertMode } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 
 const PopupSettings = ({ open, setOpen }) => {
-  const [mode, setMode] = useState("dark");
+  const [mode, setMode] = useState(localStorage.getItem("mode") | "dark");
   const { i18n, t } = useTranslation();
   const lang = localStorage.getItem("lang");
 
@@ -55,7 +55,10 @@ const PopupSettings = ({ open, setOpen }) => {
       <div className="content mt-10 px-3">
         <div className="select_lang ">
           <LuLanguages size={25} />
-          <select onChange={changeLanguage}>
+          <select
+            value={localStorage.getItem("lang")}
+            onChange={changeLanguage}
+          >
             <option value="">{t("select language")}</option>
             <option value="en">English</option>
             <option value="ar">Arabic</option>

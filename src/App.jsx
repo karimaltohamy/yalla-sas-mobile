@@ -35,17 +35,7 @@ const ProidectedRoute = ({ children }) => {
 function App() {
   const [mobile, setMobile] = useState(false);
   const location = useLocation();
-  const dispatch = useDispatch();
   const { t } = useTranslation();
-
-  {
-    /*useEffect(() => {
-    if (!location.pathname.includes("login")) {
-      getUser(dispatch);
-    }
-  }, []);
-*/
-  }
 
   // handle language and mode theme
   useEffect(() => {
@@ -53,7 +43,7 @@ function App() {
 
     localStorage.setItem("lang", "ar");
 
-    if (window.innerWidth <= 500) {
+    if (window.innerWidth <= 900) {
       setMobile(true);
     } else {
       setMobile(false);

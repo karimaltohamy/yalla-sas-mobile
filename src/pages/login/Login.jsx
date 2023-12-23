@@ -3,10 +3,11 @@ import { FaRegUser } from "react-icons/fa6";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { GrLicense } from "react-icons/gr";
 import logo from "../../images/logo.png";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setEndLoading,
   setUserError,
   setUserStart,
   setUserSuccess,
@@ -40,8 +41,7 @@ const Login = () => {
       if (data.success == "multiable") {
         setShowSelect(true);
         setUsers(data.data);
-        console.log(data);
-        dispatch(setUserSuccess(data.data));
+        dispatch(setEndLoading());
       } else {
         dispatch(setUserSuccess(data.data));
         localStorage.setItem("access_token", data.access_token);
@@ -57,7 +57,6 @@ const Login = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
       toast.error(
         lang == "en"
           ? error.response.data.message.en
@@ -67,6 +66,7 @@ const Login = () => {
     }
   };
 
+  // this work when user have more than username
   const handleMultipleUser = async (e) => {
     let value = e.target.value;
     dispatch(setUserStart());
@@ -76,8 +76,8 @@ const Login = () => {
         license_num: LicenseName,
         user_id: value,
       });
-      dispatch(setUserSuccess(data.data));
-      localStorage.setItem("access_token", data.access_token);
+      dispatch(setUserSuccess(data?.data));
+      localStorage.setItem("access_token", data?.access_token);
 
       apiAxios.defaults.headers.common[
         "Authorization"
@@ -89,7 +89,7 @@ const Login = () => {
       );
       navigate("/");
     } catch (error) {
-      console.log(error);
+      toast.error("something error");
     }
   };
 
@@ -127,20 +127,25 @@ const Login = () => {
               />
             </div>
             {showSelect && (
-              <div className="input_item">
-                <FaRegUser size={20} />
-                <select onChange={handleMultipleUser}>
-                  <option value="">{t("Choose account")}</option>
-                  {users &&
-                    users.map((user) => {
-                      return (
-                        <option option value={user.id}>
-                          {user.name}
-                        </option>
-                      );
-                    })}
-                </select>
-              </div>
+              <Fragment>
+                <p className="text-center text-red-500">
+                  تحذير هذا الرقم لدية اكثر من حساب
+                </p>
+                <div className="input_item">
+                  <FaRegUser size={20} />
+                  <select onChange={handleMultipleUser}>
+                    <option value="">{t("Choose account")}</option>
+                    {users &&
+                      users.map((user, index) => {
+                        return (
+                          <option option value={user.id} key={index}>
+                            {user.name}
+                          </option>
+                        );
+                      })}
+                  </select>
+                </div>
+              </Fragment>
             )}
             {!showSelect && (
               <button className="btn_fill w-full py-2 text-[18px] rounded-full">

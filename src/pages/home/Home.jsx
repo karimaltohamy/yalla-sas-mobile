@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, useState } from "react";
+import React, { Fragment, Suspense, useEffect, useState } from "react";
 import HeaderHome from "../../components/headerHome/HeaderHome";
 const BoxInfoUser = React.lazy(() =>
   import("../../components/boxInfoUser/BoxInfoUser")
@@ -27,6 +27,8 @@ const PopupNotification = React.lazy(() =>
 import styles from "../../styles/style";
 import "./home.scss";
 import LoaderBox from "../../components/loaderBox/LoaderBox";
+import { useDispatch } from "react-redux";
+import { getUser } from "../../redux/actions/user";
 
 const Home = () => {
   const [openPopupCharge, setOpenPopupCharge] = useState(false);
@@ -35,6 +37,11 @@ const Home = () => {
   const [openActivatePackage, setOpenActivatePackage] = useState(false);
   const [openPopupSettings, setOpenPopupSettings] = useState(false);
   const [openPopupNotification, setOpenPopupNotification] = useState(false);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   getUser(dispatch);
+  // }, []);
 
   return (
     <Fragment>

@@ -36,8 +36,8 @@
   "Mail Box": "صندوق البريد",
   "From": "من",
   "To": "الي",
-  "Total download": "التحميل الشامل",
-  "Total Upload": "إجمالي التحميل",
+  "Total download": "اجمالي التحميل",
+  "Total Upload": "اجمالي الابلود",
   "Change Package": "تغيير الباقه",
   "Current Package": "الباقه الحالية",
   "Activate Package": "تفعيل الحزمة",
@@ -101,5 +101,11 @@
   "close": "اغلاق",
   "Contact customer service": "تواصل مع خدمة العملاء",
   "being processing now": "يتم المعالجه الان",
-  "Choose account": " اختيار الحساب"
+  "Choose account": " اختيار الحساب",
+  "Mass consumption": "الاستهلاك الشامل",
+  "You must write a number greater than 0 in the amount": "يجب عليك كتابه رقم اكبر من 0 في المبلغ",
+  "Month": "الشهر",
+  "select month": "اختار الشهر",
+  "select day": "اختار اليوم",
+  "Day to must be greater than Day from": "يجب ان يكون نهايه اليوم اكبر من بدايه اليوم"
 }

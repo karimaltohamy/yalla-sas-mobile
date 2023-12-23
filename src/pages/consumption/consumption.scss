@@ -7,6 +7,7 @@
 
   .ruselt_consumption_chart {
     .items {
+      margin-bottom: 60px;
       .item {
         background-color: var(--bg-main);
         box-shadow: var(--box-shadow2);
@@ -17,7 +18,7 @@
         gap: 8px;
 
         .package {
-          border: 1px solid white;
+          border: 1px solid var(--border-color);
           border-radius: 7px;
           padding: 7px;
         }
