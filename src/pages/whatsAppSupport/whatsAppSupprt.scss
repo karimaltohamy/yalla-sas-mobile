@@ -1,0 +1,17 @@
+@import "../../sass/mixins.scss";
+@import "../../sass/variables.scss";
+
+.whatsapp_support {
+  .top {
+    @include topPopup;
+  }
+
+  .container {
+    height: calc(100vh - 55px);
+    overflow: hidden;
+
+    .content {
+      height: 100vh;
+    }
+  }
+}

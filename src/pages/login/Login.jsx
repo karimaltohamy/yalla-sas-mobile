@@ -66,7 +66,7 @@ const Login = () => {
     }
   };
 
-  // this work when user have more than username
+  // this work when user have more than phoneNumber
   const handleMultipleUser = async (e) => {
     let value = e.target.value;
     dispatch(setUserStart());
@@ -119,8 +119,8 @@ const Login = () => {
             <div className="input_item">
               <MdOutlinePhoneEnabled size={20} />
               <input
-                type="number"
-                placeholder={t("phoneNumber")}
+                type="text"
+                placeholder={t("write username or phone number")}
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 autoComplete="phoneNumber"

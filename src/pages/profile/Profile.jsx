@@ -79,10 +79,13 @@ const Profile = () => {
                 </div>
                 <div className="item text-center">
                   <h3 className="text-[21px] font-semibold">
-                    {userInfo.package_usage_percent}
+                    {userInfo.package_usage_percent == "unlimited" ||
+                    userInfo.package_usage_percent == "suspended"
+                      ? userInfo.package_usage_percent
+                      : userInfo.total_rxtx}
                   </h3>
                   <span className="text-[15px] -translate-y-1 block text-gray-400">
-                    {t("Package")}
+                    {t("You have now")}
                   </span>
                 </div>
                 <div className="item text-center">

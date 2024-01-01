@@ -107,5 +107,9 @@
   "Month": "الشهر",
   "select month": "اختار الشهر",
   "select day": "اختار اليوم",
-  "Day to must be greater than Day from": "يجب ان يكون نهايه اليوم اكبر من بدايه اليوم"
+  "Day to must be greater than Day from": "يجب ان يكون نهايه اليوم اكبر من بدايه اليوم",
+  "WhatsApp Support": "دعم الواتساب",
+  "write username or phone number": "كتابة اسم المستخدم أو رقم الهاتف",
+  "You have now": "لديك الان",
+  "price": "السعر"
 }

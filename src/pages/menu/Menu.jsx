@@ -75,11 +75,10 @@ const Menu = () => {
           {userInfo.whatsapp_support_number && (
             <Link
               className="link mt-4"
-              to={userInfo.whatsapp_support_number}
+              to={"/whatsappSupport"}
               data-aos="zoom-in"
               data-aos-duration="1000"
               data-aos-delay="200"
-              target="_blank"
             >
               <RiCustomerServiceLine size={45} />
               {t("Contact customer service")}

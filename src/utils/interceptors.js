@@ -1,20 +1,39 @@
+import { useNavigate } from "react-router-dom";
 import apiAxios from "./apiAxios";
-const accessToken = localStorage.getItem("access_token");
 
 // apiAxios.interceptors.response.use(
 //   (response) => {
-//     apiAxios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-//     return response;
-//   },
-//   (error) => {
-//     if (error.response.status === 401) {
-//       apiAxios.defaults.headers.common[
-//         "Authorization"
-//       ] = `Bearer ${accessToken}`;
-
-//       return apiAxios(error.config);
+//     const accessToken = localStorage.getItem("access_token");
+//     if (accessToken) {
+//       response.headers.Authorization = `Bearer ${accessToken}`;
 //     }
 
-//     return error;
+//     return response;
+//   },
+//   async (error) => {
+//     console.log(error);
+
+//     if (error.data.message === "unauthorized") {
+//       const navigate = useNavigate();
+
+//       try {
+//         await apiAxios.get("mob/logout");
+//         localStorage.setItem("access_token", null);
+//         apiAxios.defaults.headers.common["Authorization"] = null;
+//         navigate("/login");
+
+//         return Promise.reject(error);
+//       } catch (logoutError) {
+//         console.error("Error during logout:", logoutError);
+
+//         navigate("/login");
+
+//         return Promise.reject(error);
+//       }
+//     }
+
+//     return Promise.reject(error);
 //   }
 // );
+
+// export default apiAxios;

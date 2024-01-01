@@ -11,8 +11,9 @@
   --text-color: white;
   --bg-section: #02533e;
   --box-shadow: 0 10px 6px 0 rgb(0 0 0 / 35%);
-  --border-color: #8d8d8d;
+  --border-color: #1e2539;
   --box-shadow2: -1px 0px 10px 0 rgb(5 5 5 / 68%);
+  --bg-box: #0a1a29;
 }
 
 html {
@@ -34,6 +35,7 @@ body {
     --text-color: black;
     --box-shadow: 0 10px 6px 0 rgba(226, 232, 240, 0.5);
     --box-shadow2: -1px 0px 10px 0 rgb(173 173 173 / 68%);
+    --bg-box: #ddffed;
   }
 
   &.ar {

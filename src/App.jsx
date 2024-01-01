@@ -21,6 +21,7 @@ import { Navigate } from "react-router-dom/dist";
 import { getUser } from "./redux/actions/user";
 import Message from "./pages/message/Message";
 import { useTranslation } from "react-i18next";
+import WhatsAppSupport from "./pages/whatsAppSupport/WhatsAppSupport";
 
 const ProidectedRoute = ({ children }) => {
   const { userInfo } = useSelector((state) => state.user);
@@ -149,6 +150,14 @@ function App() {
           element={
             <ProidectedRoute>
               <Message />
+            </ProidectedRoute>
+          }
+        />
+        <Route
+          path="/whatsappSupport"
+          element={
+            <ProidectedRoute>
+              <WhatsAppSupport />
             </ProidectedRoute>
           }
         />

@@ -50,14 +50,29 @@ const PopupCharge = ({ setOpen, open }) => {
 
     setLoading(true);
     try {
-      const { data } = await apiAxios.post("mob/charge", {
-        payment_type: paymentType,
-        amount: paymentType == "fullCharge" ? userInfo.package_price : amount,
-      });
-      toast.success(data.success && "Successfull Charge");
+      let response = null;
+      if (userInfo.system_type == "sas") {
+        response = await apiAxios.post("mob/charge", {
+          payment_type: paymentType,
+          amount: paymentType == "fullCharge" ? userInfo.package_price : amount,
+        });
+      } else {
+        response = await apiAxios.post("mob/charge", {
+          payment_type: paymentType,
+          amount: paymentType == "fullCharge" ? userInfo.package_price : amount,
+          package: userInfo.package,
+          email: userInfo.email,
+          phone: userInfo.phone,
+          username: userInfo.username,
+          name: userInfo.name,
+          sas_id: userInfo.sas_id,
+        });
+      }
+
+      toast.success(response.data.success && "Successfull Charge");
       setLoading(false);
-      setUrlCharge(data.data?.url && data.data.url);
-      setOpenIframe(data.data?.url && true);
+      setUrlCharge(response.data.data?.url && response.data.data.url);
+      setOpenIframe(response.data.data?.url && true);
       paymentType == "extend" && setOpen(false);
       getOptions();
     } catch (error) {

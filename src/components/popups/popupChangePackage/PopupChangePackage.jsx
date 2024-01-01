@@ -6,6 +6,8 @@ import apiAxios from "../../../utils/apiAxios";
 import { toast } from "react-toastify";
 import { getUser } from "../../../redux/actions/user";
 import { useDispatch, useSelector } from "react-redux";
+import { PiPackage } from "react-icons/pi";
+import Loader from "../../loader/Loader";
 
 const PopupChangePackage = ({ open, setOpen }) => {
   const [selectPackage, setSelectPackage] = useState(0);
@@ -31,15 +33,18 @@ const PopupChangePackage = ({ open, setOpen }) => {
   }, []);
 
   // change package
-  const handleChangePackage = async () => {
+  const handleChangePackage = async (profileId) => {
+    setLoading(true);
     try {
       const { data } = await apiAxios.put("mob/profile", {
-        profile_id: selectPackage,
+        profile_id: profileId,
       });
       toast.success(data.success && data.message);
       getUser(dispatch);
+      setLoading(false);
     } catch (error) {
       toast.error(error.response.data.message);
+      setLoading(false);
     }
   };
 
@@ -62,17 +67,31 @@ const PopupChangePackage = ({ open, setOpen }) => {
           <span className="text-gray-500">{userInfo.package}</span>
         </div>
 
-        {packages.length > 0 ? (
-          <div className="packages_boxs my-8 grid grid-cols-2 gap-4">
+        {packages && packages.length > 0 ? (
+          <div className="packages_boxs my-8 grid gap-4">
             {!loading ? (
               packages.map((item, index) => (
-                <div
-                  className={`box ${selectPackage === item.id ? "active" : ""}`}
-                  key={index}
-                  onClick={() => setSelectPackage(item.id)}
-                >
-                  <h4 className="package_name text-center">{item.name}</h4>
-                  <span className="price">{item.price}EGP</span>
+                <div className={`box`} key={index}>
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="text">
+                      <h4 className="package_name text-center mb-2">
+                        {item.name}
+                      </h4>
+                      <span className="price">
+                        {t("price")}: {item.price}EGP
+                      </span>
+                    </div>
+                    <div className="icon">
+                      <PiPackage size={30} />
+                    </div>
+                  </div>
+
+                  <button
+                    className="btn_fill w-full rounded-full text-[17px] py-1 mt-3"
+                    onClick={() => handleChangePackage(item.id)}
+                  >
+                    {t("Change Package")}
+                  </button>
                 </div>
               ))
             ) : (
@@ -87,16 +106,7 @@ const PopupChangePackage = ({ open, setOpen }) => {
           </div>
         )}
 
-        <div>
-          {packages.length > 0 && (
-            <button
-              className="btn_fill w-full rounded-full text-[17px] py-3"
-              onClick={handleChangePackage}
-            >
-              {t("Change Package")}
-            </button>
-          )}
-        </div>
+        {loading && <Loader fixed={true} />}
       </div>
     </div>
   );
