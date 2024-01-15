@@ -39,9 +39,9 @@ const Home = () => {
   const [openPopupNotification, setOpenPopupNotification] = useState(false);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   getUser(dispatch);
-  // }, []);
+  useEffect(() => {
+    getUser(dispatch);
+  }, []);
 
   return (
     <Fragment>

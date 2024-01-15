@@ -18,6 +18,8 @@ import { useTranslation } from "react-i18next";
 import apiAxios from "../../utils/apiAxios.js";
 import ReactDatePicker from "react-datepicker";
 import Loader from "../../components/loader/Loader.jsx";
+import { getUser } from "../../redux/actions/user.js";
+import { useDispatch } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -92,6 +94,7 @@ const Consumption = () => {
   const [typeComsumption, setTypeComsumption] = useState("Monthly consumption");
   const [years, setYears] = useState([]);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const handleCloseCalender = (e, type) => {
     if (e.target === e.currentTarget && type == "daily") {
@@ -100,6 +103,8 @@ const Consumption = () => {
   };
 
   useEffect(() => {
+    getUser(dispatch);
+
     const date = new Date();
 
     // this for loop for set years in select options

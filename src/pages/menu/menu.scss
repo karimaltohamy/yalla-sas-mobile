@@ -10,13 +10,35 @@
       padding: 30px 20px;
       text-align: center;
       border-radius: 6px;
+      overflow: hidden;
       background-color: var(--bg-section);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
 
-      svg {
+      &.matches {
+        background-image: url(../../images/bg-matches.jpg);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #238a5db3;
+        }
+
+        span,
+        svg {
+          position: relative;
+          z-index: 10;
+        }
       }
     }
   }

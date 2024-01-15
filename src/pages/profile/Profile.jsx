@@ -9,7 +9,8 @@ import { setLogout } from "../../redux/reducers/userReducer";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../components/loader/Loader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getUser } from "../../redux/actions/user";
 
 const Profile = () => {
   const { userInfo } = useSelector((state) => state.user);
@@ -17,6 +18,10 @@ const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    getUser(dispatch);
+  }, []);
 
   const handleLogout = async () => {
     setLoading(true);

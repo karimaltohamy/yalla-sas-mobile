@@ -18,10 +18,18 @@ const ConsumptionCalculation = React.lazy(() =>
 import AOS from "aos";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom/dist";
-import { getUser } from "./redux/actions/user";
 import Message from "./pages/message/Message";
 import { useTranslation } from "react-i18next";
 import WhatsAppSupport from "./pages/whatsAppSupport/WhatsAppSupport";
+import Matches from "./pages/matches/Matches";
+import apiAxios from "./utils/apiAxios";
+import {
+  setUserError,
+  setUserStart,
+  setUserSuccess,
+} from "./redux/reducers/userReducer";
+import "./utils/apiAxios";
+import { getUser } from "./redux/actions/user";
 
 const ProidectedRoute = ({ children }) => {
   const { userInfo } = useSelector((state) => state.user);
@@ -37,12 +45,44 @@ function App() {
   const [mobile, setMobile] = useState(false);
   const location = useLocation();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  const controller = new AbortController();
+
+  const refrechData = async (makeLoading = true) => {
+    makeLoading && dispatch(setUserStart());
+    try {
+      const { data } = await apiAxios.get("mob/refresh");
+      apiAxios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${data.access_token}`;
+      dispatch(setUserSuccess(data.data));
+      localStorage.setItem("access_token", data.access_token);
+      return data;
+    } catch (error) {
+      dispatch(setUserError());
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    const intervalId =
+      !location.pathname.includes("login") &&
+      setInterval(() => {
+        refrechData(false);
+      }, 10 * 60 * 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   // handle language and mode theme
   useEffect(() => {
     AOS.init();
-
     localStorage.setItem("lang", "ar");
+
+    if (!location.pathname.includes("login")) {
+      refrechData();
+    }
 
     if (window.innerWidth <= 900) {
       setMobile(true);
@@ -63,11 +103,16 @@ function App() {
       document.body.classList.add("en");
       document.body.classList.remove("ar");
     }
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   return mobile ? (
     <Fragment>
-      {!location.pathname.includes("login") && <Navigation />}
+      {!location.pathname.includes("login") &&
+        !location.pathname.includes("matches") && <Navigation />}
       <Routes>
         <Route
           path="/"
@@ -158,6 +203,14 @@ function App() {
           element={
             <ProidectedRoute>
               <WhatsAppSupport />
+            </ProidectedRoute>
+          }
+        />
+        <Route
+          path="/matches"
+          element={
+            <ProidectedRoute>
+              <Matches />
             </ProidectedRoute>
           }
         />

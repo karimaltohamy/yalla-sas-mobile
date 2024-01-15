@@ -51,23 +51,10 @@ const PopupCharge = ({ setOpen, open }) => {
     setLoading(true);
     try {
       let response = null;
-      if (userInfo.system_type == "sas") {
-        response = await apiAxios.post("mob/charge", {
-          payment_type: paymentType,
-          amount: paymentType == "fullCharge" ? userInfo.package_price : amount,
-        });
-      } else {
-        response = await apiAxios.post("mob/charge", {
-          payment_type: paymentType,
-          amount: paymentType == "fullCharge" ? userInfo.package_price : amount,
-          package: userInfo.package,
-          email: userInfo.email,
-          phone: userInfo.phone,
-          username: userInfo.username,
-          name: userInfo.name,
-          sas_id: userInfo.sas_id,
-        });
-      }
+      response = await apiAxios.post("mob/charge", {
+        payment_type: paymentType,
+        amount: paymentType == "fullCharge" ? userInfo.package_price : amount,
+      });
 
       toast.success(response.data.success && "Successfull Charge");
       setLoading(false);
@@ -173,6 +160,19 @@ const PopupCharge = ({ setOpen, open }) => {
                     checked={paymentType === "extend"}
                   />
                   <label htmlFor="extend">{t("Extending package")}</label>
+                </div>
+              )}
+              {options?.user_balance_renew && (
+                <div className="input_radio">
+                  <input
+                    type="radio"
+                    id="userbalance"
+                    name="redio-charge"
+                    onChange={handleRadioChange}
+                    value={"userbalance"}
+                    checked={paymentType === "userbalance"}
+                  />
+                  <label htmlFor="extend">{t("Renewal from my balance")}</label>
                 </div>
               )}
             </div>

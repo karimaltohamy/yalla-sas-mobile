@@ -8,9 +8,11 @@ import { getUser } from "../../../redux/actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import { PiPackage } from "react-icons/pi";
 import Loader from "../../loader/Loader";
+import { IoClose } from "react-icons/io5";
 
 const PopupChangePackage = ({ open, setOpen }) => {
   const [selectPackage, setSelectPackage] = useState(0);
+  const [openPopupWarning, setOpenPopupWarning] = useState(false);
   const lang = localStorage.getItem("lang");
   const { t } = useTranslation();
   const { userInfo } = useSelector((state) => state.user);
@@ -20,6 +22,8 @@ const PopupChangePackage = ({ open, setOpen }) => {
 
   // get all packages
   useEffect(() => {
+    getUser(dispatch);
+
     (async () => {
       setLoading(true);
       try {
@@ -33,18 +37,21 @@ const PopupChangePackage = ({ open, setOpen }) => {
   }, []);
 
   // change package
-  const handleChangePackage = async (profileId) => {
+  const handleChangePackage = async () => {
     setLoading(true);
     try {
       const { data } = await apiAxios.put("mob/profile", {
-        profile_id: profileId,
+        profile_id: selectPackage,
       });
       toast.success(data.success && data.message);
+      // refrach user data
       getUser(dispatch);
       setLoading(false);
+      setOpenPopupWarning(false);
     } catch (error) {
       toast.error(error.response.data.message);
       setLoading(false);
+      setOpenPopupWarning(false);
     }
   };
 
@@ -88,7 +95,10 @@ const PopupChangePackage = ({ open, setOpen }) => {
 
                   <button
                     className="btn_fill w-full rounded-full text-[17px] py-1 mt-3"
-                    onClick={() => handleChangePackage(item.id)}
+                    onClick={() => {
+                      setSelectPackage(item.id);
+                      setOpenPopupWarning(true);
+                    }}
                   >
                     {t("Change Package")}
                   </button>
@@ -103,6 +113,46 @@ const PopupChangePackage = ({ open, setOpen }) => {
             {t(
               "Sorry, there are no packages available now Please contact the company"
             )}
+          </div>
+        )}
+
+        {openPopupWarning && (
+          <div className="warning_popup">
+            <div className="content">
+              <div
+                className="close_popup"
+                onClick={() => setOpenPopupWarning(false)}
+              >
+                <IoClose size={20} />
+              </div>
+              {lang == "en" ? (
+                <p className="desc">
+                  Please note that your current package has not expired yet, and
+                  you have {userInfo.total_rxtx} remaining and{" "}
+                  {userInfo.remaining_days} days until your package expires. If
+                  you click on change now, you must pay the cost of the new
+                  package for it to work for you. If you pay, the internet will
+                  be stopped. If you have any other inquiries, please contact
+                  the company. 🤍
+                </p>
+              ) : (
+                <p className="desc">
+                  يرجي العلم ان باقتك الحالية لم تنتهي بعد ومتبقي لديك{" "}
+                  {userInfo.total_rxtx} و {userInfo.remaining_days} يوم علي
+                  انتهاء باقتك وفي حالة الضغط علي التغير الان فأنة يجب عليك دفع
+                  تكلفة الباقه الجديده لكي تعمل معك وفي حالة عدم الدفع سوف يتم
+                  ايقاف الانترنت واذا كان لديك اي استفسارات اخري برجاء التواصل
+                  مع الشركه الخاصه بك 🤍
+                </p>
+              )}
+
+              <button
+                className="btn_fill w-full rounded-full text-[17px] py-1 mt-3"
+                onClick={handleChangePackage}
+              >
+                {t("Change Package Now")}
+              </button>
+            </div>
           </div>
         )}
 

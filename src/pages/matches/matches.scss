@@ -1,0 +1,23 @@
+@import "../../sass/mixins.scss";
+@import "../../sass/variables.scss";
+
+.matches_page {
+  .top {
+    @include topPopup;
+    background-color: transparent !important;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 100%;
+    padding: 0;
+  }
+
+  .content {
+    height: 100dvh;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

@@ -1,7 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { setLogout } from "../redux/reducers/userReducer";
-import { useDispatch } from "react-redux";
 
 const apiAxios = axios.create({
   baseURL: "https://app.yalla-cash.com/api/",
@@ -39,7 +36,8 @@ apiAxios.interceptors.response.use(
     if (error.response.status === 401) {
       localStorage.setItem("user", null);
       localStorage.setItem("access_token", null);
-      window.location.reload();
+      // window.location.reload();
+      window.location.href = "/login";
       return Promise.reject(error);
     }
 
