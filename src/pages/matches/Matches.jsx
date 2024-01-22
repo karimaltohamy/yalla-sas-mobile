@@ -20,13 +20,17 @@ const Matches = () => {
           lang == "en" ? "en" : "ar"
         }`}
       >
-        <span className="back" onClick={() => navigate(-1)}>
+        <span
+          className="back"
+          onClick={() => navigate(-1)}
+          style={{ mixBlendMode: "difference" }}
+        >
           <IoClose size={25} />
         </span>
       </div>
       <div className="content">
         <iframe
-          src={userInfo.whatsapp_support_number}
+          src={userInfo.matches_link}
           frameBorder="0"
           allowFullScreen
         ></iframe>

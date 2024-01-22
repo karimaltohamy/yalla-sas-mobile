@@ -37,7 +37,7 @@ apiAxios.interceptors.response.use(
       localStorage.setItem("user", null);
       localStorage.setItem("access_token", null);
       // window.location.reload();
-      window.location.href = "/login";
+      // window.location.href = "/login";
       return Promise.reject(error);
     }
 

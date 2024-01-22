@@ -79,7 +79,7 @@ const Menu = () => {
                 <span>{t("Contact customer service")}</span>
               </Link>
             )}
-            {userInfo.whatsapp_support_number && (
+            {userInfo.matches_link && (
               <Link
                 className="link matches"
                 to={"/matches"}

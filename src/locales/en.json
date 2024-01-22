@@ -114,5 +114,11 @@
   "Matches": "Matches",
   "message warning": "Please note that your current package has not expired yet, and you have 500 MB remaining and 15 days until your package expires. If you click on change now, you must pay the cost of the new package for it to work for you. If you pay, the internet will be stopped. If you have any other inquiries, please contact the company. 🤍",
   "Change Package Now": "Change Package Now",
-  "Renewal from my balance": "Renewal from my balance"
+  "Renewal from my balance": "Renewal from my balance",
+  "Special Subscriptions": "Special Subscriptions",
+  "Subscription": "Subscription",
+  "Expiration unit": "Expiration unit",
+  "Expiration Date": "Expiration Date",
+  "Remaining days": "Remaining days",
+  "Renewal": "Renewal"
 }

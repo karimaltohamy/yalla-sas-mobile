@@ -30,6 +30,7 @@ import {
 } from "./redux/reducers/userReducer";
 import "./utils/apiAxios";
 import { getUser } from "./redux/actions/user";
+import SpecialSubscriptions from "./pages/specialSubscriptions/specialSubscriptions";
 
 const ProidectedRoute = ({ children }) => {
   const { userInfo } = useSelector((state) => state.user);
@@ -90,12 +91,14 @@ function App() {
       setMobile(false);
     }
 
+    // theme mode
     if (localStorage.getItem("mode") == "light") {
       document.body.classList.add("light");
     } else {
       document.body.classList.remove("light");
     }
 
+    // default lang
     if (localStorage.getItem("lang") == "ar") {
       document.body.classList.add("ar");
       document.body.classList.remove("en");
@@ -112,7 +115,8 @@ function App() {
   return mobile ? (
     <Fragment>
       {!location.pathname.includes("login") &&
-        !location.pathname.includes("matches") && <Navigation />}
+        !location.pathname.includes("matches") &&
+        !location.pathname.includes("special-subscriptions") && <Navigation />}
       <Routes>
         <Route
           path="/"
@@ -211,6 +215,14 @@ function App() {
           element={
             <ProidectedRoute>
               <Matches />
+            </ProidectedRoute>
+          }
+        />
+        <Route
+          path="/special-subscriptions"
+          element={
+            <ProidectedRoute>
+              <SpecialSubscriptions />
             </ProidectedRoute>
           }
         />

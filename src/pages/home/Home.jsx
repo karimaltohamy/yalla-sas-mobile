@@ -27,21 +27,21 @@ const PopupNotification = React.lazy(() =>
 import styles from "../../styles/style";
 import "./home.scss";
 import LoaderBox from "../../components/loaderBox/LoaderBox";
-import { useDispatch } from "react-redux";
-import { getUser } from "../../redux/actions/user";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { t } from "i18next";
+const BoxSpecialSubscriptions = React.lazy(() =>
+  import("../../components/boxSpecialSubscriptions/BoxSpecialSubscriptions")
+);
 
 const Home = () => {
+  const { userInfo } = useSelector((state) => state.user);
   const [openPopupCharge, setOpenPopupCharge] = useState(false);
   const [openChangePackage, setOpenChangePackage] = useState(false);
   const [openExtending, setOpenExtending] = useState(false);
   const [openActivatePackage, setOpenActivatePackage] = useState(false);
   const [openPopupSettings, setOpenPopupSettings] = useState(false);
   const [openPopupNotification, setOpenPopupNotification] = useState(false);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    getUser(dispatch);
-  }, []);
 
   return (
     <Fragment>
@@ -60,6 +60,20 @@ const Home = () => {
               }
             >
               <BoxInfoUser setOpen={setOpenPopupCharge} />
+            </Suspense>
+          </div>
+          <div className="pt-[25px]">
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center my-4 p-4 rounded bg_loader">
+                  <LoaderBox />
+                </div>
+              }
+            >
+              {userInfo.addons &&
+                userInfo.addons.map((item, index) => (
+                  <BoxSpecialSubscriptions item={item} key={index} />
+                ))}
             </Suspense>
           </div>
           <div className="pt-[25px]">

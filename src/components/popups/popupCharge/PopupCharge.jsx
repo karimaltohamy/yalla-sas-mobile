@@ -65,6 +65,7 @@ const PopupCharge = ({ setOpen, open }) => {
     } catch (error) {
       toast.error(error.response.data.message);
       setError(true);
+      setLoading(false);
     }
   };
 
@@ -172,15 +173,17 @@ const PopupCharge = ({ setOpen, open }) => {
                     value={"userbalance"}
                     checked={paymentType === "userbalance"}
                   />
-                  <label htmlFor="extend">{t("Renewal from my balance")}</label>
+                  <label htmlFor="userbalance">
+                    {t("Renewal from my balance")}
+                  </label>
                 </div>
               )}
             </div>
-            {paymentType !== "extend" && (
+            {paymentType !== "extend" && paymentType !== "userbalance" && (
               <div className="input_item">
                 <FaRegCreditCard size={25} />
                 <input
-                  type="text"
+                  type="number"
                   placeholder={t("amount")}
                   value={
                     paymentType == "fullCharge"

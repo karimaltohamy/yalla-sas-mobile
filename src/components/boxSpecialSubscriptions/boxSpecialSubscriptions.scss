@@ -1,0 +1,17 @@
+@import "../../sass/mixins.scss";
+
+.box_special_subscriptions {
+  background-color: var(--bg-main);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  padding: 12px;
+
+  .content {
+    background-color: var(--bg-main);
+    z-index: 10000;
+
+    .top {
+      @include topPopup;
+    }
+  }
+}

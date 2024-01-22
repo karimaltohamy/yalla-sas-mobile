@@ -103,8 +103,6 @@ const Consumption = () => {
   };
 
   useEffect(() => {
-    getUser(dispatch);
-
     const date = new Date();
 
     // this for loop for set years in select options

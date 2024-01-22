@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoReloadOutline } from "react-icons/io5";
 import { getUser } from "../../redux/actions/user";
 import Loader from "../loader/Loader";
+import { GiHotSpices } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 const BoxInfoUser = ({ setOpen }) => {
   const { t } = useTranslation();
@@ -55,22 +57,40 @@ const BoxInfoUser = ({ setOpen }) => {
                 </span>
               </div>
             </div>
-            <div className="bottom_info flex items-center justify-between p-4">
-              <div className="text">
-                <h5 className="text-[18px] font-semibold">
-                  {t("Account balance")}
-                </h5>
-                <h3 className=" font-bold text-[26px]">
-                  {userInfo.balance} {t("EGP")}
-                </h3>
+            <div className="bottom_info">
+              <div className="flex items-center justify-between p-4">
+                <div className="text">
+                  <h5 className="text-[18px] font-semibold">
+                    {t("Account balance")}
+                  </h5>
+                  <h3 className=" font-bold text-[26px]">
+                    {userInfo.balance} {t("EGP")}
+                  </h3>
+                </div>
+                {userInfo.allow_charge && (
+                  <button
+                    className="flex items-center gap-1 btn_fill"
+                    onClick={() => setOpen(true)}
+                  >
+                    <FaPlus />
+                    <span>{t("Charge")}</span>
+                  </button>
+                )}
               </div>
-              <button
-                className="flex items-center gap-1 btn_fill"
-                onClick={() => setOpen(true)}
-              >
-                <FaPlus />
-                <span>{t("Charge")}</span>
-              </button>
+              {userInfo.special_subscription &&
+                userInfo.system_type == "sas" && (
+                  <div className="special_subscriptions p-2">
+                    <Link
+                      to={"/special-subscriptions"}
+                      className="flex items-center justify-center gap-1 btn_outline"
+                    >
+                      <GiHotSpices size={"25"} />
+                      <span className="text-[18px]">
+                        {t("Special Subscriptions")}
+                      </span>
+                    </Link>
+                  </div>
+                )}
             </div>
           </div>
         </>
