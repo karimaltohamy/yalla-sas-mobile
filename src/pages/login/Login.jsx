@@ -1,6 +1,5 @@
 import "./login.scss";
 import { FaRegUser } from "react-icons/fa6";
-import { RiLockPasswordLine } from "react-icons/ri";
 import { GrLicense } from "react-icons/gr";
 import logo from "../../images/logo.png";
 import { Fragment, useState } from "react";
@@ -14,7 +13,7 @@ import {
 } from "../../redux/reducers/userReducer";
 import apiAxios from "../../utils/apiAxios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom/dist";
+import { Link, useNavigate } from "react-router-dom/dist";
 import Loader from "../../components/loader/Loader";
 import { MdOutlinePhoneEnabled } from "react-icons/md";
 
@@ -152,6 +151,12 @@ const Login = () => {
                 {t("Login")}
               </button>
             )}
+            <Link
+              to={"/cards-login"}
+              className="btn_card_subscriptions block mt-3 btn_fill text-center"
+            >
+              {t("Card subscriptions")}
+            </Link>
           </form>
         </div>
       </div>

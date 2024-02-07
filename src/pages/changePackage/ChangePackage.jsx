@@ -1,16 +1,17 @@
 import { IoMdArrowBack, IoMdClose } from "react-icons/io";
-import "./popupChangePackage.scss";
+import "./changePackage.scss";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import apiAxios from "../../../utils/apiAxios";
+import apiAxios from "../../utils/apiAxios";
 import { toast } from "react-toastify";
-import { getUser } from "../../../redux/actions/user";
+import { getUser } from "../../redux/actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import { PiPackage } from "react-icons/pi";
-import Loader from "../../loader/Loader";
+import Loader from "../../components/loader/Loader";
 import { IoClose } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
-const PopupChangePackage = ({ open, setOpen }) => {
+const ChangePackage = ({ open, setOpen }) => {
   const [selectPackage, setSelectPackage] = useState(0);
   const [openPopupWarning, setOpenPopupWarning] = useState(false);
   const lang = localStorage.getItem("lang");
@@ -20,6 +21,7 @@ const PopupChangePackage = ({ open, setOpen }) => {
   const [loading, setLoading] = useState(false);
   const [openIframe, setOpenIframe] = useState(false);
   const [urlCharge, setUrlCharge] = useState(null);
+  const navigate = useNavigate();
 
   // get all packages
   useEffect(() => {
@@ -56,14 +58,14 @@ const PopupChangePackage = ({ open, setOpen }) => {
   };
 
   return (
-    <div className={`popup_change_package ${open ? "active" : ""}`}>
+    <div className={`change_package`}>
       <div
         className={`top flex items-center justify-between ${
           lang == "en" ? "en" : "ar"
         }`}
       >
         {!openIframe && (
-          <div className={`back `} onClick={() => setOpen(false)}>
+          <div className={`back `} onClick={() => navigate(-1)}>
             <IoMdArrowBack size={25} />
           </div>
         )}
@@ -182,4 +184,4 @@ const PopupChangePackage = ({ open, setOpen }) => {
   );
 };
 
-export default PopupChangePackage;
+export default ChangePackage;

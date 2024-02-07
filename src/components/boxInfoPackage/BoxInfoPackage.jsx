@@ -1,24 +1,32 @@
 import { IoIosWifi } from "react-icons/io";
 import { IoSettings } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./boxInfoPackage.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formateDate } from "../../utils/formatDate";
+import { getRefrechData } from "../../redux/actions/refrechData";
+import { Link } from "react-router-dom";
 
 const BoxInfoPackage = ({ setOpen }) => {
   const { userInfo } = useSelector((state) => state.user);
-  const [percent, setPercent] = useState(userInfo.package_usage_percent);
+  const { refrechData } = useSelector((state) => state.refrechData);
+  const [percent, setPercent] = useState(userInfo?.package_usage_percent);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const circleStyle = {
     "--value":
-      userInfo.package_usage_percent == "unlimited"
+      userInfo?.package_usage_percent == "unlimited"
         ? 100
-        : userInfo.package_usage_percent == "suspended"
+        : userInfo?.package_usage_percent == "suspended"
         ? 0
         : Math.floor(percent),
   };
+
+  useEffect(() => {
+    getRefrechData(dispatch);
+  }, []);
 
   return (
     <>
@@ -58,7 +66,7 @@ const BoxInfoPackage = ({ setOpen }) => {
                 {t("Active")}
               </span>
             ) : (
-              <span className="status text-green-500 font-bold text-red-500">
+              <span className="status font-bold text-red-500">
                 {t("Not Active")}
               </span>
             )}
@@ -73,30 +81,61 @@ const BoxInfoPackage = ({ setOpen }) => {
             style={circleStyle}
           ></div>
 
-          <div className="bottom_info flex items-center justify-between">
-            {userInfo.package_usage_percent == "unlimited" ? (
-              <p className=" font-semibold text-[14px]">
-                {t("You have")} {userInfo.package_usage_percent} {t("Package")}
-              </p>
-            ) : userInfo.package_usage_percent == "suspended" ? (
-              <p className=" font-semibold text-[14px]">
-                {t("You have")} {userInfo.package_usage_percent} {t("Package")}
-              </p>
-            ) : (
-              <p className=" font-semibold text-[14px]">
-                {t("You have")} {userInfo.total_rxtx} {t("out of")}{" "}
-                {userInfo.traffic_limit}
-              </p>
-            )}
+          {refrechData ? (
+            <div className="bottom_info flex items-center justify-between">
+              {refrechData.package_usage_percent == "unlimited" ? (
+                <p className=" font-semibold text-[14px]">
+                  {t("You have")} {refrechData.package_usage_percent}{" "}
+                  {t("Package")}
+                </p>
+              ) : refrechData.package_usage_percent == "suspended" ? (
+                <p className=" font-semibold text-[14px]">
+                  {t("You have")} {refrechData.package_usage_percent}{" "}
+                  {t("Package")}
+                </p>
+              ) : (
+                <p className=" font-semibold text-[14px]">
+                  {t("You have")} {refrechData.total_rxtx} {t("out of")}{" "}
+                  {refrechData.traffic_limit}
+                </p>
+              )}
 
-            <button
-              className="flex items-center gap-1 btn_fill"
-              onClick={() => setOpen(true)}
-            >
-              <IoSettings />
-              <span>{t("Change Package")}</span>
-            </button>
-          </div>
+              <Link
+                className="flex items-center gap-1 btn_fill"
+                to={"/change-package"}
+              >
+                <IoSettings />
+                <span>{t("Change Package")}</span>
+              </Link>
+            </div>
+          ) : (
+            <div className="bottom_info flex items-center justify-between">
+              {userInfo.package_usage_percent == "unlimited" ? (
+                <p className=" font-semibold text-[14px]">
+                  {t("You have")} {userInfo.package_usage_percent}{" "}
+                  {t("Package")}
+                </p>
+              ) : userInfo.package_usage_percent == "suspended" ? (
+                <p className=" font-semibold text-[14px]">
+                  {t("You have")} {userInfo.package_usage_percent}{" "}
+                  {t("Package")}
+                </p>
+              ) : (
+                <p className=" font-semibold text-[14px]">
+                  {t("You have")} {userInfo.total_rxtx} {t("out of")}{" "}
+                  {userInfo.traffic_limit}
+                </p>
+              )}
+
+              <Link
+                className="flex items-center gap-1 btn_fill"
+                to={"/change-package"}
+              >
+                <IoSettings />
+                <span>{t("Change Package")}</span>
+              </Link>
+            </div>
+          )}
         </div>
       ) : (
         <div>Loading...</div>

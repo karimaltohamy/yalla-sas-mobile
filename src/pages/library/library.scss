@@ -1,7 +1,7 @@
 @import "../../sass/mixins.scss";
 @import "../../sass/variables.scss";
 
-.whatsapp_support {
+.library {
   .top {
     @include topPopup;
   }
@@ -9,9 +9,15 @@
   .container {
     height: calc(100vh - 55px);
     overflow: hidden;
+    padding: 0;
 
     .content {
       height: 100vh;
+
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }

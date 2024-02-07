@@ -68,13 +68,13 @@ const BoxInfoUser = ({ setOpen }) => {
                   </h3>
                 </div>
                 {userInfo.allow_charge && (
-                  <button
+                  <Link
                     className="flex items-center gap-1 btn_fill"
-                    onClick={() => setOpen(true)}
+                    to={"/charge-package"}
                   >
                     <FaPlus />
                     <span>{t("Charge")}</span>
-                  </button>
+                  </Link>
                 )}
               </div>
               {userInfo.special_subscription &&

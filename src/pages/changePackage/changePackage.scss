@@ -1,9 +1,7 @@
-@import "../../../sass/mixins.scss";
-@import "../../../sass/variables.scss";
+@import "../../sass/mixins.scss";
+@import "../../sass/variables.scss";
 
-.popup_change_package {
-  @include popupStyle;
-
+.change_package {
   .top {
     @include topPopup;
   }

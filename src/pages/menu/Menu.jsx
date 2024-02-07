@@ -12,8 +12,8 @@ import apiAxios from "../../utils/apiAxios";
 import { setLogout } from "../../redux/reducers/userReducer";
 import Loader from "../../components/loader/Loader";
 import { FiLogIn } from "react-icons/fi";
-import { IoFootballOutline } from "react-icons/io5";
-import { getUser } from "../../redux/actions/user";
+import { IoFootballOutline, IoLibraryOutline } from "react-icons/io5";
+import { getRefrechData } from "../../redux/actions/refrechData";
 
 const Menu = () => {
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ const Menu = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getUser(dispatch);
+    getRefrechData(dispatch);
   }, []);
 
   const handleLogout = async () => {
@@ -67,18 +67,6 @@ const Menu = () => {
               <PiMathOperationsFill size={45} />
               <span>{t("Consumption calculation")}</span>
             </Link>
-            {userInfo.whatsapp_support_number && (
-              <Link
-                className="link"
-                to={"/whatsappSupport"}
-                data-aos="zoom-in"
-                data-aos-duration="1000"
-                data-aos-delay="200"
-              >
-                <RiCustomerServiceLine size={45} />
-                <span>{t("Contact customer service")}</span>
-              </Link>
-            )}
             {userInfo.matches_link && (
               <Link
                 className="link matches"
@@ -89,6 +77,18 @@ const Menu = () => {
               >
                 <IoFootballOutline size={45} />
                 <span>{t("Matches")}</span>
+              </Link>
+            )}
+            {userInfo.library_link && (
+              <Link
+                className="link library"
+                to={"/library"}
+                data-aos="zoom-in"
+                data-aos-duration="1000"
+                data-aos-delay="200"
+              >
+                <IoLibraryOutline size={45} />
+                <span>{t("Books Library")}</span>
               </Link>
             )}
           </div>

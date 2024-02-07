@@ -16,7 +16,10 @@ const BoxSpecialSubscriptions = ({ item }) => {
   const lang = localStorage.getItem("lang");
 
   return (
-    <div className="box_special_subscriptions relative overflow-hidden">
+    <div
+      className="box_special_subscriptions relative overflow-hidden"
+      style={{ direction: lang == "ar" ? "rtl" : "ltr" }}
+    >
       <div className="relative z-30">
         <div className="text">
           <div className="flex items-center justify-between mb-3">
@@ -57,7 +60,7 @@ const BoxSpecialSubscriptions = ({ item }) => {
           </div>
         </div>
       </div>
-      <div class="primary2-shadow z-10"></div>
+      <div className="primary2-shadow z-10"></div>
       {openIframe && (
         <div className="content fixed top-0 left-0 w-full h-[100vh] ">
           <div

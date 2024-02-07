@@ -6,50 +6,45 @@ const BoxInfoUser = React.lazy(() =>
 const BoxInfoPackage = React.lazy(() =>
   import("../../components/boxInfoPackage/BoxInfoPackage")
 );
-const PopupCharge = React.lazy(() =>
-  import("../../components/popups/popupCharge/PopupCharge")
-);
-const PopupChangePackage = React.lazy(() =>
-  import("../../components/popups/popupChangePackage/PopupChangePackage")
-);
 const PopupExtendingPackage = React.lazy(() =>
   import("../../components/popups/popupExtendingPackage/PopupExtendingPackage")
 );
-const PopupActivatePackage = React.lazy(() =>
-  import("../../components/popups/popupActivatePackage/PopupActivatePackage")
-);
+
 const PopupSettings = React.lazy(() =>
   import("../../components/popups/popupSettings/PopupSettings")
-);
-const PopupNotification = React.lazy(() =>
-  import("../../components/popups/popupNotification/PopupNotification")
 );
 import styles from "../../styles/style";
 import "./home.scss";
 import LoaderBox from "../../components/loaderBox/LoaderBox";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { t } from "i18next";
+import { useDispatch, useSelector } from "react-redux";
 const BoxSpecialSubscriptions = React.lazy(() =>
   import("../../components/boxSpecialSubscriptions/BoxSpecialSubscriptions")
 );
+import Slider from "react-slick";
+import { getUser } from "../../redux/actions/user";
 
 const Home = () => {
+  const lang = localStorage.getItem("lang");
   const { userInfo } = useSelector((state) => state.user);
-  const [openPopupCharge, setOpenPopupCharge] = useState(false);
-  const [openChangePackage, setOpenChangePackage] = useState(false);
   const [openExtending, setOpenExtending] = useState(false);
-  const [openActivatePackage, setOpenActivatePackage] = useState(false);
   const [openPopupSettings, setOpenPopupSettings] = useState(false);
-  const [openPopupNotification, setOpenPopupNotification] = useState(false);
+  const dispatch = useDispatch();
+
+  // settings slider
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    rtl: lang == "ar" ? true : false,
+  };
 
   return (
     <Fragment>
       <div className="home">
-        <HeaderHome
-          setOpenPopupSettings={setOpenPopupSettings}
-          setOpenPopupNotification={setOpenPopupNotification}
-        />
+        <HeaderHome setOpenPopupSettings={setOpenPopupSettings} />
         <div className={styles.custom_container}>
           <div className="pt-[10px]">
             <Suspense
@@ -59,7 +54,7 @@ const Home = () => {
                 </div>
               }
             >
-              <BoxInfoUser setOpen={setOpenPopupCharge} />
+              <BoxInfoUser />
             </Suspense>
           </div>
           <div className="pt-[25px]">
@@ -70,10 +65,12 @@ const Home = () => {
                 </div>
               }
             >
-              {userInfo.addons &&
-                userInfo.addons.map((item, index) => (
-                  <BoxSpecialSubscriptions item={item} key={index} />
-                ))}
+              <Slider {...settings}>
+                {userInfo?.addons &&
+                  userInfo?.addons.map((item, index) => (
+                    <BoxSpecialSubscriptions item={item} key={index} />
+                  ))}
+              </Slider>
             </Suspense>
           </div>
           <div className="pt-[25px]">
@@ -84,7 +81,7 @@ const Home = () => {
                 </div>
               }
             >
-              <BoxInfoPackage setOpen={setOpenChangePackage} />
+              <BoxInfoPackage />
             </Suspense>
           </div>
         </div>
@@ -93,21 +90,6 @@ const Home = () => {
       </div>
 
       {/* popups */}
-      <Suspense>
-        <PopupCharge open={openPopupCharge} setOpen={setOpenPopupCharge} />
-      </Suspense>
-      <Suspense>
-        <PopupChangePackage
-          setOpen={setOpenChangePackage}
-          open={openChangePackage}
-        />
-      </Suspense>
-      <Suspense>
-        <PopupActivatePackage
-          setOpen={setOpenActivatePackage}
-          open={openActivatePackage}
-        />
-      </Suspense>
       <Suspense>
         <PopupExtendingPackage
           setOpen={setOpenExtending}
@@ -118,12 +100,6 @@ const Home = () => {
         <PopupSettings
           setOpen={setOpenPopupSettings}
           open={openPopupSettings}
-        />
-      </Suspense>
-      <Suspense>
-        <PopupNotification
-          setOpen={setOpenPopupNotification}
-          open={openPopupNotification}
         />
       </Suspense>
     </Fragment>

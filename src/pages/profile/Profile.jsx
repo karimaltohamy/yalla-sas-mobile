@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../components/loader/Loader";
 import { useEffect, useState } from "react";
-import { getUser } from "../../redux/actions/user";
+import { getRefrechData } from "../../redux/actions/refrechData";
 
 const Profile = () => {
   const { userInfo } = useSelector((state) => state.user);
@@ -20,7 +20,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getUser(dispatch);
+    getRefrechData(dispatch);
   }, []);
 
   const handleLogout = async () => {

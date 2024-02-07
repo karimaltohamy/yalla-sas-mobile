@@ -36,8 +36,8 @@ apiAxios.interceptors.response.use(
     if (error.response.status === 401) {
       localStorage.setItem("user", null);
       localStorage.setItem("access_token", null);
-      // window.location.reload();
-      // window.location.href = "/login";
+      localStorage.setItem("refrechData", null);
+      window.location.href = "/login";
       return Promise.reject(error);
     }
 

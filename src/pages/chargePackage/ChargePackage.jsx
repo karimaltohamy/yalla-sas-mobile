@@ -1,17 +1,18 @@
 import { IoMdArrowBack, IoMdClose } from "react-icons/io";
 import { FaRegCreditCard } from "react-icons/fa";
 import { GiElectric } from "react-icons/gi";
-import "./popupCharge.scss";
+import "./chargePackage.scss";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import apiAxios from "../../../utils/apiAxios";
+import apiAxios from "../../utils/apiAxios";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FaGift } from "react-icons/fa";
-import Loader from "../../loader/Loader";
+import Loader from "../../components/loader/Loader";
+import { useNavigate } from "react-router-dom";
 
-const PopupCharge = ({ setOpen, open }) => {
+const ChargePackage = () => {
   const { t } = useTranslation();
   const lang = localStorage.getItem("lang");
   const { userInfo } = useSelector((state) => state.user);
@@ -22,6 +23,7 @@ const PopupCharge = ({ setOpen, open }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [options, setOtipns] = useState(null);
+  const navigate = useNavigate();
 
   const getOptions = async () => {
     try {
@@ -56,11 +58,11 @@ const PopupCharge = ({ setOpen, open }) => {
         amount: paymentType == "fullCharge" ? userInfo.package_price : amount,
       });
 
-      toast.success(response.data.success && "Successfull Charge");
+      toast.success(response.data.success && t("Successful operation"));
       setLoading(false);
       setUrlCharge(response.data.data?.url && response.data.data.url);
       setOpenIframe(response.data.data?.url && true);
-      paymentType == "extend" && setOpen(false);
+      paymentType == "extend" && navigate(-1);
       getOptions();
     } catch (error) {
       toast.error(error.response.data.message);
@@ -70,14 +72,14 @@ const PopupCharge = ({ setOpen, open }) => {
   };
 
   return (
-    <div className={`PopupCharge ${open ? "active" : ""}`}>
+    <div className={`charge_package`}>
       <div
         className={`top flex items-center justify-between ${
           lang == "en" ? "en" : "ar"
         }`}
       >
         {!openIframe && (
-          <div className={`back `} onClick={() => setOpen(false)}>
+          <div className={`back `} onClick={() => navigate(-1)}>
             <IoMdArrowBack size={25} />
           </div>
         )}
@@ -232,4 +234,4 @@ const PopupCharge = ({ setOpen, open }) => {
   );
 };
 
-export default PopupCharge;
+export default ChargePackage;

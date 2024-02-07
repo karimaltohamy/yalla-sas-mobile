@@ -15,13 +15,24 @@ const MailBox = React.lazy(() => import("./pages/mailBox/MailBox"));
 const ConsumptionCalculation = React.lazy(() =>
   import("./pages/consumptionCalculation/ConsumptionCalculation")
 );
+const SpecialSubscriptions = React.lazy(() =>
+  import("./pages/specialSubscriptions/specialSubscriptions")
+);
+const ChangePackage = React.lazy(() =>
+  import("./pages/changePackage/ChangePackage")
+);
+const ChargePackage = React.lazy(() =>
+  import("./pages/chargePackage/ChargePackage")
+);
+const Matches = React.lazy(() => import("./pages/matches/Matches"));
+const CardsLogin = React.lazy(() => import("./pages/cardsLogin/CardsLogin"));
+
+import { Navigate } from "react-router-dom/dist";
 import AOS from "aos";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom/dist";
 import Message from "./pages/message/Message";
 import { useTranslation } from "react-i18next";
-import WhatsAppSupport from "./pages/whatsAppSupport/WhatsAppSupport";
-import Matches from "./pages/matches/Matches";
+
 import apiAxios from "./utils/apiAxios";
 import {
   setUserError,
@@ -29,8 +40,13 @@ import {
   setUserSuccess,
 } from "./redux/reducers/userReducer";
 import "./utils/apiAxios";
-import { getUser } from "./redux/actions/user";
-import SpecialSubscriptions from "./pages/specialSubscriptions/specialSubscriptions";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import CardsSubscriptionOptions from "./pages/cardsSubscriptionOptions/CardsSubscriptionOptions";
+import AvailableCards from "./pages/availableCards/AvailableCards";
+import MyCards from "./pages/myCards/MyCards";
+import Library from "./pages/library/Library";
 
 const ProidectedRoute = ({ children }) => {
   const { userInfo } = useSelector((state) => state.user);
@@ -50,7 +66,7 @@ function App() {
 
   const controller = new AbortController();
 
-  const refrechData = async (makeLoading = true) => {
+  const handlerefrechData = async (makeLoading = true) => {
     makeLoading && dispatch(setUserStart());
     try {
       const { data } = await apiAxios.get("mob/refresh");
@@ -70,7 +86,7 @@ function App() {
     const intervalId =
       !location.pathname.includes("login") &&
       setInterval(() => {
-        refrechData(false);
+        handlerefrechData(false);
       }, 10 * 60 * 1000);
 
     return () => clearInterval(intervalId);
@@ -80,10 +96,6 @@ function App() {
   useEffect(() => {
     AOS.init();
     localStorage.setItem("lang", "ar");
-
-    if (!location.pathname.includes("login")) {
-      refrechData();
-    }
 
     if (window.innerWidth <= 900) {
       setMobile(true);
@@ -116,7 +128,14 @@ function App() {
     <Fragment>
       {!location.pathname.includes("login") &&
         !location.pathname.includes("matches") &&
-        !location.pathname.includes("special-subscriptions") && <Navigation />}
+        !location.pathname.includes("special-subscriptions") &&
+        !location.pathname.includes("change-package") &&
+        !location.pathname.includes("charge-package") &&
+        !location.pathname.includes("available-cards") &&
+        !location.pathname.includes("cards-subscription-options") &&
+        !location.pathname.includes("cards-login") &&
+        !location.pathname.includes("my-cards") &&
+        !location.pathname.includes("library") && <Navigation />}
       <Routes>
         <Route
           path="/"
@@ -198,15 +217,19 @@ function App() {
           path="/message"
           element={
             <ProidectedRoute>
-              <Message />
+              <Suspense fallback={<Loader />}>
+                <Message />
+              </Suspense>
             </ProidectedRoute>
           }
         />
         <Route
-          path="/whatsappSupport"
+          path="/library"
           element={
             <ProidectedRoute>
-              <WhatsAppSupport />
+              <Suspense fallback={<Loader />}>
+                <Library />
+              </Suspense>
             </ProidectedRoute>
           }
         />
@@ -214,7 +237,9 @@ function App() {
           path="/matches"
           element={
             <ProidectedRoute>
-              <Matches />
+              <Suspense fallback={<Loader />}>
+                <Matches />
+              </Suspense>
             </ProidectedRoute>
           }
         />
@@ -222,8 +247,62 @@ function App() {
           path="/special-subscriptions"
           element={
             <ProidectedRoute>
-              <SpecialSubscriptions />
+              <Suspense fallback={<Loader />}>
+                <SpecialSubscriptions />
+              </Suspense>
             </ProidectedRoute>
+          }
+        />
+        <Route
+          path="/change-package"
+          element={
+            <ProidectedRoute>
+              <Suspense fallback={<Loader />}>
+                <ChangePackage />
+              </Suspense>
+            </ProidectedRoute>
+          }
+        />
+        <Route
+          path="/charge-package"
+          element={
+            <ProidectedRoute>
+              <Suspense fallback={<Loader />}>
+                <ChargePackage />
+              </Suspense>
+            </ProidectedRoute>
+          }
+        />
+        <Route
+          path="/cards-login"
+          element={
+            <Suspense fallback={<Loader />}>
+              <CardsLogin />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/cards-subscription-options"
+          element={
+            <Suspense fallback={<Loader />}>
+              <CardsSubscriptionOptions />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/available-cards"
+          element={
+            <Suspense fallback={<Loader />}>
+              <AvailableCards />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/my-cards"
+          element={
+            <Suspense fallback={<Loader />}>
+              <MyCards />
+            </Suspense>
           }
         />
       </Routes>

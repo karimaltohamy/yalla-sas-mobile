@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import apiAxios from "../../utils/apiAxios";
 import { formateDate } from "../../utils/formatDate";
 import LoaderBox from "../../components/loaderBox/LoaderBox";
+import Pagination from "../../components/pagination/Pagination";
 
 const Sessions = () => {
   const navigate = useNavigate();
@@ -84,21 +85,11 @@ const Sessions = () => {
             )}
           </table>
         </div>
-        <div className="pagination">
-          <div className="items">
-            {Array.from({ length: lastPage }).map((_, index) => {
-              return (
-                <div
-                  key={index}
-                  className={`item ${currentPage == index + 1 && "active"}`}
-                  onClick={() => setCurrentPage(index + 1)}
-                >
-                  {index + 1}
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <Pagination
+          lastPage={lastPage}
+          page={currentPage}
+          setPage={setCurrentPage}
+        />
       </div>
     </div>
   );

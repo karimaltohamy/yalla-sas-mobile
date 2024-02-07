@@ -1,5 +1,16 @@
 .home {
   overflow-x: hidden !important;
+
+  .slick-slider {
+    .slick-prev {
+      left: -10px;
+      z-index: 99;
+    }
+
+    .slick-next {
+      right: -10px;
+    }
+  }
 }
 
 .bg_loader {

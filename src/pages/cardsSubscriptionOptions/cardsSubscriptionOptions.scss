@@ -1,0 +1,39 @@
+@import "../../sass/mixins.scss";
+@import "../../sass/variables.scss";
+
+.cards_subscription_options {
+  // background-color: var(--bg-main);
+  // height: 100vh;
+  // margin: 0 20px;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+
+  .top {
+    @include topPopup;
+  }
+
+  .container_btns {
+    height: calc(100vh - 55px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+
+    .btn {
+      padding: 8px 20px;
+      width: 100%;
+      text-align: center;
+      border-radius: 50px;
+    }
+  }
+}

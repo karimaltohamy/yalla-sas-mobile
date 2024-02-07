@@ -10,11 +10,11 @@ import { getOptions } from "../../redux/actions/optionCharge";
 import { useSelector } from "react-redux";
 import Loader from "../../components/loader/Loader";
 import { handleSubscription } from "../../redux/actions/handleSubscription";
+import Pagination from "../../components/pagination/Pagination";
 
 const SpecialSubscriptions = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { userInfo } = useSelector((state) => state.user);
   const lang = localStorage.getItem("lang");
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -115,21 +115,11 @@ const SpecialSubscriptions = () => {
             </div>
           )}
 
-          <div className="pagination">
-            <div className="items">
-              {Array.from({ length: lastPage }).map((_, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={`item ${currentPage == index + 1 && "active"}`}
-                    onClick={() => setCurrentPage(index + 1)}
-                  >
-                    {index + 1}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <Pagination
+            lastPage={lastPage}
+            page={currentPage}
+            setPage={setCurrentPage}
+          />
         </div>
       )}
 

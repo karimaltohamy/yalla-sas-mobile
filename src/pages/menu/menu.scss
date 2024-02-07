@@ -17,7 +17,8 @@
       justify-content: center;
       flex-direction: column;
 
-      &.matches {
+      &.matches,
+      &.library {
         background-image: url(../../images/bg-matches.jpg);
         background-position: center;
         background-size: cover;
@@ -39,6 +40,10 @@
           position: relative;
           z-index: 10;
         }
+      }
+
+      &.library {
+        background-image: url(../../images/bg-hero.JPG);
       }
     }
   }

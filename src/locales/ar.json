@@ -121,5 +121,17 @@
   "Expiration unit": "أنتهاء الصلاحيه",
   "Expiration Date": "تاريخ الانتهاء",
   "Remaining days": "الايام المتبقيه",
-  "Renewal": "تجديد"
+  "Renewal": "تجديد",
+  "Successful operation": "عمليه ناجحه",
+  "Card subscriptions": "اشتراكات الكروت",
+  "Registration": "تسجيل",
+  "Purchased cards": "الكروت المشتراه",
+  "Buy card": "شراء كارت",
+  "Sorry, there are no cards available now Please contact the company": "عذرا، لا توجد بطاقات متاحة الآن. يرجى الاتصال بالشركة",
+  "Total Traffic": "إجمالي",
+  "Expiration": "تاريخ الانتهاء",
+  "My cards": "كروتي",
+  "Options": "خيارات",
+  "Exit": "الخروج",
+  "Books Library": "مكتبه الكتب"
 }

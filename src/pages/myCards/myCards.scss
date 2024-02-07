@@ -1,0 +1,35 @@
+@import "../../sass/mixins.scss";
+@import "../../sass/variables.scss";
+
+.my_cards {
+  .top {
+    @include topPopup;
+  }
+
+  .content {
+    .cards_boxs {
+      max-height: 80vh;
+      overflow: auto;
+
+      .box {
+        padding: 20px;
+        border-radius: 8px;
+        background-color: var(--bg-main);
+        box-shadow: var(--box-shadow);
+        border: 1px solid var(--border-color);
+
+        &.active {
+          background-color: var(--bg-section);
+        }
+
+        .package_name {
+          font-size: 22px;
+        }
+
+        .icon {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}
